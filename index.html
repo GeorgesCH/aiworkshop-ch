@@ -1,0 +1,262 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>AI Workshop Switzerland - Expert Corporate AI Training & Workshops</title>
+      <meta name="description" content="Professional AI training and workshops across Switzerland. Master Generative AI, Agentic AI, and AI for Business Intelligence. Zurich, Geneva, Basel, Lausanne." />
+      
+      <!-- Favicon and App Icons -->
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+      <link rel="manifest" href="/manifest.json" />
+      <meta name="theme-color" content="#000000" />
+      
+      <!-- Preload critical resources for LCP optimization -->
+      <link rel="preload" href="/fonts/aiworkshop/aiworkshop-font.woff2" as="font" type="font/woff2" crossorigin>
+      
+      <!-- Preload critical CSS chunks -->
+      <link rel="modulepreload" href="/src/main.tsx">
+      <link rel="modulepreload" href="/src/App.tsx">
+      <link rel="modulepreload" href="/src/components/Header.tsx">
+      <link rel="modulepreload" href="/src/components/HeroSection.tsx">
+      
+      <!-- DNS prefetch for external resources -->
+      <link rel="dns-prefetch" href="//fonts.googleapis.com">
+      <link rel="dns-prefetch" href="//fonts.gstatic.com">
+      <link rel="dns-prefetch" href="//www.googletagmanager.com">
+
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDY4DP6BME"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Enhanced Google Analytics configuration
+        gtag('config', 'G-NDY4DP6BME', {
+          // Enhanced measurement settings
+          enhanced_measurements: {
+            scrolls: true,
+            outbound_clicks: true,
+            site_search: true,
+            video_engagement: true,
+          },
+          
+          // Custom parameters
+          custom_map: {
+            'custom_parameter_1': 'page_type',
+            'custom_parameter_2': 'language',
+            'custom_parameter_3': 'user_type',
+          },
+          
+          // Privacy and performance settings
+          anonymize_ip: true,
+          allow_google_signals: true,
+          allow_ad_personalization_signals: false,
+          
+          // Enhanced ecommerce (for workshop bookings)
+          send_page_view: false, // We'll handle this manually for better control
+          
+          // Debug mode in development
+          debug_mode: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
+        });
+        
+        // Track initial page load
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          language: navigator.language,
+          screen_resolution: screen.width + 'x' + screen.height,
+          viewport_size: window.innerWidth + 'x' + window.innerHeight,
+        });
+      </script>
+      
+      <!-- Critical CSS inlined for LCP optimization -->
+      <style>
+        /* Critical CSS for above-the-fold content and LCP optimization */
+        * { box-sizing: border-box; }
+        html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { margin: 0; padding: 0; background: white; color: #1d1d1f; overflow-x: hidden; }
+        
+        /* Critical layout styles to prevent CLS */
+        .min-h-screen { min-height: 100vh; }
+        .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        
+        /* Critical header styles */
+        header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+        
+        /* Critical hero section styles */
+        .hero-section { 
+          display: flex; 
+          flex-direction: column; 
+          align-items: center; 
+          justify-content: center;
+          min-height: 60vh;
+          padding: 2rem 1rem;
+          background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        /* Critical typography */
+        .hero-title { 
+          font-size: clamp(2rem, 5vw, 4rem);
+          font-weight: 700;
+          line-height: 1.1;
+          text-align: center;
+          margin-bottom: 1rem;
+          color: #1d1d1f;
+        }
+        
+        /* Critical button styles */
+        .btn-primary {
+          background-color: #dc143c;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 8px;
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .btn-primary:hover { background-color: #b81234; transform: translateY(-1px); }
+        
+        /* Loading spinner */
+        .loading-spinner {
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          border: 3px solid rgba(220, 20, 60, 0.3);
+          border-radius: 50%;
+          border-top-color: #dc143c;
+          animation: spin 1s ease-in-out infinite;
+        }
+        
+        /* Prevent layout shift for images */
+        img { max-width: 100%; height: auto; }
+        
+        /* Critical accessibility styles */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        *:focus-visible { outline: 2px solid #dc143c; outline-offset: 2px; }
+        
+        /* High contrast text for accessibility */
+        .text-high-contrast { color: #000000; }
+        .bg-high-contrast { background-color: #ffffff; }
+        
+        /* Loading state to prevent flash */
+        #root:empty::before {
+          content: "";
+          display: block;
+          width: 40px;
+          height: 40px;
+          margin: 50vh auto 0;
+          border: 3px solid #f3f3f3;
+          border-top: 3px solid #dc143c;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        /* Critical responsive utilities */
+        @media (max-width: 768px) {
+          .hero-section { min-height: 80vh; padding: 20px; }
+          .btn-primary { padding: 10px 20px; font-size: 14px; }
+        }
+      </style>
+      
+      <!-- Defer non-critical CSS with correct hash -->
+      <script>
+        // Dynamically load CSS with correct hash
+        (function() {
+          var cssFiles = document.querySelectorAll('link[href*="/css/index-"]');
+          if (cssFiles.length === 0) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/css/index-B46Ldm_6.css';
+            link.crossOrigin = 'anonymous';
+            document.head.appendChild(link);
+          }
+        })();
+      </script>
+      <script>
+        // Force light theme only - no dark mode support
+        (function () {
+          try {
+            var storageKey = 'ai-workshop-theme';
+            // Clear any stored theme preference
+            localStorage.removeItem(storageKey);
+            
+            // Force light theme only
+            var theme = 'light';
+            var root = document.documentElement;
+            
+            // Remove any existing theme classes
+            root.classList.remove('light', 'dark', 'system');
+            root.classList.add('light');
+            
+            // Remove any theme attributes
+            root.removeAttribute('data-theme');
+            root.setAttribute('data-theme', 'light');
+            
+            // Set light theme colors inline
+            root.style.backgroundColor = '#ffffff';
+            root.style.color = '#1d1d1f';
+            
+            // Force light color scheme
+            root.style.colorScheme = 'light';
+          } catch (e) { /* no-op */ }
+        })();
+      </script>
+    </head>
+
+  <body>
+      <div id="root"></div>
+      
+      <!-- Optimized script loading for better performance -->
+      <script>
+        // Inline critical performance optimizations
+        (function() {
+          // Mark LCP element early
+          if ('PerformanceMark' in window) {
+            performance.mark('lcp-candidate-start');
+          }
+          
+          // Optimize font loading
+          if ('fonts' in document) {
+            document.fonts.ready.then(function() {
+              document.documentElement.classList.add('fonts-loaded');
+            });
+          }
+        })();
+      </script>
+      
+      <script type="module" src="/src/main.tsx"></script>
+      
+      <!-- Service Worker Registration -->
+      <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+              .then(registration => {
+                console.log('SW registered: ', registration);
+              })
+              .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+              });
+          });
+        }
+      </script>
+    </body>
+  </html>
+  
