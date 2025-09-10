@@ -75,6 +75,7 @@
             "deploy": "npm run build && ./deploy-simple.sh",
             "deploy:full": "npm run build && ./deploy.sh",
             "deploy:optimized": "./deploy-optimized.sh",
-            "deploy:fixed": "./deploy-fixed.sh"
+            "deploy:fixed": "./deploy-fixed.sh",
+            "vercel-build": "npm run build"
       }
 }

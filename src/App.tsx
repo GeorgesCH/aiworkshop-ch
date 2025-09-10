@@ -13,10 +13,7 @@ const PageRouter = lazy(() => import("./components/router/PageRouter").then(modu
 const Toaster = lazy(() => import("./components/ui/sonner").then(module => ({ default: module.Toaster })));
 
 // Lazy load performance utilities to avoid blocking initial render
-const initPerformanceMonitoring = lazy(() => import("./utils/performance").then(module => ({ default: module.initPerformanceMonitoring })));
-const initSEOOptimizer = lazy(() => import("./utils/seo-optimizer").then(module => ({ default: module.initSEOOptimizer })));
-const initWebVitals = lazy(() => import("./utils/web-vitals").then(module => ({ default: module.initWebVitals })));
-const initializeGA = lazy(() => import("./utils/analytics").then(module => ({ default: module.initializeGA })));
+// Removed lazy imports - now using direct dynamic imports for better error handling
 
 function AppContent() {
   const { language } = useLanguage();
@@ -31,20 +28,20 @@ function AppContent() {
     const initNonCritical = async () => {
       try {
         // Initialize Google Analytics
-        const { initializeGA } = await initializeGA();
-        initializeGA();
+        const analyticsModule = await import("./utils/analytics");
+        analyticsModule.initializeGA();
         
         // Initialize performance monitoring
-        const { initPerformanceMonitoring } = await initPerformanceMonitoring();
-        initPerformanceMonitoring();
+        const performanceModule = await import("./utils/performance");
+        performanceModule.initPerformanceMonitoring();
         
         // Initialize Web Vitals tracking
-        const { initWebVitals } = await initWebVitals();
-        initWebVitals();
+        const webVitalsModule = await import("./utils/web-vitals");
+        webVitalsModule.initWebVitals();
         
         // Initialize comprehensive SEO optimizer
-        const { initSEOOptimizer } = await import("./utils/seo-optimizer");
-        const seoOptimizer = initSEOOptimizer({
+        const seoModule = await import("./utils/seo-optimizer");
+        const seoOptimizer = seoModule.initSEOOptimizer({
           enableWebVitals: true,
           enableAccessibility: true,
           enableImageOptimization: true,
@@ -73,8 +70,8 @@ function AppContent() {
   React.useEffect(() => {
     const timeoutId = setTimeout(async () => {
       try {
-        const { initSEOOptimizer } = await import("./utils/seo-optimizer");
-        const seoOptimizer = initSEOOptimizer();
+        const seoModule = await import("./utils/seo-optimizer");
+        const seoOptimizer = seoModule.initSEOOptimizer();
         seoOptimizer.updatePage(currentPage, language);
       } catch (error) {
         console.warn('Failed to load SEO optimizer:', error);

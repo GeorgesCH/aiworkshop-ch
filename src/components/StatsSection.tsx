@@ -143,7 +143,7 @@ export function StatsSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-apple"></div>
                 <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
-                    <h4 className="font-semibold mb-1 text-foreground">{t("stats.ready_to_join")}</h4>
+                    <h3 className="font-semibold mb-1 text-foreground">{t("stats.ready_to_join")}</h3>
                     <p className="text-sm text-muted-foreground">
                       {t("stats.start_journey")}
                     </p>

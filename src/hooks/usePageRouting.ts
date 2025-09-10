@@ -17,7 +17,9 @@ export function usePageRouting(language: string, initialPage?: Page) {
 
   // Track page view whenever currentPage changes
   useEffect(() => {
-    console.log('🔧 usePageRouting - currentPage state changed to:', currentPage);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔧 usePageRouting - currentPage state changed to:', currentPage);
+    }
     if (currentPage) {
       const pageTitle = getPageTitle(currentPage, language);
       trackEnhancedPageView(currentPage, pageTitle, undefined, {
@@ -34,14 +36,18 @@ export function usePageRouting(language: string, initialPage?: Page) {
     // Only set from URL if no initial page was provided (client-side navigation)
     if (!initialPage) {
       const newPage = getPageFromUrl();
-      console.log('🔧 usePageRouting - Initial page detection:', newPage);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🔧 usePageRouting - Initial page detection:', newPage);
+      }
       setCurrentPage(newPage);
     }
     
     // Update page when URL changes (browser back/forward)
     const handlePopState = () => {
       const newPage = getPageFromUrl();
-      console.log('🔧 usePageRouting - PopState detected, new page:', newPage);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🔧 usePageRouting - PopState detected, new page:', newPage);
+      }
       setCurrentPage(newPage);
     };
     
@@ -67,9 +73,11 @@ export function usePageRouting(language: string, initialPage?: Page) {
   // }, [currentPage]);
 
   const handlePageChange = (page: Page) => {
-    console.log('handlePageChange called with:', page);
-    console.log('Current page before change:', currentPage);
-    console.log('Language:', language);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('handlePageChange called with:', page);
+      console.log('Current page before change:', currentPage);
+      console.log('Language:', language);
+    }
     
     // Track navigation
     trackNavigation(currentPage, page, 'click');
@@ -84,16 +92,22 @@ export function usePageRouting(language: string, initialPage?: Page) {
     }
     
     const fullPath = `/${language}${path}`;
-    console.log('Setting URL to:', fullPath);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Setting URL to:', fullPath);
+    }
     
     // Update the current page state FIRST
-    console.log('Setting current page to:', page);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Setting current page to:', page);
+    }
     setCurrentPage(page);
     
     // Then update URL without page reload using History API
     window.history.pushState({}, '', fullPath);
     
-    console.log('handlePageChange completed');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('handlePageChange completed');
+    }
   };
 
   return {

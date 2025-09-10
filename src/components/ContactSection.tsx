@@ -168,7 +168,7 @@ export function ContactSection() {
                         <Mail className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-medium mb-2 text-lg">{t("contact.email_label")}</h4>
+                        <h3 className="font-medium mb-2 text-lg">{t("contact.email_label")}</h3>
                         <a href="mailto:hello@aiworkshop.ch" className="text-primary hover:opacity-70 transition-opacity text-base">
                           hello@aiworkshop.ch
                         </a>
@@ -184,7 +184,7 @@ export function ContactSection() {
                         <Phone className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-medium mb-2 text-lg">{t("contact.phone_label")}</h4>
+                        <h3 className="font-medium mb-2 text-lg">{t("contact.phone_label")}</h3>
                         <a href="tel:+41768184677" className="text-primary hover:opacity-70 transition-opacity text-base">
                           +41 76 818 46 77
                         </a>
@@ -200,7 +200,7 @@ export function ContactSection() {
                         <MapPin className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-medium mb-2 text-lg">{t("contact.location_label")}</h4>
+                        <h3 className="font-medium mb-2 text-lg">{t("contact.location_label")}</h3>
                         <p className="text-base text-gray-600">
                           {t("footer.location")}
                         </p>

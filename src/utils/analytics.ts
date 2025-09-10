@@ -82,7 +82,9 @@ export const initializeGA = () => {
   // GA is already initialized via the script tag in HTML
   // This function can be used for any additional setup if needed
   if (typeof window !== 'undefined' && window.gtag) {
-    console.log('Google Analytics initialized');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Google Analytics initialized');
+    }
   }
 };
 
@@ -109,7 +111,9 @@ export const trackPageView = (page: string, title?: string, url?: string) => {
       page_path: `/${page}`,
     });
 
-    console.log(`GA: Page view tracked for ${page}`, { title: pageTitle, url: pageUrl });
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`GA: Page view tracked for ${page}`, { title: pageTitle, url: pageUrl });
+    }
   }
 };
 
@@ -121,7 +125,9 @@ export const trackPageView = (page: string, title?: string, url?: string) => {
 export const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', eventName, parameters);
-    console.log(`GA: Event tracked: ${eventName}`, parameters);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`GA: Event tracked: ${eventName}`, parameters);
+    }
   }
 };
 
@@ -324,6 +330,8 @@ export const trackEnhancedPageView = (page: string, title?: string, url?: string
       });
     }
 
-    console.log(`GA: Enhanced page view tracked for ${page}`, { title: pageTitle, url: pageUrl, additionalData });
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`GA: Enhanced page view tracked for ${page}`, { title: pageTitle, url: pageUrl, additionalData });
+    }
   }
 };

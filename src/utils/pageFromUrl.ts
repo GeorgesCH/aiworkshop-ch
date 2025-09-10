@@ -11,12 +11,16 @@ export function getPageFromUrl(pathname?: string): Page {
     return "home"; // Server-side default
   }
   
-  // Debug logging for the original path
-  console.log('🔍 getPageFromUrl - Original path:', path);
+  // Debug logging for the original path (development only)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🔍 getPageFromUrl - Original path:', path);
+  }
   
   // Check for discovery call URLs FIRST - before any other processing
   if (path.includes('/booking-calendar/discovery-call')) {
-    console.log('✅ DIRECT MATCH: /booking-calendar/discovery-call found in path -> returning discovery-call');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ DIRECT MATCH: /booking-calendar/discovery-call found in path -> returning discovery-call');
+    }
     return "discovery-call";
   }
   
@@ -25,31 +29,43 @@ export function getPageFromUrl(pathname?: string): Page {
       path.includes('/fr/booking-calendar/discovery-call') || 
       path.includes('/de/booking-calendar/discovery-call') || 
       path.includes('/it/booking-calendar/discovery-call')) {
-    console.log('✅ LANGUAGE PREFIX MATCH: /{lang}/booking-calendar/discovery-call found in path -> returning discovery-call');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ LANGUAGE PREFIX MATCH: /{lang}/booking-calendar/discovery-call found in path -> returning discovery-call');
+    }
     return "discovery-call";
   }
   
   // Remove language prefix (e.g., /en, /fr, /de, /it)
   const pathWithoutLang = path.replace(/^\/[a-z]{2}/, '') || '/';
-  console.log('🔍 getPageFromUrl - Path without language:', pathWithoutLang);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🔍 getPageFromUrl - Path without language:', pathWithoutLang);
+  }
 
   // Remove courses prefix (e.g., /courses/)
   const pathWithoutCourses = pathWithoutLang.replace(/^\/courses/, '') || '/';
-  console.log('🔍 getPageFromUrl - Path without courses prefix:', pathWithoutCourses);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🔍 getPageFromUrl - Path without courses prefix:', pathWithoutCourses);
+  }
   
   // Remove trailing slash and normalize
   const normalizedPath = pathWithoutCourses.replace(/\/$/, '') || '/';
-  console.log('🔍 getPageFromUrl - Normalized path:', normalizedPath);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🔍 getPageFromUrl - Normalized path:', normalizedPath);
+  }
   
   // Check normalized path for discovery call
   if (normalizedPath === '/booking-calendar/discovery-call') {
-    console.log('✅ NORMALIZED MATCH: /booking-calendar/discovery-call -> returning discovery-call');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ NORMALIZED MATCH: /booking-calendar/discovery-call -> returning discovery-call');
+    }
     return "discovery-call";
   }
   
   // Check if the path contains the discovery call pattern anywhere
   if (normalizedPath.includes('booking-calendar') && normalizedPath.includes('discovery-call')) {
-    console.log('✅ PATTERN MATCH: booking-calendar + discovery-call found -> returning discovery-call');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ PATTERN MATCH: booking-calendar + discovery-call found -> returning discovery-call');
+    }
     return "discovery-call";
   }
   
@@ -100,6 +116,8 @@ export function getPageFromUrl(pathname?: string): Page {
   }
   
   // Final check - if we still haven't found a match, log it and return not-found
-  console.log('❌ NO MATCH FOUND for path:', path, '-> returning not-found');
+  if (process.env.NODE_ENV === 'development') {
+    console.log('❌ NO MATCH FOUND for path:', path, '-> returning not-found');
+  }
   return "not-found";
 }

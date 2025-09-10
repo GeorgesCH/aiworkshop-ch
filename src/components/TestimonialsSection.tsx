@@ -100,7 +100,7 @@ export function TestimonialsSection() {
                 </blockquote>
 
                 <div className="flex flex-col gap-apple-2">
-                  <h4 className="font-medium text-foreground">{testimonial.name}</h4>
+                  <h3 className="font-medium text-foreground">{testimonial.name}</h3>
                   <p className="text-sm text-muted-foreground">
                     {testimonial.role}, {testimonial.company}
                   </p>

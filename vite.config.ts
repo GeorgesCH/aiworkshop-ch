@@ -71,100 +71,56 @@
       'react-dom', 
       'react/jsx-runtime',
       'framer-motion',
-      'lucide-react'
+      'lucide-react',
+      'react-hook-form',
+      'recharts',
+      'use-callback-ref',
+      '@radix-ui/react-use-callback-ref'
     ],
     esbuildOptions: {
       target: 'esnext'
-    }
+    },
+    force: true
   },
   build: {
     target: 'esnext',
     outDir: 'dist',
-    // Enhanced chunking strategy for better performance
-    cssCodeSplit: true, // Split CSS for better loading
+    cssCodeSplit: true,
     minify: 'terser',
     terserOptions: {
       compress: { 
         drop_console: true, 
         drop_debugger: true,
-        passes: 3,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        unsafe_arrows: true,
-        unsafe_methods: true,
-        unsafe_proto: true,
-        unsafe_regexp: true,
-        reduce_vars: true,
-        collapse_vars: true,
-        hoist_funs: true,
-        keep_infinity: true
+        passes: 2
       },
       mangle: {
-        safari10: true,
-        properties: {
-          regex: /^_/
-        }
+        safari10: true
       },
       format: {
         comments: false
       }
     },
-    sourcemap: true,
-    // Advanced build optimizations for better Core Web Vitals
+    sourcemap: false,
     reportCompressedSize: false,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
-      // Enhanced tree-shaking
-      treeshake: {
-        moduleSideEffects: false,
-        propertyReadSideEffects: false,
-        tryCatchDeoptimization: false
-      },
       output: {
-        // Aggressive chunking for optimal loading and caching
+        // Simplified chunking strategy
         manualChunks: (id) => {
-          // Vendor chunk for core React libraries (highest priority)
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom')) {
               return 'react-vendor';
             }
-            // UI components chunk (medium priority)
             if (id.includes('@radix-ui') || id.includes('lucide-react')) {
               return 'ui-vendor';
             }
-            // Animation libraries (lower priority)
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
-            // Utility libraries (lowest priority)
-            if (id.includes('clsx') || id.includes('class-variance-authority') || id.includes('tailwind-merge')) {
-              return 'utils-vendor';
-            }
-            // Analytics and tracking (lowest priority)
-            if (id.includes('analytics') || id.includes('gtag') || id.includes('web-vitals')) {
-              return 'analytics-vendor';
-            }
-            // All other vendor code
             return 'vendor';
           }
-          // Component-based chunking for better code splitting
-          if (id.includes('/components/learn/')) {
-            return 'learn-components';
-          }
-          if (id.includes('/components/design-system/')) {
-            return 'design-system';
-          }
-          if (id.includes('/components/admin/')) {
-            return 'admin-components';
-          }
-          if (id.includes('/utils/')) {
-            return 'utils';
-          }
         },
-        // Optimized chunk naming for better caching
-        chunkFileNames: (chunkInfo) => {
-          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/').pop() : 'chunk';
-          return `js/[name]-[hash:8].js`;
-        },
+        chunkFileNames: 'js/[name]-[hash:8].js',
         entryFileNames: 'js/[name]-[hash:8].js',
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') || ['asset'];
@@ -179,27 +135,7 @@
             return `fonts/[name]-[hash:8].[ext]`;
           }
           return `assets/[name]-[hash:8].[ext]`;
-        },
-        // Enable better compression
-        generatedCode: {
-          preset: 'es2015',
-          arrowFunctions: true,
-          constBindings: true,
-          objectShorthand: true
-        },
-        // Add preload hints for critical resources
-        intro: `
-          // Preload critical resources
-          if (typeof window !== 'undefined') {
-            const preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.href = '/fonts/aiworkshop/aiworkshop-font.woff2';
-            preloadLink.as = 'font';
-            preloadLink.type = 'font/woff2';
-            preloadLink.crossOrigin = 'anonymous';
-            document.head.appendChild(preloadLink);
-          }
-        `
+        }
       }
     }
   },
@@ -208,6 +144,10 @@
     host: true,
     hmr: {
       port: 5173,
+      host: 'localhost'
+    },
+    fs: {
+      strict: false
     },
     proxy: {
       '/api': {

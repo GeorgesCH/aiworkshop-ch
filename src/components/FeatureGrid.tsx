@@ -27,7 +27,7 @@ export function FeatureGrid() {
                       <Icon className="w-5 h-5 text-primary" />
                     </div>
                   </div>
-                  <h3 className="font-sigum text-lg font-semibold text-foreground">{t(f.titleKey)}</h3>
+                  <h2 className="font-sigum text-lg font-semibold text-foreground">{t(f.titleKey)}</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">{t(f.descKey)}</p>
                 </div>
               </div>

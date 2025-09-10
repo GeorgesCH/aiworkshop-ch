@@ -53,10 +53,12 @@ interface PageRouterProps {
 }
 
 export function PageRouter({ currentPage, setCurrentPage }: PageRouterProps) {
-  // Enhanced debug logging
-  console.log('🚀 PageRouter - currentPage:', currentPage);
-  console.log('🚀 PageRouter - setCurrentPage function:', setCurrentPage);
-  console.log('🚀 PageRouter - window.location.pathname:', typeof window !== 'undefined' ? window.location.pathname : 'N/A');
+  // Enhanced debug logging (development only)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🚀 PageRouter - currentPage:', currentPage);
+    console.log('🚀 PageRouter - setCurrentPage function:', setCurrentPage);
+    console.log('🚀 PageRouter - window.location.pathname:', typeof window !== 'undefined' ? window.location.pathname : 'N/A');
+  }
   
   // Global scroll-to-top on page change (avoid conflicts with sticky elements)
   useEffect(() => {

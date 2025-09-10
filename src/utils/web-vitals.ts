@@ -163,7 +163,7 @@ export function initPerformanceObserver() {
     // Observe long tasks (important for FID)
     const longTaskObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (entry.duration > 50) {
+        if (entry.duration > 50 && process.env.NODE_ENV === 'development') {
           console.warn(`🐌 Long task detected: ${entry.duration}ms`, entry);
         }
       }
@@ -178,7 +178,7 @@ export function initPerformanceObserver() {
           cumulativeScore += (entry as any).value;
         }
       }
-      if (cumulativeScore > 0.1) {
+      if (cumulativeScore > 0.1 && process.env.NODE_ENV === 'development') {
         console.warn(`📐 Layout shift detected: ${cumulativeScore}`, list.getEntries());
       }
     });

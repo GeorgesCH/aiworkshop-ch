@@ -93,11 +93,11 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
   ];
 
   const currentAIUsage = [
-    "No AI implementation yet",
-    "Basic AI tools (ChatGPT, etc.)",
-    "Some AI integration in workflows",
-    "Advanced AI systems in place",
-    "Leading AI innovation"
+    t("discovery.no_ai_yet"),
+    t("discovery.basic_ai"),
+    t("discovery.some_ai"),
+    t("discovery.advanced_ai"),
+    t("discovery.leading_ai")
   ];
 
   const budgetRanges = [
@@ -121,27 +121,27 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
     switch (field) {
       case 'email':
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return !value ? 'Email is required' : !emailRegex.test(value) ? 'Please enter a valid email' : '';
+        return !value ? t('discovery.email_required') : !emailRegex.test(value) ? t('discovery.valid_email') : '';
       case 'phone':
-        return !value ? 'Phone is required' : '';
+        return !value ? t('discovery.phone_required') : '';
       case 'firstName':
-        return !value ? 'First name is required' : '';
+        return !value ? t('discovery.first_name_required') : '';
       case 'lastName':
-        return !value ? 'Last name is required' : '';
+        return !value ? t('discovery.last_name_required') : '';
       case 'company':
-        return !value ? 'Company name is required' : '';
+        return !value ? t('discovery.company_required') : '';
       case 'preferredDate':
-        if (!value) return 'Please select a date';
+        if (!value) return t('discovery.select_date');
         const selectedDate = new Date(value);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        return selectedDate < today ? 'Please select a future date' : '';
+        return selectedDate < today ? t('discovery.future_date') : '';
       case 'preferredTime':
-        return !value ? 'Please select a time slot' : '';
+        return !value ? t('discovery.select_time') : '';
       case 'callDuration':
-        return !value ? 'Please select call duration' : '';
+        return !value ? t('discovery.select_duration') : '';
       case 'timezone':
-        return !value ? 'Please select your timezone' : '';
+        return !value ? t('discovery.select_timezone') : '';
       default:
         return '';
     }
@@ -187,7 +187,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      toast.success("Discovery call request submitted successfully! We'll contact you within 24 hours to confirm your appointment.");
+      toast.success(t("discovery.success_message"));
       setStep(1);
       setFormData({
         firstName: "",
@@ -211,7 +211,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
         specialRequirements: ""
       });
     } catch (error) {
-      toast.error("Failed to submit request. Please try again.");
+      toast.error(t("discovery.error_message"));
     } finally {
       setIsSubmitting(false);
     }
@@ -243,12 +243,12 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Home
+                {t("discovery.back_to_home")}
               </Button>
             </div>
             <div className="text-center">
-              <h1 className="text-2xl font-bold text-gray-900">Discovery Call Booking</h1>
-              <p className="text-gray-600">Schedule a free consultation with our AI experts</p>
+              <h1 className="text-2xl font-bold text-gray-900">{t("discovery.title")}</h1>
+              <p className="text-gray-600">{t("discovery.subtitle")}</p>
             </div>
             <div className="w-20"></div> {/* Spacer for centering */}
           </div>
@@ -260,8 +260,8 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
           {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Step {step} of 3</span>
-              <span className="text-sm text-gray-500">{Math.round(progressPercentage)}% Complete</span>
+              <span className="text-sm font-medium text-gray-700">{t("discovery.step_of").replace("{step}", step.toString())}</span>
+              <span className="text-sm text-gray-500">{Math.round(progressPercentage)}% {t("discovery.complete")}</span>
             </div>
             <Progress value={progressPercentage} className="h-2" />
           </div>
@@ -272,14 +272,14 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-primary" />
-                  Personal Information
+                  {t("discovery.personal_info")}
                 </CardTitle>
-                <p className="text-gray-600">Tell us about yourself and your company</p>
+                <p className="text-gray-600">{t("discovery.personal_info_desc")}</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="firstName">First Name *</Label>
+                    <Label htmlFor="firstName">{t("discovery.first_name")} *</Label>
                     <Input
                       id="firstName"
                       value={formData.firstName}
@@ -289,7 +289,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     {fieldErrors.firstName && <p className="text-red-500 text-sm mt-1">{fieldErrors.firstName}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="lastName">Last Name *</Label>
+                    <Label htmlFor="lastName">{t("discovery.last_name")} *</Label>
                     <Input
                       id="lastName"
                       value={formData.lastName}
@@ -302,7 +302,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="email">Email Address *</Label>
+                    <Label htmlFor="email">{t("discovery.email")} *</Label>
                     <Input
                       id="email"
                       type="email"
@@ -313,7 +313,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     {fieldErrors.email && <p className="text-red-500 text-sm mt-1">{fieldErrors.email}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Label htmlFor="phone">{t("discovery.phone")} *</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -327,7 +327,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="company">Company Name *</Label>
+                    <Label htmlFor="company">{t("discovery.company")} *</Label>
                     <Input
                       id="company"
                       value={formData.company}
@@ -337,7 +337,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     {fieldErrors.company && <p className="text-red-500 text-sm mt-1">{fieldErrors.company}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="position">Job Title</Label>
+                    <Label htmlFor="position">{t("discovery.job_title")}</Label>
                     <Input
                       id="position"
                       value={formData.position}
@@ -348,10 +348,10 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="companySize">Company Size</Label>
+                    <Label htmlFor="companySize">{t("discovery.company_size")}</Label>
                     <Select value={formData.companySize} onValueChange={(value) => handleInputChange('companySize', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select company size" />
+                        <SelectValue placeholder={t("discovery.select_company_size")} />
                       </SelectTrigger>
                       <SelectContent>
                         {companySizes.map((size) => (
@@ -361,10 +361,10 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="industry">Industry</Label>
+                    <Label htmlFor="industry">{t("discovery.industry")}</Label>
                     <Select value={formData.industry} onValueChange={(value) => handleInputChange('industry', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select industry" />
+                        <SelectValue placeholder={t("discovery.select_industry")} />
                       </SelectTrigger>
                       <SelectContent>
                         {industries.map((industry) => (
@@ -384,14 +384,14 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-primary" />
-                  Schedule Your Call
+                  {t("discovery.schedule_call")}
                 </CardTitle>
-                <p className="text-gray-600">Choose a convenient time for your discovery call</p>
+                <p className="text-gray-600">{t("discovery.schedule_desc")}</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="preferredDate">Preferred Date *</Label>
+                    <Label htmlFor="preferredDate">{t("discovery.preferred_date")} *</Label>
                     <Input
                       id="preferredDate"
                       type="date"
@@ -404,10 +404,10 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     {fieldErrors.preferredDate && <p className="text-red-500 text-sm mt-1">{fieldErrors.preferredDate}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="preferredTime">Preferred Time *</Label>
+                    <Label htmlFor="preferredTime">{t("discovery.preferred_time")} *</Label>
                     <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange('preferredTime', value)}>
                       <SelectTrigger className={fieldErrors.preferredTime ? 'border-red-500' : ''}>
-                        <SelectValue placeholder="Select time slot" />
+                        <SelectValue placeholder={t("discovery.select_time_slot")} />
                       </SelectTrigger>
                       <SelectContent>
                         {timeSlots.map((time) => (
@@ -421,7 +421,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="callDuration">Call Duration *</Label>
+                    <Label htmlFor="callDuration">{t("discovery.call_duration")} *</Label>
                     <Select value={formData.callDuration} onValueChange={(value) => handleInputChange('callDuration', value)}>
                       <SelectTrigger>
                         <SelectValue />
@@ -434,7 +434,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="timezone">Your Timezone *</Label>
+                    <Label htmlFor="timezone">{t("discovery.your_timezone")} *</Label>
                     <Select value={formData.timezone} onValueChange={(value) => handleInputChange('timezone', value)}>
                       <SelectTrigger>
                         <SelectValue />
@@ -449,15 +449,15 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="callType">Call Type</Label>
+                  <Label htmlFor="callType">{t("discovery.call_type")}</Label>
                   <Select value={formData.callType} onValueChange={(value) => handleInputChange('callType', value)}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="video">Video Call (Zoom/Teams)</SelectItem>
-                      <SelectItem value="phone">Phone Call</SelectItem>
-                      <SelectItem value="in-person">In-Person (Switzerland)</SelectItem>
+                      <SelectItem value="video">{t("discovery.video_call")}</SelectItem>
+                      <SelectItem value="phone">{t("discovery.phone_call")}</SelectItem>
+                      <SelectItem value="in-person">{t("discovery.in_person")}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -471,16 +471,16 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-primary" />
-                  Business Context & Goals
+                  {t("discovery.business_context")}
                 </CardTitle>
-                <p className="text-gray-600">Help us understand your AI needs and objectives</p>
+                <p className="text-gray-600">{t("discovery.business_desc")}</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <Label htmlFor="currentAIUsage">Current AI Usage</Label>
+                  <Label htmlFor="currentAIUsage">{t("discovery.current_ai_usage")}</Label>
                   <Select value={formData.currentAIUsage} onValueChange={(value) => handleInputChange('currentAIUsage', value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select current AI usage level" />
+                      <SelectValue placeholder={t("discovery.select_ai_usage")} />
                     </SelectTrigger>
                     <SelectContent>
                       {currentAIUsage.map((usage) => (
@@ -491,10 +491,10 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="challenges">Main Challenges</Label>
+                  <Label htmlFor="challenges">{t("discovery.main_challenges")}</Label>
                   <Textarea
                     id="challenges"
-                    placeholder="What are the main challenges you're facing with AI implementation?"
+                    placeholder={t("discovery.challenges_placeholder")}
                     value={formData.challenges}
                     onChange={(e) => handleInputChange('challenges', e.target.value)}
                     rows={3}
@@ -502,10 +502,10 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="goals">Goals & Objectives</Label>
+                  <Label htmlFor="goals">{t("discovery.goals_objectives")}</Label>
                   <Textarea
                     id="goals"
-                    placeholder="What do you hope to achieve with AI in your organization?"
+                    placeholder={t("discovery.goals_placeholder")}
                     value={formData.goals}
                     onChange={(e) => handleInputChange('goals', e.target.value)}
                     rows={3}
@@ -513,10 +513,10 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="budgetRange">Budget Range</Label>
+                  <Label htmlFor="budgetRange">{t("discovery.budget_range")}</Label>
                   <Select value={formData.budgetRange} onValueChange={(value) => handleInputChange('budgetRange', value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select budget range" />
+                      <SelectValue placeholder={t("discovery.select_budget")} />
                     </SelectTrigger>
                     <SelectContent>
                       {budgetRanges.map((range) => (
@@ -527,26 +527,26 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 </div>
 
                 <div>
-                  <Label htmlFor="howDidYouHear">How did you hear about us?</Label>
+                  <Label htmlFor="howDidYouHear">{t("discovery.how_hear")}</Label>
                   <Select value={formData.howDidYouHear} onValueChange={(value) => handleInputChange('howDidYouHear', value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select option" />
+                      <SelectValue placeholder={t("discovery.select_option")} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="google">Google Search</SelectItem>
-                      <SelectItem value="linkedin">LinkedIn</SelectItem>
-                      <SelectItem value="referral">Referral</SelectItem>
-                      <SelectItem value="social-media">Social Media</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="google">{t("discovery.google_search")}</SelectItem>
+                      <SelectItem value="linkedin">{t("discovery.linkedin")}</SelectItem>
+                      <SelectItem value="referral">{t("discovery.referral")}</SelectItem>
+                      <SelectItem value="social-media">{t("discovery.social_media")}</SelectItem>
+                      <SelectItem value="other">{t("discovery.other")}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="specialRequirements">Special Requirements</Label>
+                  <Label htmlFor="specialRequirements">{t("discovery.special_requirements")}</Label>
                   <Textarea
                     id="specialRequirements"
-                    placeholder="Any special requirements or questions for our team?"
+                    placeholder={t("discovery.requirements_placeholder")}
                     value={formData.specialRequirements}
                     onChange={(e) => handleInputChange('specialRequirements', e.target.value)}
                     rows={3}
@@ -565,7 +565,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 className="flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Previous
+                {t("discovery.previous")}
               </Button>
             )}
             
@@ -574,7 +574,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 onClick={handleNext}
                 className="ml-auto flex items-center gap-2"
               >
-                Next
+                {t("discovery.next")}
                 <CheckCircle className="w-4 h-4" />
               </Button>
             ) : (
@@ -586,12 +586,12 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                 {isSubmitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    Submitting...
+                    {t("discovery.submitting")}
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4" />
-                    Schedule Discovery Call
+                    {t("discovery.schedule_call_btn")}
                   </>
                 )}
               </Button>
@@ -601,15 +601,15 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
           {/* Benefits Section */}
           <Card className="mt-12 bg-gradient-to-r from-primary/5 to-secondary/5 border-primary/20">
             <CardContent className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Why Schedule a Discovery Call?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("discovery.why_schedule")}</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Target className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Personalized Assessment</h4>
-                    <p className="text-sm text-gray-600">Get a customized AI strategy tailored to your business needs</p>
+                    <h4 className="font-medium text-gray-900">{t("discovery.personalized_assessment")}</h4>
+                    <p className="text-sm text-gray-600">{t("discovery.assessment_desc")}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -617,8 +617,8 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     <Users className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Expert Guidance</h4>
-                    <p className="text-sm text-gray-600">Consult with certified AI professionals with Swiss expertise</p>
+                    <h4 className="font-medium text-gray-900">{t("discovery.expert_guidance")}</h4>
+                    <p className="text-sm text-gray-600">{t("discovery.guidance_desc")}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -626,8 +626,8 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
                     <Clock className="w-4 h-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">No Obligation</h4>
-                    <p className="text-sm text-gray-600">Free consultation to explore AI opportunities for your business</p>
+                    <h4 className="font-medium text-gray-900">{t("discovery.no_obligation")}</h4>
+                    <p className="text-sm text-gray-600">{t("discovery.obligation_desc")}</p>
                   </div>
                 </div>
               </div>

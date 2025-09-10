@@ -49,7 +49,9 @@ class PerformanceMonitor {
         fcpObserver.observe({ entryTypes: ['paint'] });
         this.observers.push(fcpObserver);
       } catch (error) {
-        console.warn('FCP observer failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('FCP observer failed:', error);
+        }
       }
 
       // Observe Largest Contentful Paint
@@ -65,7 +67,9 @@ class PerformanceMonitor {
         lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
         this.observers.push(lcpObserver);
       } catch (error) {
-        console.warn('LCP observer failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('LCP observer failed:', error);
+        }
       }
 
       // Observe First Input Delay
@@ -83,7 +87,9 @@ class PerformanceMonitor {
         fidObserver.observe({ entryTypes: ['first-input'] });
         this.observers.push(fidObserver);
       } catch (error) {
-        console.warn('FID observer failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('FID observer failed:', error);
+        }
       }
     }
   }
@@ -105,7 +111,9 @@ class PerformanceMonitor {
         clsObserver.observe({ entryTypes: ['layout-shift'] });
         this.observers.push(clsObserver);
       } catch (error) {
-        console.warn('CLS observer failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('CLS observer failed:', error);
+        }
       }
     }
   }
@@ -117,7 +125,9 @@ class PerformanceMonitor {
           const entries = list.getEntries();
           entries.forEach(entry => {
             if (entry.duration > 50) {
-              console.warn(`Long task detected: ${entry.duration}ms`);
+              if (process.env.NODE_ENV === 'development') {
+                console.warn(`Long task detected: ${entry.duration}ms`);
+              }
               // Report to analytics or monitoring service
               this.reportLongTask(entry.duration);
             }
@@ -126,7 +136,9 @@ class PerformanceMonitor {
         longTaskObserver.observe({ entryTypes: ['longtask'] });
         this.observers.push(longTaskObserver);
       } catch (error) {
-        console.warn('Long task observer failed:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Long task observer failed:', error);
+        }
       }
     }
   }
