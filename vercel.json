@@ -6,7 +6,7 @@
   "installCommand": "npm install",
   "rewrites": [
     {
-      "source": "/((?!js/|css/|images/|fonts/|assets/|sw\\.js|robots\\.txt|sitemap\\.xml|manifest\\.json|favicon\\.ico|apple-touch-icon\\.png).*)",
+      "source": "/((?!js/|css/|images/|fonts/|assets/|robots\\.txt|sitemap\\.xml|favicon\\.ico|apple-touch-icon\\.png).*)",
       "destination": "/index.html"
     }
   ],
