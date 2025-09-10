@@ -89,6 +89,9 @@
         '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion',
         // Scheduler polyfill for framer-motion compatibility
         'scheduler': path.resolve(__dirname, './src/utils/scheduler-polyfill.js'),
+        // Ensure consistent React version
+        'react': path.resolve(__dirname, './node_modules/react'),
+        'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
         '@': path.resolve(__dirname, './src'),
     },
   },
