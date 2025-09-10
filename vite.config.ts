@@ -3,9 +3,37 @@
   import react from '@vitejs/plugin-react';
   import tailwindcss from '@tailwindcss/vite';
   import path from 'path';
+  import { copyFileSync, existsSync } from 'fs';
 
   export default defineConfig({
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(), 
+      tailwindcss(),
+      // Custom plugin to ensure manifest.json and sw.js are copied
+      {
+        name: 'copy-manifest-and-sw',
+        writeBundle() {
+          const publicDir = path.resolve(__dirname, 'public');
+          const distDir = path.resolve(__dirname, 'dist');
+          
+          // Copy manifest.json
+          const manifestSrc = path.join(publicDir, 'manifest.json');
+          const manifestDest = path.join(distDir, 'manifest.json');
+          if (existsSync(manifestSrc)) {
+            copyFileSync(manifestSrc, manifestDest);
+            console.log('✅ Copied manifest.json to dist/');
+          }
+          
+          // Copy sw.js
+          const swSrc = path.join(publicDir, 'sw.js');
+          const swDest = path.join(distDir, 'sw.js');
+          if (existsSync(swSrc)) {
+            copyFileSync(swSrc, swDest);
+            console.log('✅ Copied sw.js to dist/');
+          }
+        }
+      }
+    ],
         define: {
           // Fix for framer-motion + React 18 compatibility
           global: 'globalThis',
