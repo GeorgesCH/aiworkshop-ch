@@ -12,7 +12,7 @@
   ],
   "headers": [
     {
-      "source": "/js/(.*\\.js)",
+      "source": "/js/(.*)",
       "headers": [
         {
           "key": "Content-Type",
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "source": "/css/(.*\\.css)",
+      "source": "/css/(.*)",
       "headers": [
         {
           "key": "Content-Type",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "source": "/assets/(.*\\.js)",
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Content-Type",
@@ -64,11 +64,11 @@
       ]
     },
     {
-      "source": "/assets/(.*\\.css)",
+      "source": "/manifest.json",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "text/css; charset=utf-8"
+          "value": "application/manifest+json"
         },
         {
           "key": "Cache-Control",
