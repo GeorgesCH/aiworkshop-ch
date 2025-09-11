@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npx vite build",
+  "buildCommand": "npm run vercel-build",
   "outputDirectory": "build",
   "installCommand": "npm install",
   "cleanUrls": true,
@@ -25,7 +25,8 @@
 
   "rewrites": [
     {
-      "source": "/((?!assets/|@optimized/|fonts/|favicon.ico|manifest.json|sw.js|robots.txt|sitemap.xml).*)",
+      "source": "/(.*)",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/html.*" }],
       "destination": "/index.html"
     }
   ],
