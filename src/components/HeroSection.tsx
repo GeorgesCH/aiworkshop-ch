@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Button, Badge, Card } from "./design-system";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { OptimizedImage } from "./OptimizedImage";
 import { ArrowRight, Play, Star, Users, CheckCircle, Phone, Calendar, Download, ChevronDown, ChevronUp } from "lucide-react";
 import { useLanguage } from "./LanguageProvider";
 import { BrochureDownloadModal as BrochureModal } from "./BrochureDownloadModal";
@@ -9,6 +7,8 @@ import { AssessmentCTA } from "./AssessmentCTA";
 import { useAnalytics } from "../hooks/useAnalytics";
 // Use optimized public images
 import { CircuitBackground, DiagonalPill } from "./BrandMotif";
+// Hero image path - using optimized WebP version
+const heroImagePath = "/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp";
 
 interface HeroSectionProps {
   onPageChange?: (page: string) => void;
@@ -59,15 +59,11 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
             <div className="relative lg:hidden mt-8">
               <div className="relative max-w-sm mx-auto">
                 <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/20 to-secondary/40 shadow-xl">
-                  <OptimizedImage
-                    src="/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp"
+                  <img
+                    src={heroImagePath}
                     alt={t("hero.image_alt")}
-                    width={400}
-                    height={500}
-                    className="w-full h-auto object-cover object-center"
-                    priority={true}
-                    fetchPriority="high"
-                    sizes="(max-width: 640px) 100vw, 400px"
+                    className="w-full h-auto object-center"
+                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-2xl"></div>
                 </div>
@@ -131,17 +127,13 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
 
           {/* Hero Image - Enhanced */}
           <div className="relative hidden lg:block">
-            <div className="relative max-w-none group">
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-secondary/20 to-secondary/40 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
-                <OptimizedImage
-                  src="/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp"
+            <div className="relative max-w-none group h-[600px]">
+              <div className="relative h-full rounded-3xl overflow-hidden bg-gradient-to-br from-secondary/20 to-secondary/40 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
+                <img
+                  src={heroImagePath}
                   alt={t("hero.image_alt")}
-                  width={600}
-                  height={750}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  priority={true}
-                  fetchPriority="high"
-                  sizes="(min-width: 1024px) 600px, 100vw"
+                  className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700"
+                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

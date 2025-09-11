@@ -1,5 +1,5 @@
 import { Button, Badge, Separator } from "./design-system";
-import { Linkedin, Instagram, Youtube, Mail, Phone, MapPin, Calendar } from "lucide-react";
+import { Linkedin, Instagram, Youtube, Mail, Phone, MapPin, Calendar, Star, ExternalLink } from "lucide-react";
 import React from 'react';
 // Use public assets
 import { useLanguage } from "./LanguageProvider";
@@ -15,7 +15,7 @@ export function Footer({ onPageChange }: FooterProps = {}) {
   
   // Always use light logo since we're forcing light mode
   const getCurrentLogo = () => {
-    return '/optimized/AI-Workshop_Logo_light-optimized.webp';
+    return '/@optimized/AI-Workshop_Logo_light-optimized.webp';
   };
 
   const navigateToPage = (page: string) => {
@@ -35,18 +35,13 @@ export function Footer({ onPageChange }: FooterProps = {}) {
           <div className="lg:col-span-1 space-y-apple-4 sm:space-y-apple-6 text-center sm:text-left">
             <div className="space-y-4">
               <div className="flex items-center justify-center sm:justify-start">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <img 
-                      src={getCurrentLogo()} 
-                      alt="AI Workshop Switzerland" 
-                      className="h-6 w-auto object-contain"
-                    />
-                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg blur opacity-30"></div>
-                  </div>
-                  <span className="font-sigum text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    AI-Workshop
-                  </span>
+                <div className="relative">
+                  <img 
+                    src={getCurrentLogo()} 
+                    alt="AI Workshop Switzerland" 
+                    className="h-3 w-auto object-contain !max-w-[80px]"
+                  />
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg blur opacity-30"></div>
                 </div>
               </div>
               
@@ -187,6 +182,47 @@ export function Footer({ onPageChange }: FooterProps = {}) {
                 </div>
               </div>
               
+              {/* Google Reviews Block */}
+              <div className="bg-muted/30 rounded-lg p-4 border border-border/50">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-muted rounded-full flex items-center justify-center">
+                      <Star className="w-3 h-3 text-muted-foreground fill-muted-foreground" />
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-3 h-3 fill-muted-foreground text-muted-foreground" />
+                        ))}
+                      </div>
+                      <p className="text-xs font-medium text-foreground">5.0/5</p>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="text-xs">
+                    Google
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+                  {t('footer.google_ratings_text', 'Rated 5/5 by Swiss professionals')}
+                </p>
+                <Button 
+                  asChild
+                  variant="ghost" 
+                  size="sm" 
+                  className="w-full text-xs h-8 hover:bg-muted/50"
+                >
+                  <a 
+                    href="https://www.google.com/search?sca_esv=83105bac496dfc01&sxsrf=AE3TifNxa23QFg65fGkHXe2nFiX62pUXMA:1757607584183&kgmid=/g/11wmm_gc8l&q=George+RAYMOND-ALSHOUFI+%7C+Artificial+Intelligence+AI+Training+for+Teams+in+Switzerland+%7C+Wellbeing+Coaching+%26+Workshop&shndl=30&shem=lcuae,lsptbl1,uaasie,shrtsdl&source=sh/x/loc/uni/m1/1&kgs=17cc4d35d1e0ad4d&utm_source=lcuae,lsptbl1,uaasie,shrtsdl,sh/x/loc/uni/m1/1#lrd=0xa34f7e15f3e8caad:0x8091235a371d771d,1,,,," 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-1"
+                  >
+                    <span>{t('footer.view_reviews', 'View Reviews')}</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </Button>
+              </div>
+
               <div className="pt-4">
                 <Button 
                   variant="apple"

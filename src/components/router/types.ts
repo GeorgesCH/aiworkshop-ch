@@ -3,6 +3,7 @@ export type Page =
   | "about" 
   | "contact" 
   | "coaching"
+  | "develop"
   | "learn" 
   | "learn-ai-overview" 
   | "learn-intelligence"

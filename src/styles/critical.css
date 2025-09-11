@@ -32,7 +32,7 @@ body {
 }
 
 /* Critical header styles - only apply to basic header, not Tailwind-styled ones */
-header:not([class*="sticky"]):not([class*="z-"]) {
+header:not([class*="sticky"]):not([class*="z-"]):not([class*="py-"]) {
   position: sticky;
   top: 0;
   z-index: 50;
@@ -98,8 +98,30 @@ header:not([class*="sticky"]):not([class*="z-"]) {
 /* Critical font loading optimization */
 @font-face {
   font-family: 'aiworkshop_font';
-  src: url('/fonts/aiworkshop/aiworkshop-font.woff2') format('woff2');
+  src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
+       url('/fonts/sigum/Sigum.woff') format('woff'),
+       url('/fonts/sigum/Sigum.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'aiworkshop_font';
+  src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
+       url('/fonts/sigum/Sigum.woff') format('woff'),
+       url('/fonts/sigum/Sigum.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'aiworkshop_font';
+  src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
+       url('/fonts/sigum/Sigum.woff') format('woff'),
+       url('/fonts/sigum/Sigum.ttf') format('truetype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

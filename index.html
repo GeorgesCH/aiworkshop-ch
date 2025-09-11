@@ -1,11 +1,34 @@
 
   <!DOCTYPE html>
-  <html>
+  <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>AI Workshop Switzerland - Expert Corporate AI Training & Workshops</title>
       <meta name="description" content="Professional AI training and workshops across Switzerland. Master Generative AI, Agentic AI, and AI for Business Intelligence. Zurich, Geneva, Basel, Lausanne." />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      
+      <!-- Canonical + hreflang (defaults; enhanced dynamically per route) -->
+      <link rel="canonical" href="https://aiworkshop.ch/en/" />
+      <link rel="alternate" hreflang="en" href="https://aiworkshop.ch/en/" />
+      <link rel="alternate" hreflang="fr" href="https://aiworkshop.ch/fr/" />
+      <link rel="alternate" hreflang="de" href="https://aiworkshop.ch/de/" />
+      <link rel="alternate" hreflang="it" href="https://aiworkshop.ch/it/" />
+      <link rel="alternate" hreflang="x-default" href="https://aiworkshop.ch/en/" />
+      
+      <!-- Social (defaults; updated dynamically per route) -->
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="AI Workshop Switzerland" />
+      <meta property="og:title" content="AI Workshop Switzerland - Expert Corporate AI Training & Workshops" />
+      <meta property="og:description" content="Professional AI training and workshops across Switzerland. Master Generative AI, Agentic AI, and AI for Business Intelligence." />
+      <meta property="og:url" content="https://aiworkshop.ch/en/" />
+      <meta property="og:image" content="https://aiworkshop.ch/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="AI Workshop Switzerland - Expert Corporate AI Training & Workshops" />
+      <meta name="twitter:description" content="Professional AI training and workshops across Switzerland. Master Generative AI, Agentic AI, and AI for Business Intelligence." />
+      <meta name="twitter:image" content="https://aiworkshop.ch/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg" />
       
       <!-- Favicon and App Icons -->
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -20,8 +43,6 @@
       <link rel="preload" href="/fonts/sigum/Sigum.woff2" as="font" type="font/woff2" crossorigin>
       
       <!-- Preload critical CSS chunks -->
-      <link rel="modulepreload" href="/src/main.tsx">
-      <link rel="modulepreload" href="/src/App.tsx">
       
       <!-- DNS prefetch for external resources -->
       <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -77,6 +98,37 @@
       
       <!-- Critical CSS inlined for LCP optimization -->
       <style>
+        /* Custom AI Workshop Font */
+        @font-face {
+          font-family: 'aiworkshop_font';
+          src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
+               url('/fonts/sigum/Sigum.woff') format('woff'),
+               url('/fonts/sigum/Sigum.ttf') format('truetype');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: 'aiworkshop_font';
+          src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
+               url('/fonts/sigum/Sigum.woff') format('woff'),
+               url('/fonts/sigum/Sigum.ttf') format('truetype');
+          font-weight: 600;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: 'aiworkshop_font';
+          src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
+               url('/fonts/sigum/Sigum.woff') format('woff'),
+               url('/fonts/sigum/Sigum.ttf') format('truetype');
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+        
         /* Critical CSS for above-the-fold content and LCP optimization */
         * { box-sizing: border-box; }
         html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -173,20 +225,7 @@
         }
       </style>
       
-      <!-- Defer non-critical CSS with correct hash -->
-      <script>
-        // Dynamically load CSS with correct hash
-        (function() {
-          var cssFiles = document.querySelectorAll('link[href*="/css/index-"]');
-          if (cssFiles.length === 0) {
-            var link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = '/css/index-xQZPxmq8.css';
-            link.crossOrigin = 'anonymous';
-            document.head.appendChild(link);
-          }
-        })();
-      </script>
+      <!-- Vite will inject the built CSS automatically; no manual CSS loader -->
       <script>
         // Force light theme only - no dark mode support
         (function () {
@@ -220,6 +259,24 @@
 
   <body>
       <div id="root"></div>
+      <noscript>
+        <div style="padding:16px;max-width:760px;margin:0 auto;color:#1d1d1f;">
+          <h1>AI Workshop Switzerland</h1>
+          <p>
+            Professional, instructor‑led AI training and workshops for teams across Switzerland.
+            We cover AI Fundamentals, Generative AI, Agentic AI, and AI for Business Intelligence.
+          </p>
+          <ul>
+            <li><a href="https://aiworkshop.ch/en/">Home</a></li>
+            <li><a href="https://aiworkshop.ch/en/about/">About</a></li>
+            <li><a href="https://aiworkshop.ch/en/coaching/">Coaching</a></li>
+            <li><a href="https://aiworkshop.ch/en/ai-fundamentals/">AI Fundamentals</a></li>
+            <li><a href="https://aiworkshop.ch/en/generative-ai/">Generative AI</a></li>
+            <li><a href="https://aiworkshop.ch/en/ai-business-intelligence/">AI for Business Intelligence</a></li>
+            <li><a href="https://aiworkshop.ch/en/contact/">Contact</a></li>
+          </ul>
+        </div>
+      </noscript>
       
       <!-- Optimized script loading for better performance -->
       <script>

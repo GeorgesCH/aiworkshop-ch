@@ -3,9 +3,6 @@ module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./renderer/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -90,6 +87,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'],
         display: ['aiworkshop_font', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
+        aiworkshop: ['aiworkshop_font', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
         mono: ['SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Courier New', 'monospace'],
       },
       
@@ -311,6 +309,7 @@ module.exports = {
         
         // Font family utilities
         '.font-aiworkshop': { fontFamily: 'aiworkshop_font, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
+        '.font-display': { fontFamily: 'aiworkshop_font, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
 
         '.dark .glass-effect': {
           backgroundColor: 'rgba(28, 28, 30, 0.8)',

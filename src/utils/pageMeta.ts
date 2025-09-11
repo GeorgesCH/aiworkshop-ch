@@ -24,6 +24,10 @@ export function getPageMeta(page: Page, language: string): DocumentProps {
         title: "AI Coaching & Consulting - Personalized AI Strategy & Implementation Support",
         description: "Expert AI coaching services for businesses. Get personalized guidance on AI strategy, tool selection, and implementation roadmaps tailored to your organization."
       },
+      develop: {
+        title: "Develop — AI Tools, Platforms & Apps",
+        description: "Design and build AI-driven web apps, admin dashboards, and mobile apps with Swiss-quality delivery. Get an instant estimate and 4-month milestone plan."
+      },
       learn: {
         title: "Learn AI — Comprehensive AI Education Platform",
         description: "Interactive AI learning platform covering fundamentals, machine learning, deep learning, generative AI, and business intelligence applications."
@@ -125,6 +129,10 @@ export function getPageMeta(page: Page, language: string): DocumentProps {
       coaching: {
         title: "Coaching IA & Conseil - Stratégie IA Personnalisée & Support d'Implémentation",
         description: "Services de coaching IA experts pour les entreprises. Obtenez des conseils personnalisés sur la stratégie IA, la sélection d'outils et les feuilles de route d'implémentation."
+      },
+      develop: {
+        title: "Develop — Outils, Plateformes & Apps IA",
+        description: "Concevez et développez des applications IA web, des dashboards admin et des apps mobiles avec une qualité suisse. Estimation instantanée et plan sur 4 mois."
       },
       learn: {
         title: "Apprendre l'IA — Plateforme d'Éducation IA Complète",
@@ -228,6 +236,10 @@ export function getPageMeta(page: Page, language: string): DocumentProps {
         title: "KI-Coaching & Beratung - Personalisierte KI-Strategie & Implementierungsunterstützung",
         description: "Experte KI-Coaching-Dienste für Unternehmen. Erhalten Sie personalisierte Beratung zu KI-Strategie, Tool-Auswahl und Implementierungs-Roadmaps für Ihre Organisation."
       },
+      develop: {
+        title: "Develop — KI-Tools, Plattformen & Apps",
+        description: "Entwickeln Sie KI-gestützte Web-Apps, Admin-Dashboards und Mobile-Apps mit Schweizer Qualität. Sofortige Schätzung und 4-Monats-Meilensteinplan."
+      },
       learn: {
         title: "KI Lernen — Umfassende KI-Bildungsplattform",
         description: "Interaktive KI-Lernplattform mit Grundlagen, maschinellem Lernen, Deep Learning, generativer KI und Business-Intelligence-Anwendungen."
@@ -329,6 +341,10 @@ export function getPageMeta(page: Page, language: string): DocumentProps {
       coaching: {
         title: "Coaching IA & Consulenza - Strategia IA Personalizzata & Supporto Implementazione",
         description: "Servizi di coaching IA esperti per le aziende. Ottieni guidance personalizzata su strategia IA, selezione strumenti e roadmap di implementazione per la tua organizzazione."
+      },
+      develop: {
+        title: "Develop — Strumenti, Piattaforme & App IA",
+        description: "Progetta e sviluppa web app IA, dashboard amministrative e app mobile con qualità svizzera. Stima immediata e piano in 4 mesi."
       },
       learn: {
         title: "Impara IA — Piattaforma Educativa IA Completa",

@@ -8,6 +8,8 @@ import {
   EmailSubscriber,
   PageAnalytics,
   LearningProgress,
+  DevelopmentEstimate,
+  DiscoveryCall,
   getClientInfo 
 } from '../config/supabase'
 import { v4 as uuidv4 } from 'uuid'
@@ -1092,3 +1094,278 @@ export const deleteAdminItem = async (table: string, id: string): Promise<Supaba
     return handleSupabaseError(error);
   }
 };
+
+// Development Estimate API
+export interface DevelopmentEstimateInput {
+  email: string
+  web_app: boolean
+  admin_dashboard: boolean
+  mobile_ios: boolean
+  mobile_android: boolean
+  ai_chat_agent: boolean
+  rag_search: boolean
+  analytics_dashboard: boolean
+  supabase_auth: boolean
+  payments: boolean
+  file_storage: boolean
+  api_integrations: string[]
+  complexity: 'starter' | 'standard' | 'advanced'
+  timeline_weeks: number
+  languages: string[]
+  project_name?: string
+  company?: string
+  contact_name?: string
+  phone?: string
+  notes?: string
+}
+
+export interface DevelopmentEstimateBreakdown {
+  scope: {
+    web_app: number
+    admin_dashboard: number
+    mobile: number
+  }
+  features: {
+    ai_chat_agent: number
+    rag_search: number
+    analytics_dashboard: number
+    supabase_auth: number
+    payments: number
+    file_storage: number
+    api_integrations: number
+  }
+  milestone_payments: {
+    deposit_20: number
+    prototype_20: number
+    mid_build_25: number
+    beta_20: number
+    launch_15: number
+  }
+}
+
+export const calculateDevelopmentEstimatePrice = (input: DevelopmentEstimateInput): { total: number; breakdown: DevelopmentEstimateBreakdown } => {
+  // Base pricing in CHF (Swiss pricing)
+  const basePrices = {
+    web_app: 15000,
+    admin_dashboard: 8000,
+    mobile_ios: 12000,
+    mobile_android: 12000,
+    ai_chat_agent: 10000,
+    rag_search: 15000,
+    analytics_dashboard: 5000,
+    supabase_auth: 2000,
+    payments: 5000,
+    file_storage: 3000,
+    api_integrations: 2000, // per integration
+  }
+
+  // Complexity multipliers
+  const complexityMultipliers = {
+    starter: 0.8,
+    standard: 1.0,
+    advanced: 1.3
+  }
+
+  // Timeline multipliers (rush delivery)
+  const timelineMultiplier = input.timeline_weeks <= 14 ? 1.2 : 1.0
+
+  // Language multipliers
+  const languageMultiplier = input.languages.length > 1 ? 1 + (input.languages.length - 1) * 0.3 : 1.0
+
+  const complexity = complexityMultipliers[input.complexity] || 1.0
+
+  // Calculate scope costs
+  const scope = {
+    web_app: input.web_app ? basePrices.web_app * complexity * timelineMultiplier * languageMultiplier : 0,
+    admin_dashboard: input.admin_dashboard ? basePrices.admin_dashboard * complexity * timelineMultiplier * languageMultiplier : 0,
+    mobile: (input.mobile_ios ? basePrices.mobile_ios : 0) + (input.mobile_android ? basePrices.mobile_android : 0)
+  }
+
+  // Calculate feature costs
+  const features = {
+    ai_chat_agent: input.ai_chat_agent ? basePrices.ai_chat_agent * complexity * timelineMultiplier * languageMultiplier : 0,
+    rag_search: input.rag_search ? basePrices.rag_search * complexity * timelineMultiplier * languageMultiplier : 0,
+    analytics_dashboard: input.analytics_dashboard ? basePrices.analytics_dashboard * complexity * timelineMultiplier * languageMultiplier : 0,
+    supabase_auth: input.supabase_auth ? basePrices.supabase_auth * complexity * timelineMultiplier * languageMultiplier : 0,
+    payments: input.payments ? basePrices.payments * complexity * timelineMultiplier * languageMultiplier : 0,
+    file_storage: input.file_storage ? basePrices.file_storage * complexity * timelineMultiplier * languageMultiplier : 0,
+    api_integrations: input.api_integrations.length * basePrices.api_integrations * complexity * timelineMultiplier * languageMultiplier
+  }
+
+  // Calculate total
+  const total = Object.values(scope).reduce((sum, val) => sum + val, 0) + 
+                Object.values(features).reduce((sum, val) => sum + val, 0)
+
+  // Calculate milestone payments
+  const milestone_payments = {
+    deposit_20: total * 0.20,
+    prototype_20: total * 0.20,
+    mid_build_25: total * 0.25,
+    beta_20: total * 0.20,
+    launch_15: total * 0.15
+  }
+
+  return {
+    total: Math.round(total),
+    breakdown: {
+      scope,
+      features,
+      milestone_payments
+    }
+  }
+}
+
+export const submitDevelopmentEstimate = async (data: DevelopmentEstimateInput): Promise<SupabaseApiResponse> => {
+  try {
+    const clientInfo = getClientInfo()
+    
+    const estimate = {
+      email: data.email,
+      project_name: data.project_name,
+      company: data.company,
+      contact_name: data.contact_name,
+      phone: data.phone,
+      web_app: data.web_app,
+      admin_dashboard: data.admin_dashboard,
+      mobile_ios: data.mobile_ios,
+      mobile_android: data.mobile_android,
+      ai_chat_agent: data.ai_chat_agent,
+      rag_search: data.rag_search,
+      analytics_dashboard: data.analytics_dashboard,
+      supabase_auth: data.supabase_auth,
+      payments: data.payments,
+      file_storage: data.file_storage,
+      api_integrations: data.api_integrations,
+      complexity: data.complexity,
+      timeline_weeks: data.timeline_weeks,
+      languages: data.languages,
+      notes: data.notes,
+      status: 'pending',
+      ...clientInfo
+    }
+
+    const { data: result, error } = await supabase
+      .from('development_estimates')
+      .insert([estimate])
+      .select()
+
+    if (error) {
+      return handleSupabaseError(error)
+    }
+
+    // Add to email subscribers
+    try {
+      const subscriberData: Partial<EmailSubscriber> = {
+        email: data.email,
+        first_name: data.contact_name?.split(' ')[0],
+        company: data.company,
+        subscription_source: 'development_estimate'
+      }
+
+      await supabase
+        .from(TABLES.EMAIL_SUBSCRIBERS)
+        .upsert(subscriberData, { 
+          onConflict: 'email'
+        })
+    } catch (emailError) {
+      console.warn('Failed to add email subscriber:', emailError)
+    }
+
+    return {
+      success: true,
+      data: result?.[0],
+      message: 'Development estimate submitted successfully'
+    }
+  } catch (error) {
+    return handleSupabaseError(error)
+  }
+}
+
+// Discovery Call API
+export interface DiscoveryCallData {
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  company?: string
+  position?: string
+  preferredDate?: string
+  preferredTime?: string
+  callDuration?: '15' | '30' | '45' | '60'
+  callType?: 'video' | 'phone' | 'in-person'
+  timezone?: string
+  companySize?: string
+  industry?: string
+  currentAIUsage?: string
+  challenges?: string
+  goals?: string
+  budgetRange?: string
+  howDidYouHear?: string
+  specialRequirements?: string
+}
+
+export const submitDiscoveryCall = async (data: DiscoveryCallData): Promise<SupabaseApiResponse> => {
+  try {
+    const clientInfo = getClientInfo()
+    
+    const discoveryCall: DiscoveryCall = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+      position: data.position,
+      preferred_date: data.preferredDate,
+      preferred_time: data.preferredTime,
+      call_duration: data.callDuration,
+      call_type: data.callType,
+      timezone: data.timezone,
+      company_size: data.companySize,
+      industry: data.industry,
+      current_ai_usage: data.currentAIUsage,
+      challenges: data.challenges,
+      goals: data.goals,
+      budget_range: data.budgetRange,
+      how_did_you_hear: data.howDidYouHear,
+      special_requirements: data.specialRequirements,
+      status: 'pending',
+      ...clientInfo
+    }
+
+    const { data: result, error } = await supabase
+      .from(TABLES.DISCOVERY_CALLS)
+      .insert([discoveryCall])
+      .select()
+
+    if (error) {
+      return handleSupabaseError(error)
+    }
+
+    // Add to email subscribers
+    try {
+      const subscriberData: Partial<EmailSubscriber> = {
+        email: data.email,
+        first_name: data.firstName,
+        last_name: data.lastName,
+        company: data.company,
+        subscription_source: 'discovery_call'
+      }
+
+      await supabase
+        .from(TABLES.EMAIL_SUBSCRIBERS)
+        .upsert(subscriberData, { 
+          onConflict: 'email'
+        })
+    } catch (emailError) {
+      console.warn('Failed to add email subscriber:', emailError)
+    }
+
+    return {
+      success: true,
+      data: result?.[0],
+      message: 'Discovery call request submitted successfully'
+    }
+  } catch (error) {
+    return handleSupabaseError(error)
+  }
+}

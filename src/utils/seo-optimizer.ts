@@ -208,7 +208,7 @@ class SEOOptimizer {
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://aiworkshop.ch/optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg"
+        "url": "https://aiworkshop.ch/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg"
       },
       "datePublished": "2024-01-01T00:00:00+00:00",
       "dateModified": new Date().toISOString()
@@ -268,14 +268,13 @@ class SEOOptimizer {
   private addPageSpecificPreloads(page: Page): void {
     const preloadMap: Record<string, string[]> = {
       'home': [
-        '/optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg',
-        '/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'
+        '/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'
       ],
       'about': [
-        '/optimized/48dec070b8118ab1abfec06ede3bc9d0f96e8592-optimized.jpg'
+        '/@optimized/48dec070b8118ab1abfec06ede3bc9d0f96e8592-optimized.jpg'
       ],
       'contact': [
-        '/optimized/2b31eff5bc767a2151576710d6a4f75fb7d1885f-optimized.jpg'
+        '/@optimized/2b31eff5bc767a2151576710d6a4f75fb7d1885f-optimized.jpg'
       ]
     };
 

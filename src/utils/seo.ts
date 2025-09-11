@@ -100,7 +100,7 @@ function injectJSONLD(objects: any[]) {
 }
 
 function imageAbsoluteUrl(): string {
-  const defaultImagePath = "/optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg";
+  const defaultImagePath = "/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg";
   return baseUrl() + defaultImagePath;
 }
 
@@ -177,7 +177,7 @@ function generateEnhancedSchema(page: Page, lang: Lang, canonical: string, title
       "@id": `${base}#ai-training-service`,
       name: "AI Training for Teams in Switzerland",
       description: "Professional AI training workshops for Swiss teams. Expert-led sessions covering AI fundamentals, business applications, and generative AI technologies. Available in Lausanne, Zurich, Geneva, Basel, and Bern.",
-      image: `${base}/optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg`,
+      image: `${base}/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg`,
       provider: {
         "@type": "Organization",
         name: "AI Workshop Switzerland",

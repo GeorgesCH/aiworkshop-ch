@@ -20,6 +20,8 @@ export const TABLES = {
   EMAIL_SUBSCRIBERS: 'email_subscribers',
   PAGE_ANALYTICS: 'page_analytics',
   LEARNING_PROGRESS: 'learning_progress',
+  DEVELOPMENT_ESTIMATES: 'development_estimates',
+  DISCOVERY_CALLS: 'discovery_calls',
 } as const
 
 // TypeScript interfaces for database tables
@@ -144,6 +146,83 @@ export interface LearningProgress {
   started_at?: string
   completed_at?: string | null
   last_visited_at?: string
+  created_at?: string
+  updated_at?: string
+}
+
+// Development estimates types
+export interface DevelopmentEstimate {
+  id?: string
+  project_name?: string
+  company?: string
+  contact_name?: string
+  email: string
+  phone?: string
+  
+  // Scope
+  web_app?: boolean
+  admin_dashboard?: boolean
+  mobile_ios?: boolean
+  mobile_android?: boolean
+  
+  // AI Features
+  ai_chat_agent?: boolean
+  rag_search?: boolean
+  analytics_dashboard?: boolean
+  supabase_auth?: boolean
+  payments?: boolean
+  file_storage?: boolean
+  api_integrations?: string[]
+  
+  // Estimate inputs
+  complexity?: 'starter' | 'standard' | 'advanced'
+  timeline_weeks?: number
+  languages?: string[]
+  
+  // Derived pricing
+  price_chf?: number
+  price_breakdown?: Record<string, any>
+  
+  // Meta
+  notes?: string
+  ip_address?: string
+  user_agent?: string
+  status?: 'new' | 'contacted' | 'archived'
+  created_at?: string
+  updated_at?: string
+}
+
+// Discovery calls types
+export interface DiscoveryCall {
+  id?: string
+  first_name: string
+  last_name: string
+  email: string
+  phone?: string
+  company?: string
+  position?: string
+  
+  // Call scheduling
+  preferred_date?: string
+  preferred_time?: string
+  call_duration?: '15' | '30' | '45' | '60'
+  call_type?: 'video' | 'phone' | 'in-person'
+  timezone?: string
+  
+  // Company information
+  company_size?: string
+  industry?: string
+  current_ai_usage?: string
+  challenges?: string
+  goals?: string
+  budget_range?: string
+  how_did_you_hear?: string
+  special_requirements?: string
+  
+  // Meta
+  status?: 'pending' | 'scheduled' | 'completed' | 'cancelled'
+  ip_address?: string
+  user_agent?: string
   created_at?: string
   updated_at?: string
 }

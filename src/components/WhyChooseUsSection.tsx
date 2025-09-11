@@ -93,8 +93,8 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <ImageWithFallback
-                  src="/optimized/aiworkshop-team-collaboration-optimized.webp"
-                  fallbackSrc="/optimized/aiworkshop-team-collaboration-optimized.jpg"
+                  src="/@optimized/aiworkshop-team-collaboration-optimized.webp"
+                  fallbackSrc="/@optimized/aiworkshop-team-collaboration-optimized.jpg"
                   alt={t('why.image_alt')}
                   className="w-full h-[400px] object-cover"
                   loading="lazy"

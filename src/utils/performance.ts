@@ -127,7 +127,7 @@ export function optimizeFonts() {
   // Preload critical fonts
   const criticalFonts = [
     '/fonts/sigum/Sigum.woff2',
-    '/fonts/aiworkshop/aiworkshop-font.woff2'
+    '/fonts/sigum/Sigum.woff2'
   ];
 
   criticalFonts.forEach(font => {
@@ -184,7 +184,7 @@ export function initPerformanceMonitoring() {
 // Preload critical resources for faster page loads
 function preloadCriticalResources() {
   const criticalResources = [
-    '/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp',
+    '/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp',
     '/hero-dots.png'
   ];
 

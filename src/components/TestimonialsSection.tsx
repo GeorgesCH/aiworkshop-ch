@@ -122,11 +122,11 @@ export function TestimonialsSection() {
             className="gap-2 min-h-[48px] px-6 w-full sm:w-auto"
           >
             <a 
-              href="https://www.google.com/search?q=ai+workshop+switzerland+reviews" 
+              href="https://share.google/Ohp7E0PSedoTSRw0i" 
               target="_blank" 
               rel="noopener noreferrer"
             >
-              {t("testimonials.view_more")}
+              {t("reviews.view_all")}
               <ArrowRight className="h-4 w-4" />
             </a>
           </Button>

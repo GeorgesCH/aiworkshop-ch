@@ -5,8 +5,8 @@ import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 // Use optimized images from public folder
-const coachingSessionImage = "/optimized/aiworkshop-fundamentals-course-optimized.webp";
-const facilitatorExpertImage = "/optimized/aiworkshop-facilitator-expert-optimized.webp";
+const coachingSessionImage = "/@optimized/aiworkshop-fundamentals-course-optimized.webp";
+const facilitatorExpertImage = "/@optimized/aiworkshop-facilitator-expert-optimized.webp";
 import { 
   CheckCircle, 
   Users, 

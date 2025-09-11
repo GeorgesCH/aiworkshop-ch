@@ -36,18 +36,18 @@ const routes = [
 
 // Enhanced route metadata for better SEO
 const routeMetadata = {
-  '/': { priority: '1.0', changefreq: 'daily', images: ['/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'] },
-  '/about': { priority: '0.8', changefreq: 'weekly', images: ['/optimized/aiworkshop-facilitator-expert-optimized.webp'] },
+  '/': { priority: '1.0', changefreq: 'daily', images: ['/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'] },
+  '/about': { priority: '0.8', changefreq: 'weekly', images: ['/@optimized/aiworkshop-facilitator-expert-optimized.webp'] },
   '/contact': { priority: '0.8', changefreq: 'weekly', images: [] },
-  '/coaching': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-design-thinking-lausanne-optimized.webp'] },
-  '/learn': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-participants-learning-optimized.webp'] },
-  '/workshop-booking': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-team-collaboration-optimized.webp'] },
-  '/discovery-call': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-facilitator-expert-optimized.webp'] },
-  '/ai-fundamentals': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-fundamentals-course-optimized.webp'] },
-  '/ai-business-intelligence': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-business-intelligence-training-optimized.webp'] },
-  '/generative-ai': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-generative-ai-training-optimized.webp'] },
-  '/agentic-ai': { priority: '0.9', changefreq: 'weekly', images: ['/optimized/aiworkshop-team-collaboration-optimized.webp'] },
-  '/seo-landing': { priority: '0.8', changefreq: 'weekly', images: ['/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'] }
+  '/coaching': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-design-thinking-lausanne-optimized.webp'] },
+  '/learn': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-participants-learning-optimized.webp'] },
+  '/workshop-booking': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-team-collaboration-optimized.webp'] },
+  '/discovery-call': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-facilitator-expert-optimized.webp'] },
+  '/ai-fundamentals': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-fundamentals-course-optimized.webp'] },
+  '/ai-business-intelligence': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-business-intelligence-training-optimized.webp'] },
+  '/generative-ai': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-generative-ai-training-optimized.webp'] },
+  '/agentic-ai': { priority: '0.9', changefreq: 'weekly', images: ['/@optimized/aiworkshop-team-collaboration-optimized.webp'] },
+  '/seo-landing': { priority: '0.8', changefreq: 'weekly', images: ['/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'] }
 };
 
 function ensureTrailingSlash(u) {
@@ -122,13 +122,25 @@ ${urls.join('\n')}
 User-agent: *
 Allow: /
 
+# Explicit allow for major AI/LLM crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: CCBot
+Allow: /
+
 # Disallow build artifacts and non-public paths (safety, though not served)
 Disallow: /dist/
 Disallow: /node_modules/
 Disallow: /src/
 
 # Allow important directories
-Allow: /optimized/
+Allow: /@optimized/
 Allow: /fonts/
 Allow: /assets/
 
@@ -137,9 +149,6 @@ Crawl-delay: 1
 
 # Sitemap location
 Sitemap: ${BASE_URL}/sitemap.xml
-
-# Additional sitemaps
-Sitemap: ${BASE_URL}/sitemap-images.xml
 
 # Host directive
 Host: ${BASE_URL}

@@ -171,7 +171,7 @@ class PerformanceMonitor {
   private preloadCriticalResources() {
     // Preload critical fonts
     const criticalFonts = [
-      '/fonts/aiworkshop/aiworkshop-font.woff2',
+      '/fonts/sigum/Sigum.woff2',
     ];
 
     criticalFonts.forEach(font => {

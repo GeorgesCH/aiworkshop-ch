@@ -74,6 +74,7 @@ export function getPageFromUrl(pathname?: string): Page {
   if (normalizedPath === '/about') return "about";
   if (normalizedPath === '/contact') return "contact";
   if (normalizedPath === '/coaching') return "coaching";
+  if (normalizedPath === '/develop') return "develop";
   if (normalizedPath === '/learn') return "learn";
   if (normalizedPath === '/learn-ai-overview') return "learn-ai-overview";
   if (normalizedPath === '/learn-intelligence') return "learn-intelligence";

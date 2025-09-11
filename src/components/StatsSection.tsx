@@ -4,7 +4,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { TrendingUp, Users, Building2, Award, MapPin, Calendar } from "lucide-react";
 import { useLanguage } from "./LanguageProvider";
 // Use optimized image from public folder
-const businessIntelligenceImage = "/optimized/aiworkshop-business-intelligence-training-optimized.webp";
+const businessIntelligenceImage = "/@optimized/aiworkshop-business-intelligence-training-optimized.webp";
 
 const stats = [
   {

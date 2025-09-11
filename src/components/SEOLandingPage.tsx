@@ -4,8 +4,8 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 // Use optimized images from public folder
-const generativeAiTrainingImage = "/optimized/aiworkshop-generative-ai-training-optimized.webp";
-const designThinkingImage = "/optimized/aiworkshop-design-thinking-lausanne-optimized.webp";
+const generativeAiTrainingImage = "/@optimized/aiworkshop-generative-ai-training-optimized.webp";
+const designThinkingImage = "/@optimized/aiworkshop-design-thinking-lausanne-optimized.webp";
 import { 
   MapPin, 
   Users, 

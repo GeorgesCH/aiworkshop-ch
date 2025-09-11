@@ -181,7 +181,7 @@ export function trackImagePerformance(imagePath: string, startTime: number) {
 
 // Critical image paths that should be preloaded
 export const CRITICAL_IMAGES = [
-  '/optimized/AI-Workshop-training-for-employees-switzerland-optimized.jpg',
+  '/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp',
   '/apple-touch-icon.png'
 ];
 

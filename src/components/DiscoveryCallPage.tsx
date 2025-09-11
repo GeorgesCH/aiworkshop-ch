@@ -184,33 +184,59 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
     trackConversion('discovery_call');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const { submitDiscoveryCall } = await import('../utils/supabaseApi');
       
-      toast.success(t("discovery.success_message"));
-      setStep(1);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        company: "",
-        position: "",
-        preferredDate: "",
-        preferredTime: "",
-        callDuration: "30",
-        callType: "video",
-        timezone: "Europe/Zurich",
-        companySize: "",
-        industry: "",
-        currentAIUsage: "",
-        challenges: "",
-        goals: "",
-        budgetRange: "",
-        howDidYouHear: "",
-        specialRequirements: ""
+      const result = await submitDiscoveryCall({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        position: formData.position,
+        preferredDate: formData.preferredDate,
+        preferredTime: formData.preferredTime,
+        callDuration: formData.callDuration as '15' | '30' | '45' | '60',
+        callType: formData.callType as 'video' | 'phone' | 'in-person',
+        timezone: formData.timezone,
+        companySize: formData.companySize,
+        industry: formData.industry,
+        currentAIUsage: formData.currentAIUsage,
+        challenges: formData.challenges,
+        goals: formData.goals,
+        budgetRange: formData.budgetRange,
+        howDidYouHear: formData.howDidYouHear,
+        specialRequirements: formData.specialRequirements
       });
+      
+      if (result.success) {
+        toast.success(t("discovery.success_message"));
+        setStep(1);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          company: "",
+          position: "",
+          preferredDate: "",
+          preferredTime: "",
+          callDuration: "30",
+          callType: "video",
+          timezone: "Europe/Zurich",
+          companySize: "",
+          industry: "",
+          currentAIUsage: "",
+          challenges: "",
+          goals: "",
+          budgetRange: "",
+          howDidYouHear: "",
+          specialRequirements: ""
+        });
+      } else {
+        toast.error(result.error || t("discovery.error_message"));
+      }
     } catch (error) {
+      console.error('Discovery call submission error:', error);
       toast.error(t("discovery.error_message"));
     } finally {
       setIsSubmitting(false);

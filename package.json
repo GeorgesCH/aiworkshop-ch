@@ -66,8 +66,7 @@
       },
       "scripts": {
             "dev": "vite",
-            "prebuild": "node ./scripts/generate-sitemap.mjs",
-            "build": "vite build",
+            "build": "node ./scripts/build-with-assets.mjs",
             "build:optimized": "node ./scripts/optimize-build.mjs",
             "preview": "vite preview",
             "sitemap": "node ./scripts/generate-sitemap.mjs",
@@ -76,6 +75,8 @@
             "deploy:full": "npm run build && ./deploy.sh",
             "deploy:optimized": "./deploy-optimized.sh",
             "deploy:fixed": "./deploy-fixed.sh",
+            "deploy:vps": "./deploy-vps.sh",
+            "deploy:vps:simple": "./deploy-simple.sh",
             "vercel-build": "npm run build"
       }
 }

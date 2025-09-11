@@ -17,7 +17,58 @@ const translations = {
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.book_consultation": "Book Consultation",
+    "nav.book_workshop": "Book Workshop",
     "nav.courses": "Courses",
+    "nav.develop": "Develop",
+
+    // Develop Page
+    "develop.badge": "Swiss AI Development",
+    "develop.title": "Build the Future with AI",
+    "develop.subtitle": "Transform your business with custom AI applications. From intelligent web platforms to mobile apps with machine learning capabilities.",
+    "develop.cta_estimate": "Get Free Estimate",
+    "develop.cta_services": "View Services",
+    "develop.services_title": "Development Services",
+    "develop.services_subtitle": "Choose from our comprehensive AI development services, each designed to Swiss quality standards.",
+    "develop.cta_ready_title": "Ready to Start Building?",
+    "develop.cta_ready_subtitle": "Join Swiss companies transforming their business with AI. Get a free consultation and custom estimate.",
+    "develop.cta_book_consultation": "Book Consultation",
+    "develop.stats_response": "Response Time",
+    "develop.stats_quality": "Swiss Quality",
+    "develop.stats_timeline": "Average Timeline",
+
+    // Services
+    "develop.service_web_app": "AI Web Platform",
+    "develop.service_web_app_desc": "Intelligent web applications with AI-powered features",
+    "develop.service_mobile_app": "Smart Mobile App",
+    "develop.service_mobile_app_desc": "Native iOS & Android apps with machine learning",
+    "develop.service_analytics": "Analytics Dashboard",
+    "develop.service_analytics_desc": "AI-powered admin interfaces with insights",
+    "develop.service_enterprise": "Enterprise AI Suite",
+    "develop.service_enterprise_desc": "Complete AI-driven business platforms",
+    "develop.starting_from": "Starting from",
+    "develop.timeline": "Timeline",
+    "develop.complexity": "Complexity",
+
+    // Process
+    "develop.process_title": "Development Process",
+    "develop.process_subtitle": "Our proven 16-week methodology ensures quality delivery and transparent progress tracking.",
+    "develop.milestone_kickoff": "Project Kickoff",
+    "develop.milestone_kickoff_desc": "Requirements analysis and project setup",
+    "develop.milestone_prototype": "Prototype Review",
+    "develop.milestone_prototype_desc": "Initial designs and core functionality",
+    "develop.milestone_development": "Development Milestone",
+    "develop.milestone_development_desc": "Feature implementation and testing",
+    "develop.milestone_review": "Client Review",
+    "develop.milestone_review_desc": "Final review and refinement phase",
+    "develop.milestone_launch": "Launch",
+    "develop.milestone_launch_desc": "Production deployment and go-live",
+
+    // Technology
+    "develop.tech_title": "Technology Stack",
+    "develop.tech_subtitle": "Enterprise-grade technologies following Swiss security and quality standards.",
+    "develop.tech_frontend": "Frontend",
+    "develop.tech_ai_backend": "AI & Backend",
+    "develop.tech_infrastructure": "Infrastructure",
 
     // Brand
     "brand.name": "AI Workshop",
@@ -326,6 +377,8 @@ const translations = {
     "footer.made_with": "Made with",
     "footer.in_switzerland": "in Switzerland",
     "footer.copyright": "© 2024 AI Workshop Switzerland. All rights reserved.",
+    "footer.google_ratings_text": "Rated 5/5 by Swiss professionals",
+    "footer.view_reviews": "View Reviews",
 
     // Common additional
     "common.free_consultation": "Free Consultation",
@@ -1928,7 +1981,58 @@ const translations = {
     "nav.about": "Chi Siamo",
     "nav.contact": "Contatto",
     "nav.book_consultation": "Prenota Consultazione",
+    "nav.book_workshop": "Prenota Workshop",
     "nav.courses": "Corsi",
+    "nav.develop": "Sviluppo",
+
+    // Develop Page
+    "develop.badge": "Sviluppo AI Svizzero",
+    "develop.title": "Costruisci il Futuro con l'AI",
+    "develop.subtitle": "Trasforma la tua azienda con applicazioni AI personalizzate. Da piattaforme web intelligenti ad app mobile con capacità di machine learning.",
+    "develop.cta_estimate": "Ottieni Preventivo Gratuito",
+    "develop.cta_services": "Visualizza Servizi",
+    "develop.services_title": "Servizi di Sviluppo",
+    "develop.services_subtitle": "Scegli dai nostri servizi completi di sviluppo AI, ognuno progettato secondo gli standard di qualità svizzeri.",
+    "develop.cta_ready_title": "Pronto a Iniziare a Costruire?",
+    "develop.cta_ready_subtitle": "Unisciti alle aziende svizzere che stanno trasformando il loro business con l'AI. Ottieni una consultazione gratuita e un preventivo personalizzato.",
+    "develop.cta_book_consultation": "Prenota Consultazione",
+    "develop.stats_response": "Tempo di Risposta",
+    "develop.stats_quality": "Qualità Svizzera",
+    "develop.stats_timeline": "Timeline Media",
+
+    // Services
+    "develop.service_web_app": "Piattaforma Web AI",
+    "develop.service_web_app_desc": "Applicazioni web intelligenti con funzionalità AI",
+    "develop.service_mobile_app": "App Mobile Intelligente",
+    "develop.service_mobile_app_desc": "App native iOS e Android con machine learning",
+    "develop.service_analytics": "Dashboard Analitica",
+    "develop.service_analytics_desc": "Interfacce amministrative alimentate da AI con insights",
+    "develop.service_enterprise": "Suite AI Enterprise",
+    "develop.service_enterprise_desc": "Piattaforme business complete guidate da AI",
+    "develop.starting_from": "A partire da",
+    "develop.timeline": "Timeline",
+    "develop.complexity": "Complessità",
+
+    // Process
+    "develop.process_title": "Processo di Sviluppo",
+    "develop.process_subtitle": "La nostra metodologia collaudata di 16 settimane garantisce una consegna di qualità e un tracciamento trasparente dei progressi.",
+    "develop.milestone_kickoff": "Avvio Progetto",
+    "develop.milestone_kickoff_desc": "Analisi dei requisiti e configurazione del progetto",
+    "develop.milestone_prototype": "Revisione Prototipo",
+    "develop.milestone_prototype_desc": "Design iniziali e funzionalità core",
+    "develop.milestone_development": "Milestone di Sviluppo",
+    "develop.milestone_development_desc": "Implementazione delle funzionalità e testing",
+    "develop.milestone_review": "Revisione Cliente",
+    "develop.milestone_review_desc": "Revisione finale e fase di perfezionamento",
+    "develop.milestone_launch": "Lancio",
+    "develop.milestone_launch_desc": "Deploy in produzione e go-live",
+
+    // Technology
+    "develop.tech_title": "Stack Tecnologico",
+    "develop.tech_subtitle": "Tecnologie di livello enterprise che seguono gli standard di sicurezza e qualità svizzeri.",
+    "develop.tech_frontend": "Frontend",
+    "develop.tech_ai_backend": "AI & Backend",
+    "develop.tech_infrastructure": "Infrastruttura",
 
     // Brand
     "brand.name": "AI Workshop",
@@ -2346,6 +2450,8 @@ const translations = {
     "footer.made_with": "Fatto con",
     "footer.in_switzerland": "in Svizzera",
     "footer.copyright": "© 2024 AI Workshop Switzerland. Tutti i diritti riservati.",
+    "footer.google_ratings_text": "Valutato 5/5 dai professionisti svizzeri",
+    "footer.view_reviews": "Vedi Recensioni",
 
     // Common additional
     "common.free_consultation": "Consulenza gratuita",
@@ -3739,7 +3845,58 @@ const translations = {
     "nav.about": "À propos",
     "nav.contact": "Contact",
     "nav.book_consultation": "Réserver une Consultation",
+    "nav.book_workshop": "Réserver un Atelier",
     "nav.courses": "Cours",
+    "nav.develop": "Développement",
+
+    // Develop Page
+    "develop.badge": "Développement IA Suisse",
+    "develop.title": "Construisez l'Avenir avec l'IA",
+    "develop.subtitle": "Transformez votre entreprise avec des applications IA personnalisées. Des plateformes web intelligentes aux applications mobiles avec capacités d'apprentissage automatique.",
+    "develop.cta_estimate": "Obtenir un Devis Gratuit",
+    "develop.cta_services": "Voir les Services",
+    "develop.services_title": "Services de Développement",
+    "develop.services_subtitle": "Choisissez parmi nos services complets de développement IA, chacun conçu selon les standards de qualité suisses.",
+    "develop.cta_ready_title": "Prêt à Commencer à Construire?",
+    "develop.cta_ready_subtitle": "Rejoignez les entreprises suisses qui transforment leur business avec l'IA. Obtenez une consultation gratuite et un devis personnalisé.",
+    "develop.cta_book_consultation": "Réserver une Consultation",
+    "develop.stats_response": "Temps de Réponse",
+    "develop.stats_quality": "Qualité Suisse",
+    "develop.stats_timeline": "Timeline Moyenne",
+
+    // Services
+    "develop.service_web_app": "Plateforme Web IA",
+    "develop.service_web_app_desc": "Applications web intelligentes avec fonctionnalités IA",
+    "develop.service_mobile_app": "App Mobile Intelligente",
+    "develop.service_mobile_app_desc": "Applications natives iOS et Android avec machine learning",
+    "develop.service_analytics": "Dashboard Analytique",
+    "develop.service_analytics_desc": "Interfaces d'administration alimentées par l'IA avec insights",
+    "develop.service_enterprise": "Suite IA Enterprise",
+    "develop.service_enterprise_desc": "Plateformes business complètes pilotées par l'IA",
+    "develop.starting_from": "À partir de",
+    "develop.timeline": "Timeline",
+    "develop.complexity": "Complexité",
+
+    // Process
+    "develop.process_title": "Processus de Développement",
+    "develop.process_subtitle": "Notre méthodologie éprouvée de 16 semaines garantit une livraison de qualité et un suivi transparent des progrès.",
+    "develop.milestone_kickoff": "Lancement du Projet",
+    "develop.milestone_kickoff_desc": "Analyse des exigences et configuration du projet",
+    "develop.milestone_prototype": "Révision du Prototype",
+    "develop.milestone_prototype_desc": "Designs initiaux et fonctionnalités principales",
+    "develop.milestone_development": "Jalon de Développement",
+    "develop.milestone_development_desc": "Implémentation des fonctionnalités et tests",
+    "develop.milestone_review": "Révision Client",
+    "develop.milestone_review_desc": "Révision finale et phase de raffinement",
+    "develop.milestone_launch": "Lancement",
+    "develop.milestone_launch_desc": "Déploiement en production et mise en ligne",
+
+    // Technology
+    "develop.tech_title": "Stack Technologique",
+    "develop.tech_subtitle": "Technologies de niveau entreprise suivant les standards de sécurité et qualité suisses.",
+    "develop.tech_frontend": "Frontend",
+    "develop.tech_ai_backend": "IA & Backend",
+    "develop.tech_infrastructure": "Infrastructure",
 
     // Brand
     "brand.name": "AI Workshop",
@@ -4238,6 +4395,8 @@ const translations = {
     "footer.made_with": "Fait avec",
     "footer.in_switzerland": "en Suisse",
     "footer.copyright": "© 2024 AI Workshop Switzerland. Tous droits réservés.",
+    "footer.google_ratings_text": "Noté 5/5 par des professionnels suisses",
+    "footer.view_reviews": "Voir les Avis",
 
     // Common additional
     "common.free_consultation": "Consultation gratuite",
@@ -5552,7 +5711,58 @@ const translations = {
     "nav.about": "Über uns",
     "nav.contact": "Kontakt",
     "nav.book_consultation": "Beratung Buchen",
+    "nav.book_workshop": "Workshop Buchen",
     "nav.courses": "Kurse",
+    "nav.develop": "Entwicklung",
+
+    // Develop Page
+    "develop.badge": "Schweizer KI-Entwicklung",
+    "develop.title": "Die Zukunft mit KI Bauen",
+    "develop.subtitle": "Transformieren Sie Ihr Unternehmen mit maßgeschneiderten KI-Anwendungen. Von intelligenten Web-Plattformen bis hin zu mobilen Apps mit Machine-Learning-Fähigkeiten.",
+    "develop.cta_estimate": "Kostenloses Angebot Erhalten",
+    "develop.cta_services": "Services Anzeigen",
+    "develop.services_title": "Entwicklungsservices",
+    "develop.services_subtitle": "Wählen Sie aus unseren umfassenden KI-Entwicklungsservices, die alle nach Schweizer Qualitätsstandards entwickelt wurden.",
+    "develop.cta_ready_title": "Bereit zu Bauen?",
+    "develop.cta_ready_subtitle": "Schließen Sie sich Schweizer Unternehmen an, die ihr Geschäft mit KI transformieren. Erhalten Sie eine kostenlose Beratung und ein maßgeschneidertes Angebot.",
+    "develop.cta_book_consultation": "Beratung Buchen",
+    "develop.stats_response": "Antwortzeit",
+    "develop.stats_quality": "Schweizer Qualität",
+    "develop.stats_timeline": "Durchschnittliche Timeline",
+
+    // Services
+    "develop.service_web_app": "KI Web-Plattform",
+    "develop.service_web_app_desc": "Intelligente Web-Anwendungen mit KI-Funktionen",
+    "develop.service_mobile_app": "Intelligente Mobile App",
+    "develop.service_mobile_app_desc": "Native iOS & Android Apps mit Machine Learning",
+    "develop.service_analytics": "Analytics Dashboard",
+    "develop.service_analytics_desc": "KI-gestützte Admin-Interfaces mit Insights",
+    "develop.service_enterprise": "Enterprise KI-Suite",
+    "develop.service_enterprise_desc": "Vollständige KI-gesteuerte Business-Plattformen",
+    "develop.starting_from": "Ab",
+    "develop.timeline": "Timeline",
+    "develop.complexity": "Komplexität",
+
+    // Process
+    "develop.process_title": "Entwicklungsprozess",
+    "develop.process_subtitle": "Unsere bewährte 16-Wochen-Methodik gewährleistet qualitativ hochwertige Lieferung und transparente Fortschrittsverfolgung.",
+    "develop.milestone_kickoff": "Projektstart",
+    "develop.milestone_kickoff_desc": "Anforderungsanalyse und Projekteinrichtung",
+    "develop.milestone_prototype": "Prototyp-Review",
+    "develop.milestone_prototype_desc": "Erste Designs und Kernfunktionalität",
+    "develop.milestone_development": "Entwicklungs-Meilenstein",
+    "develop.milestone_development_desc": "Feature-Implementierung und Testing",
+    "develop.milestone_review": "Kunden-Review",
+    "develop.milestone_review_desc": "Finale Überprüfung und Verfeinerungsphase",
+    "develop.milestone_launch": "Launch",
+    "develop.milestone_launch_desc": "Produktions-Deployment und Go-Live",
+
+    // Technology
+    "develop.tech_title": "Technologie-Stack",
+    "develop.tech_subtitle": "Enterprise-Grade-Technologien nach Schweizer Sicherheits- und Qualitätsstandards.",
+    "develop.tech_frontend": "Frontend",
+    "develop.tech_ai_backend": "KI & Backend",
+    "develop.tech_infrastructure": "Infrastruktur",
 
     // Brand
     "brand.name": "AI Workshop",
@@ -6057,6 +6267,8 @@ const translations = {
     "footer.made_with": "Gemacht mit",
     "footer.in_switzerland": "in der Schweiz",
     "footer.copyright": "© 2024 AI Workshop Switzerland. Alle Rechte vorbehalten.",
+    "footer.google_ratings_text": "Mit 5/5 von Schweizer Profis bewertet",
+    "footer.view_reviews": "Bewertungen Ansehen",
 
     // Common additional
     "common.free_consultation": "Kostenlose Beratung",

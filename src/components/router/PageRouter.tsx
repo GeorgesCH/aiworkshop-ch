@@ -44,6 +44,7 @@ const CoachingPage = React.lazy(() => import("../CoachingPage").then(module => (
 const SEOLandingPage = React.lazy(() => import("../SEOLandingPage").then(module => ({ default: module.SEOLandingPage })));
 const AdminPage = React.lazy(() => import("../AdminPage").then(module => ({ default: module.AdminPage })));
 const NotFoundPage = React.lazy(() => import("../NotFoundPage").then(module => ({ default: module.NotFoundPage })));
+const DevelopPage = React.lazy(() => import("../DevelopPage").then(module => ({ default: module.DevelopPage })));
 import type { Page } from "./types";
 import { ErrorBoundary } from "../ErrorBoundary";
 
@@ -101,6 +102,7 @@ export function PageRouter({ currentPage, setCurrentPage }: PageRouterProps) {
     );
   }
 
+
   if (currentPage === "about") {
     return (
       <Suspense fallback={<div className="animate-pulse bg-gray-100 min-h-screen"></div>}>
@@ -121,6 +123,14 @@ export function PageRouter({ currentPage, setCurrentPage }: PageRouterProps) {
     return (
       <Suspense fallback={<div className="animate-pulse bg-gray-100 min-h-screen"></div>}>
         <CoachingPage />
+      </Suspense>
+    );
+  }
+
+  if (currentPage === "develop") {
+    return (
+      <Suspense fallback={<div className="animate-pulse bg-gray-100 min-h-screen"></div>}>
+        <DevelopPage />
       </Suspense>
     );
   }

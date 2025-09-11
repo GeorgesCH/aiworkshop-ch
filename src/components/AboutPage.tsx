@@ -6,9 +6,9 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Award, Target, Users, Zap, ArrowLeft, Mail, Phone, CheckCircle, Calendar, Linkedin } from "lucide-react";
 import { useLanguage } from "./LanguageProvider";
 import { AssessmentCTA } from "./AssessmentCTA";
-// Use optimized images from public folder
-const designThinkingImage = "/optimized/aiworkshop-design-thinking-lausanne-optimized.webp";
-const georgeImage = "/optimized/george-raymond-alshoufi-AI-educator-AI-expert-Switzerland-optimized.webp";
+// Use optimized images from @optimized folder
+const designThinkingImage = "/@optimized/aiworkshop-design-thinking-lausanne-optimized.webp";
+const georgeImage = "/@optimized/george-raymond-alshoufi-AI-educator-AI-expert-Switzerland-optimized.webp";
 
 const stats = [
   {
@@ -287,19 +287,19 @@ export function AboutPage({ onBackToHome, onPageChange }: AboutPageProps) {
       </section>
 
       {/* Team Section */}
-      <section className="py-12 lg:py-16">
+      <section className="py-8 sm:py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="space-y-6 mb-16">
-              <Badge variant="outline" className="w-fit border-primary/20 text-primary bg-transparent">
+            <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12 lg:mb-16">
+              <Badge variant="outline" className="w-fit border-primary/20 text-primary bg-transparent text-xs sm:text-sm">
                 {t("about.our_team")}
               </Badge>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight px-2">
                 <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                   {t("about.meet_facilitator")}
                 </span>
               </h2>
-              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+              <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light px-4">
                 {t("about.facilitator_desc")}
               </p>
             </div>
@@ -308,30 +308,30 @@ export function AboutPage({ onBackToHome, onPageChange }: AboutPageProps) {
               {team.map((member, index) => (
                 <Card key={index} className="group relative overflow-hidden border border-gray-200/60 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.02] bg-white/90 backdrop-blur-sm">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <CardContent className="relative p-8 lg:p-12 text-center">
-                    <div className="relative w-28 h-28 lg:w-32 lg:h-32 mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
-                      <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="relative p-4 sm:p-6 lg:p-8 xl:p-12 text-center">
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 mx-auto mb-4 sm:mb-6 lg:mb-8 group-hover:scale-110 transition-transform duration-300">
+                      <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <ImageWithFallback
                         src={member.image}
                         alt={member.name}
-                        className="relative w-full h-full object-cover rounded-full border-4 border-white shadow-lg"
+                        className="relative w-full h-full object-cover rounded-full border-2 sm:border-4 border-white shadow-lg"
                       />
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">{member.name}</h3>
-                    <Badge variant="secondary" className="mb-6 px-4 py-2 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300">{member.role}</Badge>
-                    <p className="text-gray-600 text-base lg:text-lg leading-relaxed max-w-lg mx-auto">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">{member.name}</h3>
+                    <Badge variant="secondary" className="mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300 text-xs sm:text-sm">{member.role}</Badge>
+                    <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed max-w-lg mx-auto px-2">
                       {member.background}
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex justify-center mt-8">
+                    <div className="flex justify-center mt-6 sm:mt-8">
                       <Button
                         variant="outline"
                         size="sm"
-                        className="group/btn gap-2 px-6 py-2 border border-blue-500/60 hover:border-blue-500/80 bg-blue-50/50 hover:bg-blue-50/80 text-blue-600 hover:text-blue-700 transition-all duration-300 hover:scale-105"
+                        className="group/btn gap-2 px-4 sm:px-6 py-2 border border-blue-500/60 hover:border-blue-500/80 bg-blue-50/50 hover:bg-blue-50/80 text-blue-600 hover:text-blue-700 transition-all duration-300 hover:scale-105 text-xs sm:text-sm"
                         onClick={() => window.open('https://www.linkedin.com/in/george-a-ch/', '_blank')}
                       >
-                        <Linkedin className="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-300" />
+                        <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:scale-110 transition-transform duration-300" />
                         Connect on LinkedIn
                       </Button>
                     </div>

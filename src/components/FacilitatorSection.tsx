@@ -55,10 +55,10 @@ export function FacilitatorSection() {
     <section id="facilitator" className="section-apple">
       <div className="container-apple">
         {/* Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">{t('facilitator.badge')}</Badge>
-          <h2 className="heading-2 mb-4">{t('facilitator.title')}</h2>
-          <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">{t('facilitator.subtitle')}</p>
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <Badge variant="outline" className="mb-3 sm:mb-4">{t('facilitator.badge')}</Badge>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">{t('facilitator.title')}</h2>
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto px-4">{t('facilitator.subtitle')}</p>
         </div>
 
         <div className="max-w-6xl mx-auto">
@@ -66,9 +66,9 @@ export function FacilitatorSection() {
             <CardContent className="p-0">
               <div className="grid lg:grid-cols-2 gap-0">
                 {/* Profile Image Section */}
-                <div className="relative bg-white p-8 lg:p-12">
+                <div className="relative bg-white p-4 sm:p-6 lg:p-8 xl:p-12">
                   <div className="relative">
-                    <div className="relative w-64 h-64 mx-auto mb-8">
+                    <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto mb-6 sm:mb-8">
                       <ImageWithFallback
                         src={georgeImage}
                         alt="George Raymond-Alshoufi, AI Educator and Expert Switzerland"
@@ -76,26 +76,26 @@ export function FacilitatorSection() {
                       />
                       
                       {/* Floating Badge */}
-                      <div className="absolute -bottom-4 -right-4">
-                        <Badge className="bg-primary text-primary-foreground px-4 py-2">{t('facilitator.ai_expert_badge')}</Badge>
+                      <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4">
+                        <Badge className="bg-primary text-primary-foreground px-2 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm">{t('facilitator.ai_expert_badge')}</Badge>
                       </div>
                     </div>
                     
-                    <div className="text-center space-y-3">
-                      <h3 className="text-2xl font-bold">{t('facilitator.profile_name')}</h3>
-                      <p className="text-muted-foreground">{t('facilitator.profile_role')}</p>
+                    <div className="text-center space-y-2 sm:space-y-3">
+                      <h3 className="text-xl sm:text-2xl font-bold">{t('facilitator.profile_name')}</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground">{t('facilitator.profile_role')}</p>
                       
                       {/* Achievement Stats */}
-                      <div className="grid grid-cols-3 gap-apple-4 pt-6">
+                      <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 sm:pt-6">
                         {achievements.map((achievement, index) => {
                           const IconComponent = achievement.icon;
                           return (
                             <div key={index} className="text-center">
-                              <div className="w-10 h-10 bg-white/80 rounded-lg flex items-center justify-center mx-auto mb-2">
-                                <IconComponent className={`w-5 h-5 ${achievement.color}`} />
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/80 rounded-lg flex items-center justify-center mx-auto mb-1 sm:mb-2">
+                                <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${achievement.color}`} />
                               </div>
-                              <div className="text-lg font-bold">{achievement.value}</div>
-                              <div className="text-xs text-muted-foreground">{t(`facilitator.stats.${index+1}`)}</div>
+                              <div className="text-sm sm:text-lg font-bold">{achievement.value}</div>
+                              <div className="text-xs text-muted-foreground leading-tight">{t(`facilitator.stats.${index+1}`)}</div>
                             </div>
                           );
                         })}
@@ -105,26 +105,26 @@ export function FacilitatorSection() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-8 lg:p-12 space-y-8">
-                  <div className="space-y-6">
-                    <p className="text-gray-600 leading-relaxed">{t('facilitator.paragraph_1')}</p>
-                    <p className="text-gray-600 leading-relaxed">{t('facilitator.paragraph_2')}</p>
+                <div className="p-4 sm:p-6 lg:p-8 xl:p-12 space-y-6 sm:space-y-8">
+                  <div className="space-y-4 sm:space-y-6">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t('facilitator.paragraph_1')}</p>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t('facilitator.paragraph_2')}</p>
                   </div>
 
                   {/* Credentials */}
-                  <div className="space-y-4">
-                    <h4 className="font-semibold">{t('facilitator.qualifications_title')}</h4>
-                    <div className="space-y-3">
+                  <div className="space-y-3 sm:space-y-4">
+                    <h4 className="text-base sm:text-lg font-semibold">{t('facilitator.qualifications_title')}</h4>
+                    <div className="space-y-2 sm:space-y-3">
                       {credentials.map((credential, index) => {
                         const IconComponent = credential.icon;
                         return (
-                          <div key={index} className="flex items-center gap-apple-4 p-4 bg-gray-100/20 rounded-lg">
-                            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                              <IconComponent className={`w-5 h-5 ${credential.color}`} />
+                          <div key={index} className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-100/20 rounded-lg">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                              <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${credential.color}`} />
                             </div>
-                            <div>
-                              <div className="font-medium">{credential.title}</div>
-                              <div className="text-sm text-gray-600">{credential.subtitle}</div>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-sm sm:text-base font-medium">{credential.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-600 leading-tight">{credential.subtitle}</div>
                             </div>
                           </div>
                         );
@@ -133,25 +133,25 @@ export function FacilitatorSection() {
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-apple-4 pt-4">
-                    <Button className="gap-2 flex-1 px-6 py-3 rounded-xl" onClick={() => window.open('https://www.linkedin.com/in/george-a-ch/', '_blank')}>
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+                    <Button className="gap-2 flex-1 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base" onClick={() => window.open('https://www.linkedin.com/in/george-a-ch/', '_blank')}>
                       <Linkedin className="w-4 h-4" />
                       {t('facilitator.cta_linkedin')}
                     </Button>
-                    <Button variant="outline" className="flex-1 px-6 py-3 rounded-xl" onClick={() => window.open('https://calendly.com/georgeraymond/30min', '_blank')}>
+                    <Button variant="outline" className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base" onClick={() => window.open('https://calendly.com/georgeraymond/30min', '_blank')}>
                       {t('facilitator.cta_consult')}
                     </Button>
                   </div>
 
                   {/* Trust Badge */}
-                  <div className="bg-gray-100/20 rounded-lg p-4">
-                    <div className="flex items-center gap-apple-3">
-                      <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                        <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                  <div className="bg-gray-100/20 rounded-lg p-3 sm:p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-500 text-yellow-500" />
                       </div>
-                      <div>
-                        <div className="font-medium">{t('facilitator.trust_title')}</div>
-                        <div className="text-sm text-gray-600">{t('facilitator.trust_subtitle')}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm sm:text-base font-medium">{t('facilitator.trust_title')}</div>
+                        <div className="text-xs sm:text-sm text-gray-600 leading-tight">{t('facilitator.trust_subtitle')}</div>
                       </div>
                     </div>
                   </div>

@@ -7,11 +7,11 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 // Remove WorkshopBookingModal import as we now use routing
 import { CourseAssessmentCTA } from "./CourseAssessmentCTA";
 // Use optimized images from public folder
-const fundamentalsCourseImage = "/optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp";
-const participantsLearningImage = "/optimized/aiworkshop-participants-learning-optimized.webp";
-const generativeAiTrainingImage = "/optimized/aiworkshop-generative-ai-training-optimized.webp";
-const businessIntelligenceImage = "/optimized/aiworkshop-business-intelligence-training-optimized.webp";
-const teamCollaborationImage = "/optimized/aiworkshop-team-collaboration-optimized.webp";
+const fundamentalsCourseImage = "/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp";
+const participantsLearningImage = "/@optimized/aiworkshop-participants-learning-optimized.webp";
+const generativeAiTrainingImage = "/@optimized/aiworkshop-generative-ai-training-optimized.webp";
+const businessIntelligenceImage = "/@optimized/aiworkshop-business-intelligence-training-optimized.webp";
+const teamCollaborationImage = "/@optimized/aiworkshop-team-collaboration-optimized.webp";
 import { 
   Clock, 
   Users, 
