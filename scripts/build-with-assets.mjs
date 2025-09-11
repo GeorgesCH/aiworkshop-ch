@@ -6,20 +6,20 @@ import path from 'path';
 
 console.log('🚀 Starting build with static assets...\n');
 
-// Step 1: Clean dist directory
-console.log('📁 Cleaning dist directory...');
-if (fs.existsSync('dist')) {
-  fs.rmSync('dist', { recursive: true, force: true });
+// Step 1: Clean build directory
+console.log('📁 Cleaning build directory...');
+if (fs.existsSync('build')) {
+  fs.rmSync('build', { recursive: true, force: true });
 }
 
 // Step 2: Run the normal build
 console.log('🔨 Running Vite build...');
 execSync('npx vite build', { stdio: 'inherit' });
 
-// Step 3: Copy static assets from public to dist
+// Step 3: Copy static assets from public to build
 console.log('📋 Copying static assets...');
 const publicDir = 'public';
-const distDir = 'dist';
+const buildDir = 'build';
 
 if (fs.existsSync(publicDir)) {
   const copyRecursive = (src, dest) => {
@@ -40,16 +40,16 @@ if (fs.existsSync(publicDir)) {
     }
   };
   
-  copyRecursive(publicDir, distDir);
+  copyRecursive(publicDir, buildDir);
   console.log('✅ Static assets copied successfully');
 } else {
   console.log('⚠️  Public directory not found, skipping asset copy');
 }
 
-// Step 3.5: Copy fonts from src/assets to dist
+// Step 3.5: Copy fonts from src/assets to build
 console.log('📋 Copying fonts...');
 const srcFontsDir = 'src/assets/fonts';
-const distFontsDir = 'dist/fonts';
+const buildFontsDir = 'build/fonts';
 
 if (fs.existsSync(srcFontsDir)) {
   const copyRecursive = (src, dest) => {
@@ -70,7 +70,7 @@ if (fs.existsSync(srcFontsDir)) {
     }
   };
   
-  copyRecursive(srcFontsDir, distFontsDir);
+  copyRecursive(srcFontsDir, buildFontsDir);
   console.log('✅ Fonts copied successfully');
 } else {
   console.log('⚠️  Fonts directory not found, skipping font copy');
@@ -78,25 +78,25 @@ if (fs.existsSync(srcFontsDir)) {
 
 // Step 4: Verify the build
 console.log('\n📊 Build verification:');
-const distFiles = fs.readdirSync(distDir);
-console.log(`- Total files in dist: ${distFiles.length}`);
-console.log(`- Has index.html: ${distFiles.includes('index.html')}`);
-console.log(`- Has assets directory: ${distFiles.includes('assets')}`);
-console.log(`- Has @optimized directory: ${distFiles.includes('@optimized')}`);
-console.log(`- Has fonts directory: ${distFiles.includes('fonts')}`);
-console.log(`- Has robots.txt: ${distFiles.includes('robots.txt')}`);
-console.log(`- Has sitemap.xml: ${distFiles.includes('sitemap.xml')}`);
+const buildFiles = fs.readdirSync(buildDir);
+console.log(`- Total files in build: ${buildFiles.length}`);
+console.log(`- Has index.html: ${buildFiles.includes('index.html')}`);
+console.log(`- Has assets directory: ${buildFiles.includes('assets')}`);
+console.log(`- Has @optimized directory: ${buildFiles.includes('@optimized')}`);
+console.log(`- Has fonts directory: ${buildFiles.includes('fonts')}`);
+console.log(`- Has robots.txt: ${buildFiles.includes('robots.txt')}`);
+console.log(`- Has sitemap.xml: ${buildFiles.includes('sitemap.xml')}`);
 
 // Check subdirectories
-if (distFiles.includes('@optimized')) {
-  const optimizedFiles = fs.readdirSync(path.join(distDir, '@optimized'));
+if (buildFiles.includes('@optimized')) {
+  const optimizedFiles = fs.readdirSync(path.join(buildDir, '@optimized'));
   console.log(`- @optimized directory contains ${optimizedFiles.length} files`);
 }
 
-if (distFiles.includes('fonts')) {
-  const fontFiles = fs.readdirSync(path.join(distDir, 'fonts'));
+if (buildFiles.includes('fonts')) {
+  const fontFiles = fs.readdirSync(path.join(buildDir, 'fonts'));
   console.log(`- fonts directory contains ${fontFiles.length} files`);
 }
 
 console.log('\n🎉 Build completed successfully!');
-console.log('📁 All files are now in the dist directory');
+console.log('📁 All files are now in the build directory');

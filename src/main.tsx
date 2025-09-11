@@ -2,8 +2,7 @@
   import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./styles/critical.css"; // Load critical CSS first
-import "./styles/globals.css";
+import "./index.css"; // Load Tailwind CSS with custom utilities
 
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

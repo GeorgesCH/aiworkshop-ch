@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { BarChart3, Activity, TrendingUp, Users } from 'lucide-react';
 import { ChartContainer, ChartTooltip, type ChartConfig } from '../ui/chart';
-import { BarChart as RBarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart as RLineChart, Line } from 'recharts@2.15.2';
+import { BarChart as RBarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart as RLineChart, Line } from 'recharts';
 import { learnCourseModules } from '../learn/courseMap';
 import {
   adminLogin,
