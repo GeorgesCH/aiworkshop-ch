@@ -1,0 +1,34 @@
+# robots.txt for aiworkshop.ch
+User-agent: *
+Allow: /
+
+# Explicit allow for major AI/LLM crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: CCBot
+Allow: /
+
+# Disallow build artifacts and non-public paths (safety, though not served)
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /src/
+
+# Allow important directories
+Allow: /@optimized/
+Allow: /fonts/
+Allow: /assets/
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://aiworkshop.ch/sitemap.xml
+
+# Host directive
+Host: https://aiworkshop.ch

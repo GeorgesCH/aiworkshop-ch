@@ -8,7 +8,8 @@ pnpm-debug.log*
 # Build outputs
 dist/
 build/
-*.tsbuildinfo
+.next/
+out/
 
 # Environment variables
 .env
@@ -78,33 +79,12 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-
-# Gatsby files
-.cache/
-public
-
-# Storybook build outputs
-.out
-.storybook-out
-
-# Temporary folders
-tmp/
-temp/
-
-# Vite
-.vite
-
-# Supabase
-.supabase
-
-# Performance reports
-performance-report.json
+# Vercel
+.vercel
 
 # Local development
-.local
-.vercel
+.temp/
+temp/
+
+# Supabase
+.supabase/
