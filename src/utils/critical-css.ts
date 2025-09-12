@@ -152,9 +152,7 @@ export const preloadCriticalResources = () => {
   // Preload critical resources
   const resources = [
     { href: '/fonts/sigum/Sigum.woff2', as: 'font', type: 'font/woff2' },
-    { href: '/hero-dots.png', as: 'image' },
-    { href: '/body-noise-effect.svg', as: 'image' },
-    { href: '/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp', as: 'image' }
+    { href: '/body-noise-effect.svg', as: 'image' }
   ];
 
   resources.forEach(resource => {

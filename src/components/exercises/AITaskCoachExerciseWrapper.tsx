@@ -27,7 +27,7 @@ export function AITaskCoachExerciseWrapper({
     
     console.log("AI Task Coach Exercise saved:", { data, status, userDetails });
     
-    // TODO: Connect to your API (Supabase / Firestore / etc.)
+    // TODO: Connect to your API (Firebase / Firestore / etc.)
     // Example: await saveExerciseResponse({ 
     //   exercise_type: 'ai-task-coach', 
     //   responses: data, 

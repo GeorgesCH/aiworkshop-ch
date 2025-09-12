@@ -14,7 +14,7 @@ export function IntelligenceHero() {
           <Card className="relative overflow-hidden border border-gray-200/60 shadow-2xl bg-white/95 backdrop-blur-sm">
             {/* Hero dotted background pattern */}
             <div className="absolute inset-0 opacity-30" style={{
-              backgroundImage: "url('/hero-dots.png')",
+              backgroundImage: "url('/@optimized/hero-dots-optimized.webp')",
               backgroundRepeat: 'repeat',
               backgroundPosition: '0 0',
               backgroundAttachment: 'fixed'
@@ -43,6 +43,8 @@ export function IntelligenceHero() {
                       src={intelligenceImage} 
                       alt={t("intelligence.hero.image_alt")} 
                       className="w-full h-auto"
+                      width="600"
+                      height="400"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent"></div>
                   </div>

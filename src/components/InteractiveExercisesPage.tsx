@@ -14,7 +14,7 @@ import { exercises } from "./data/exercises";
 import { AITasksExercise, FuturePlanningExercise, ToolSharingExercise } from "./exercises/ExerciseComponents";
 import { AITaskCoachExerciseWrapper } from "./exercises/AITaskCoachExerciseWrapper";
 import { useLanguage } from "./LanguageProvider";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "./FirebaseAuthProvider";
 import { AuthModal } from "./auth/AuthModal";
 import { toast } from "sonner";
 

@@ -66,8 +66,8 @@ async function main() {
   for (const route of routes) {
     const normalizedRoute = route === '/' ? '/' : route;
     const metadata = routeMetadata[normalizedRoute] || { priority: '0.7', changefreq: 'monthly', images: [] };
-    
-    // Create entries for each language
+
+    // Include each language URL with full hreflang cluster
     for (const lang of languages) {
       const locPath = ensureTrailingSlash(`/${lang}${normalizedRoute}`.replace(/\/{2,}/g, '/'));
       const loc = `${baseNoSlash}${locPath}`;
@@ -78,20 +78,17 @@ async function main() {
           return `      <xhtml:link rel="alternate" hreflang="${l}" href="${baseNoSlash}${p}" />`;
         })
         .join('\n');
-      
+
       const xDefaultPath = ensureTrailingSlash(`/en${normalizedRoute}`.replace(/\/{2,}/g, '/'));
       const xDefault = `      <xhtml:link rel="alternate" hreflang="x-default" href="${baseNoSlash}${xDefaultPath}" />`;
 
-      // Add image sitemap entries
-      const imageEntries = metadata.images.map(img => 
+      const imageEntries = (metadata.images || []).map(img => 
         `      <image:image>
         <image:loc>${baseNoSlash}${img}</image:loc>
         <image:title>AI Workshop Switzerland - Professional AI Training</image:title>
         <image:caption>Professional AI training and workshops in Switzerland</image:caption>
       </image:image>`
       ).join('\n');
-
-      const imageNamespace = metadata.images.length > 0 ? ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"' : '';
 
       urls.push(
 `  <url>
@@ -117,7 +114,7 @@ ${urls.join('\n')}
   await fs.writeFile(outPath, xml, 'utf8');
   console.log(`Generated enhanced sitemap with ${urls.length} URLs -> ${path.relative(projectRoot, outPath)}`);
   
-  // Generate robots.txt with enhanced directives
+  // Generate robots.txt with multilingual support (do not block language paths)
   const robotsTxt = `# robots.txt for aiworkshop.ch
 User-agent: *
 Allow: /
@@ -163,3 +160,4 @@ main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
+

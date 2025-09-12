@@ -1,16 +1,24 @@
-// Basic service worker for AI Workshop
-const CACHE_NAME = 'aiworkshop-v2';
-// Only precache concrete, stable URLs; hashed assets are cached via HTTP headers
-const urlsToCache = [
+// Optimized service worker for AI Workshop - LCP optimization
+const CACHE_NAME = 'aiworkshop-v3';
+const CRITICAL_CACHE = 'aiworkshop-critical-v3';
+
+// Critical resources for LCP optimization
+const criticalUrlsToCache = [
   '/',
   '/manifest.json',
-  '/favicon.ico'
+  '/favicon.ico',
+  '/fonts/sigum/Sigum.woff2',
+  '/@optimized/AI-Workshop_Logo_light-optimized.webp',
+  '/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp'
 ];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    Promise.all([
+      caches.open(CRITICAL_CACHE).then((cache) => cache.addAll(criticalUrlsToCache)),
+      caches.open(CACHE_NAME).then((cache) => cache.addAll(criticalUrlsToCache))
+    ])
   );
 });
 
@@ -24,7 +32,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Network-first for HTML, cache-first for others
+// Optimized fetch strategy for LCP
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
@@ -39,6 +47,21 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
+  // Critical resources - cache first for LCP optimization
+  if (criticalUrlsToCache.some(criticalUrl => url.pathname === criticalUrl)) {
+    event.respondWith(
+      caches.match(req).then((cached) => {
+        if (cached) return cached;
+        return fetch(req).then((res) => {
+          const copy = res.clone();
+          caches.open(CRITICAL_CACHE).then((cache) => cache.put(req, copy));
+          return res;
+        });
+      })
+    );
+    return;
+  }
+  
   const accept = req.headers.get('accept') || '';
   if (accept.includes('text/html')) {
     event.respondWith(
@@ -50,6 +73,8 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
+  
+  // Other resources - cache first
   event.respondWith(
     caches.match(req).then((cached) => cached || fetch(req))
   );

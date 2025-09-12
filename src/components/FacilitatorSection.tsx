@@ -9,20 +9,32 @@ import georgeImage from "../assets/george-raymond-alshoufi-AI-educator-AI-expert
 
 const credentials = [
   {
-    title: "MSc HEC Paris",
-    subtitle: "Innovation & Entrepreneurship",
+    title: "Postgraduate Certificate",
+    subtitle: "Computer Science, University of Essex",
     icon: GraduationCap,
     color: "text-blue-600"
   },
   {
-    title: "MIT Sloan & CSAIL Certified", 
-    subtitle: "AI for Business Strategy",
+    title: "Master en Innovation & Entrepreneurship",
+    subtitle: "HEC Paris",
+    icon: GraduationCap,
+    color: "text-blue-600"
+  },
+  {
+    title: "Artificial Intelligence: Implications for Business Strategy",
+    subtitle: "MIT Sloan Executive Education (2025)",
     icon: Award,
     color: "text-green-600"
   },
   {
-    title: "ICF Certified Coach",
-    subtitle: "Institut de Coaching International, Geneva", 
+    title: "Professional Scrum Product Owner II (PSPO II)",
+    subtitle: "Scrum.org (2025)",
+    icon: Award,
+    color: "text-green-600"
+  },
+  {
+    title: "Coach certifié ICF (team coaching)",
+    subtitle: "International Coaching Institute, Genève, Suisse (2024)",
     icon: Briefcase,
     color: "text-purple-600"
   }

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { toast } from "sonner";
 import { useLanguage } from "./LanguageProvider";
 import { useScrollToTop } from "../utils/useScrollToTop";
-import { submitContactForm, ContactFormData } from "../utils/supabaseApi";
+import { submitContactForm, ContactFormData } from "../utils/firebaseApi";
 
 interface ContactPageProps {
   onBackToHome: () => void;
@@ -97,7 +97,7 @@ export function ContactPage({ onBackToHome }: ContactPageProps) {
         form_type: 'contact_page'
       };
 
-      // Submit contact form using Supabase API
+      // Submit contact form using Firebase API
       const response = await submitContactForm(contactData);
       
       if (response.success) {

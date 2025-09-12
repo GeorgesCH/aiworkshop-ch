@@ -68,6 +68,8 @@ export function AIDeepDive() {
                     src={aiImage} 
                     alt={t("intelligence.ai_deep_dive.image_alt")} 
                     className="w-full h-auto rounded-2xl shadow-2xl border border-gray-200/60"
+                    width="600"
+                    height="400"
                   />
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useAuth } from '../components/AuthProvider';
-import { getLearningProgress, upsertLearningProgress } from '../utils/supabaseApi';
+import { useAuth } from '../components/FirebaseAuthProvider';
+import { getLearningProgress, upsertLearningProgress } from '../utils/firebaseApi';
 
 export type ModuleDef = {
   moduleKey: string; // unique module key, e.g., 'learn-ai-overview'
@@ -35,23 +35,23 @@ export function useLearningProgress(courseKey: string, modules: ModuleDef[]) {
     try { localStorage.setItem(storageKey, JSON.stringify(progress)); } catch {}
   }, [storageKey, progress]);
 
-  // Load from Supabase when logged in and merge (prefer higher percentage/status)
+  // Load from Firebase when logged in and merge (prefer higher percentage/status)
   useEffect(() => {
     let mounted = true;
     (async () => {
       if (!user) return;
-      const res = await getLearningProgress(user.id, courseKey);
+      const res = await getLearningProgress(courseKey, user.id);
       if (!mounted || !res.success || !res.data) return;
-      const server = res.data.progress;
+      const server = res.data;
       const merged: ProgressMap = { ...progress };
       server.forEach(row => {
-        const key = row.module_key;
+        const key = row.moduleKey;
         const existing = merged[key];
         const serverStatus = row.status as ModuleProgress['status'];
         const serverPct = row.percentage ?? 0;
         const better = !existing || serverPct > existing.percentage || (existing.status !== 'completed' && serverStatus === 'completed');
         if (better) {
-          merged[key] = { status: serverStatus, percentage: serverPct, updatedAt: Date.parse(row.updated_at || row.last_visited_at || row.created_at || new Date().toISOString()) };
+          merged[key] = { status: serverStatus, percentage: serverPct, updatedAt: Date.parse(row.updatedAt || row.lastVisitedAt || row.createdAt || new Date().toISOString()) };
         }
       });
       setProgress(merged);

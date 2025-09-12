@@ -27,11 +27,26 @@ class PerformanceMonitor {
     if (this.isInitialized || typeof window === 'undefined') return;
     
     this.isInitialized = true;
-    this.observeWebVitals();
-    this.observeLayoutShifts();
-    this.observeLongTasks();
-    this.optimizeImages();
-    this.preloadCriticalResources();
+    
+    // Defer non-critical initialization to avoid blocking main thread
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => {
+        this.observeWebVitals();
+        this.observeLayoutShifts();
+        this.observeLongTasks();
+        this.optimizeImages();
+        this.preloadCriticalResources();
+      }, { timeout: 2000 });
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(() => {
+        this.observeWebVitals();
+        this.observeLayoutShifts();
+        this.observeLongTasks();
+        this.optimizeImages();
+        this.preloadCriticalResources();
+      }, 100);
+    }
   }
 
   private observeWebVitals() {
@@ -186,7 +201,7 @@ class PerformanceMonitor {
 
     // Preload critical images
     const criticalImages = [
-      '/hero-dots.png',
+      '/@optimized/hero-dots-optimized.webp',
       '/body-noise-effect.svg',
     ];
 
@@ -200,13 +215,26 @@ class PerformanceMonitor {
   }
 
   private reportMetric(name: string, value: number) {
-    // Send to analytics or monitoring service
+    // Batch analytics calls to reduce main thread blocking
     if (typeof gtag !== 'undefined') {
-      gtag('event', 'web_vitals', {
-        metric_name: name,
-        metric_value: Math.round(value),
-        metric_rating: this.getMetricRating(name, value),
-      });
+      // Use requestIdleCallback to defer analytics calls
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          gtag('event', 'web_vitals', {
+            metric_name: name,
+            metric_value: Math.round(value),
+            metric_rating: this.getMetricRating(name, value),
+          });
+        });
+      } else {
+        setTimeout(() => {
+          gtag('event', 'web_vitals', {
+            metric_name: name,
+            metric_value: Math.round(value),
+            metric_rating: this.getMetricRating(name, value),
+          });
+        }, 0);
+      }
     }
 
     // Log to console in development

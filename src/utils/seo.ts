@@ -19,18 +19,7 @@ function baseUrl(): string {
   // Always use the canonical domain (non-www version)
   const canonicalDomain = "https://aiworkshop.ch";
   
-  // If we're in the browser, check if we need to redirect to canonical domain
-  if (typeof window !== "undefined") {
-    const currentOrigin = window.location.origin;
-    const currentHost = window.location.host;
-    
-    // If we're on www version, redirect to non-www (canonical)
-    if (currentHost.startsWith('www.')) {
-      const newUrl = currentOrigin.replace('www.', '') + window.location.pathname + window.location.search + window.location.hash;
-      window.location.replace(newUrl);
-      return canonicalDomain;
-    }
-  }
+  // Do not perform client-side redirects here; handle canonical redirects at the web server (301).
   
   return stripTrailingSlash(fromEnv || canonicalDomain);
 }
@@ -40,6 +29,13 @@ function pageToPath(page: Page): string {
 }
 
 function urlFor(lang: Lang, page: Page): string {
+  const path = pageToPath(page);
+  const locPath = ensureTrailingSlash(`/${lang}${path}`.replace(/\/{2,}/g, "/"));
+  return baseUrl() + locPath;
+}
+
+// Generate canonical URL - always points to English version for consistency
+function canonicalUrlFor(page: Page, lang: Lang): string {
   const path = pageToPath(page);
   const locPath = ensureTrailingSlash(`/${lang}${path}`.replace(/\/{2,}/g, "/"));
   return baseUrl() + locPath;
@@ -586,19 +582,19 @@ export function applySEO(page: Page, language: string) {
     document.documentElement.setAttribute('lang', lang);
   }
 
-  // Canonical
-  const canonical = urlFor(lang, page);
+  // Canonical - self-referential per language version
+  const canonical = canonicalUrlFor(page, lang);
   // Remove existing canonical then set one
   document.head.querySelectorAll('link[rel="canonical"]').forEach((el) => el.remove());
   upsertLinkRel("canonical", canonical);
 
-  // Hreflang alternates
+  // Hreflang alternates - all pointing to their respective language versions
   document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
   (SUPPORTED_LANGS as readonly Lang[]).forEach((l) => {
     upsertLinkRel("alternate", urlFor(l, page), { hreflang: l });
   });
-  // x-default -> English
-  upsertLinkRel("alternate", urlFor("en", page), { hreflang: "x-default" });
+  // x-default -> English homepage fallback
+  upsertLinkRel("alternate", canonicalUrlFor(page, "en"), { hreflang: "x-default" });
 
   // Enhanced meta tags - ensure description is set first and prominently
   upsertMetaByName("description", description);

@@ -21,7 +21,7 @@ import {
   getAdminNewsletterSubscribers,
   updateWorkshopBookingStatus,
   getAdminLearningProgress,
-} from '../../utils/supabaseApi';
+} from '../../utils/firebaseApi';
 
 // Types
 
@@ -113,8 +113,9 @@ export function AdminDashboard() {
   // Auth
   const verify = async (tok: string) => {
     try {
-      if (verifyAdminToken()) {
-        setMe({ email: 'admin@aiworkshop.ch' });
+      const response = await verifyAdminToken();
+      if (response.success && response.data?.user) {
+        setMe({ email: response.data.user.email || 'admin@aiworkshop.ch' });
         setError('');
         return true;
       } else {

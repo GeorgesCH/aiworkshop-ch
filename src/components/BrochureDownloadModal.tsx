@@ -8,7 +8,7 @@ import { Textarea } from "./ui/textarea";
 import { Download, Mail, Building, Users, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { useLanguage } from "./LanguageProvider";
-import { submitBrochureRequest, BrochureRequestData } from "../utils/supabaseApi";
+import { submitBrochureRequest, BrochureRequestData } from "../utils/firebaseApi";
 
 interface BrochureDownloadModalProps {
   isOpen: boolean;
@@ -54,7 +54,7 @@ export function BrochureDownloadModal({ isOpen, onClose }: BrochureDownloadModal
     setIsSubmitting(true);
 
     try {
-      // Prepare data for Supabase API
+      // Prepare data for Firebase API
       const brochureData: BrochureRequestData = {
         firstName: formData.firstName,
         lastName: formData.lastName,

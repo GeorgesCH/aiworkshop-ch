@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow anonymous users to create documents in form collections
+    match /contactSubmissions/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /workshopBookings/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /brochureRequests/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /exerciseResponses/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /emailSubscribers/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /pageAnalytics/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /developmentEstimates/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /discoveryCalls/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    match /learningProgress/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+    
+    // Admin access (authenticated users)
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

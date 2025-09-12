@@ -133,7 +133,7 @@ function SelectItem({
           <CheckIcon className="size-4" />
         </SelectPrimitive.ItemIndicator>
       </span>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemText className="text-gray-900 dark:text-gray-100">{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
 }

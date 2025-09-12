@@ -154,7 +154,7 @@ export function MachineLearningPage({ onBackToLearn }: { onBackToLearn: () => vo
             <Card className="relative overflow-hidden border border-gray-200/60 shadow-2xl bg-white/95 backdrop-blur-sm">
               {/* Hero dotted background pattern */}
               <div className="absolute inset-0 opacity-30" style={{
-                backgroundImage: "url('/hero-dots.png')",
+                backgroundImage: "url('/@optimized/hero-dots-optimized.webp')",
                 backgroundRepeat: 'repeat',
                 backgroundPosition: '0 0',
                 backgroundAttachment: 'fixed'

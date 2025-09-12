@@ -201,6 +201,8 @@ const TestimonialCard = React.forwardRef<
               src={avatar}
               alt={author}
               className="w-12 h-12 rounded-full object-cover"
+              width="48"
+              height="48"
             />
           )}
           

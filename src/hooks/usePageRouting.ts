@@ -10,25 +10,31 @@ export function usePageRouting(language: string, initialPage?: Page) {
     return getPageFromUrl();
   });
 
-  // Initialize Google Analytics
+  // Initialize Google Analytics - deferred to avoid blocking LCP
   useEffect(() => {
-    initializeGA();
+    // Defer GA initialization to avoid blocking LCP
+    setTimeout(() => {
+      initializeGA();
+    }, 2000);
   }, []);
 
-  // Track page view whenever currentPage changes
+  // Track page view whenever currentPage changes - deferred to avoid blocking LCP
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       console.log('🔧 usePageRouting - currentPage state changed to:', currentPage);
     }
     if (currentPage) {
-      const pageTitle = getPageTitle(currentPage, language);
-      trackEnhancedPageView(currentPage, pageTitle, undefined, {
-        language,
-        timestamp: new Date().toISOString(),
-        user_agent: navigator.userAgent,
-        screen_resolution: `${screen.width}x${screen.height}`,
-        viewport_size: `${window.innerWidth}x${window.innerHeight}`,
-      });
+      // Defer analytics tracking to avoid blocking LCP
+      setTimeout(() => {
+        const pageTitle = getPageTitle(currentPage, language);
+        trackEnhancedPageView(currentPage, pageTitle, undefined, {
+          language,
+          timestamp: new Date().toISOString(),
+          user_agent: navigator.userAgent,
+          screen_resolution: `${screen.width}x${screen.height}`,
+          viewport_size: `${window.innerWidth}x${window.innerHeight}`,
+        });
+      }, 1000);
     }
   }, [currentPage, language]);
 

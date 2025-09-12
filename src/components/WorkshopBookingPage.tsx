@@ -11,7 +11,7 @@ import { Progress } from "./ui/progress";
 import { Calendar, Mail, Clock, CheckCircle, ArrowLeft, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { useLanguage } from "./LanguageProvider";
-import { submitWorkshopBooking, savePartialWorkshopBooking, updateWorkshopBooking, WorkshopBookingData } from "../utils/supabaseApi";
+import { submitWorkshopBooking, updateWorkshopBooking, WorkshopBookingData } from "../utils/firebaseApi";
 
 interface Course {
   id: string;
@@ -138,12 +138,10 @@ export function WorkshopBookingPage({ selectedCourse, onBackToHome }: WorkshopBo
             position: formData.position
           };
 
-          const response = await savePartialWorkshopBooking(partialData);
-          
-          if (response.success && response.data) {
-            setCurrentBookingId(response.data.id);
-            toast.success("Progress saved! You can continue or come back later.");
-          }
+          // For Firebase, we'll save progress in localStorage for now
+          // In a production app, you might want to implement a draft saving mechanism
+          localStorage.setItem('workshopBookingDraft', JSON.stringify(partialData));
+          toast.success("Progress saved locally! You can continue or come back later.");
         } catch (error) {
           console.error('Error saving step 1 progress:', error);
         } finally {

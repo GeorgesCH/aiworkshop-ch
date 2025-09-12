@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useAuth } from '../AuthProvider';
+import { useAuth } from '../FirebaseAuthProvider';
 import { useLanguage } from '../LanguageProvider';
 
 interface AuthModalProps {

@@ -1,7 +1,8 @@
 import React, { Suspense, lazy, useMemo } from "react";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { LanguageProvider, useLanguage } from "./components/LanguageProvider";
-import { AuthProvider } from "./components/AuthProvider";
+import { FirebaseAuthProvider } from "./components/FirebaseAuthProvider";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { usePageRouting } from "./hooks/usePageRouting";
 import { SEOHead } from "./components/SEOHead";
 import type { Page } from "./components/router/types";
@@ -13,8 +14,11 @@ const Footer = lazy(() => import("./components/Footer").then(module => ({ defaul
 const PageRouter = lazy(() => import("./components/router/PageRouter").then(module => ({ default: module.PageRouter })));
 const Toaster = lazy(() => import("./components/ui/sonner").then(module => ({ default: module.Toaster })));
 
+// Ultra-lazy load non-critical components
+const AnalyticsDashboard = lazy(() => import("./components/AnalyticsDashboard").then(module => ({ default: module.AnalyticsDashboard })));
+
 // Lazy load performance utilities to avoid blocking initial render
-// Removed lazy imports - now using direct dynamic imports for better error handling
+// Defer performance monitoring initialization
 
 function AppContent() {
   const { language } = useLanguage();
@@ -28,26 +32,31 @@ function AppContent() {
     // Use requestIdleCallback to defer non-critical initialization
     const initNonCritical = async () => {
       try {
-        // Initialize Google Analytics
-        initializeGA();
+        // Initialize Google Analytics (already deferred in HTML)
+        // initializeGA();
         
-        // Initialize performance monitoring
-        const performanceModule = await import("./utils/performance");
-        performanceModule.initPerformanceMonitoring();
+        // Initialize performance monitoring with additional delay (after LCP)
+        setTimeout(async () => {
+          const performanceModule = await import("./utils/performance");
+          performanceModule.initPerformanceMonitoring();
+        }, 3000);
         
-        // Initialize Web Vitals tracking
-        const webVitalsModule = await import("./utils/web-vitals");
-        webVitalsModule.initWebVitals();
+        // Initialize Web Vitals tracking with additional delay (after LCP)
+        setTimeout(async () => {
+          const webVitalsModule = await import("./utils/web-vitals");
+          webVitalsModule.initWebVitals();
+        }, 4000);
         
-        // Initialize comprehensive SEO optimizer
-        const seoModule = await import("./utils/seo-optimizer");
-        const seoOptimizer = seoModule.initSEOOptimizer({
-          enableWebVitals: true,
-          enableAccessibility: true,
-          enableImageOptimization: true,
-          enablePerformanceMonitoring: true
-        });
-        seoOptimizer.initialize();
+        // Initialize comprehensive SEO optimizer with additional delay (after LCP)
+        setTimeout(async () => {
+          const seoModule = await import("./utils/seo-optimizer");
+          const seoOptimizer = seoModule.initSEOOptimizer({
+            enableWebVitals: false, // Disable to reduce initial load
+            enableAccessibility: true,
+            enableImageOptimization: false, // Disable to reduce initial load
+            enablePerformanceMonitoring: false // Disable to reduce initial load
+          });
+        }, 5000);
       } catch (error) {
         console.warn('Failed to initialize non-critical features:', error);
       }
@@ -140,12 +149,14 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="ai-workshop-theme">
-      <LanguageProvider>
-        <AuthProvider>
-          <AppContent />
-        </AuthProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider defaultTheme="light" storageKey="ai-workshop-theme">
+        <LanguageProvider>
+          <FirebaseAuthProvider>
+            <AppContent />
+          </FirebaseAuthProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }

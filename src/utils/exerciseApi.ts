@@ -1,5 +1,5 @@
-// Exercise API utilities for saving responses to Supabase
-import { submitExerciseResponse, loadExerciseResponse as loadFromSupabase, ExerciseSubmissionData } from './supabaseApi';
+// Exercise API utilities for saving responses to Firebase
+import { submitExerciseResponse, loadExerciseResponse as loadFromFirebase, ExerciseSubmissionData } from './firebaseApi';
 
 export interface ExerciseSubmission {
   exercise_type: 'ai-tasks' | 'future-planning' | 'tool-sharing';
@@ -25,7 +25,7 @@ export function getSessionId(): string {
   return sessionId;
 }
 
-// Save exercise response to Supabase
+// Save exercise response to Firebase
 export async function saveExerciseResponse(submission: ExerciseSubmission): Promise<any> {
   try {
     const exerciseData: ExerciseSubmissionData = {
@@ -51,13 +51,13 @@ export async function saveExerciseResponse(submission: ExerciseSubmission): Prom
   }
 }
 
-// Load existing exercise response from Supabase
+// Load existing exercise response from Firebase
 export async function loadExerciseResponse(
   exerciseType: string, 
   sessionId?: string
 ): Promise<any> {
   try {
-    const response = await loadFromSupabase(exerciseType, sessionId || getSessionId());
+    const response = await loadFromFirebase(exerciseType, sessionId || getSessionId());
     
     if (!response.success) {
       return null; // No existing response found or error occurred

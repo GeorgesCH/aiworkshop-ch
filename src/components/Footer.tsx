@@ -40,6 +40,8 @@ export function Footer({ onPageChange }: FooterProps = {}) {
                     src={getCurrentLogo()} 
                     alt="AI Workshop Switzerland" 
                     className="h-3 w-auto object-contain !max-w-[80px]"
+                    width="80"
+                    height="12"
                   />
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg blur opacity-30"></div>
                 </div>

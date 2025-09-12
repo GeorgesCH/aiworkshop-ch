@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { useLanguage } from "./LanguageProvider";
 import { useFormAnalytics } from "../hooks/useAnalytics";
 import { trackWorkshopBooking, trackConversion } from "../utils/analytics";
-import { submitWorkshopBooking, savePartialWorkshopBooking, updateWorkshopBooking, WorkshopBookingData } from "../utils/supabaseApi";
+import { submitWorkshopBooking, updateWorkshopBooking, WorkshopBookingData } from "../utils/firebaseApi";
 
 interface Course {
   id: string;
@@ -146,16 +146,11 @@ export function WorkshopBookingModal({ isOpen, onClose, selectedCourse }: Worksh
             position: formData.position
           };
 
-          const response = await savePartialWorkshopBooking(partialData);
-          
-          if (response.success && response.data) {
-            setCurrentBookingId(response.data.id);
-            console.log('Step 1 progress saved:', response.data.id);
-            toast.success("Progress saved! You can continue or come back later.");
-          } else {
-            console.warn('Failed to save step 1 progress:', response.error);
-            // Continue anyway, don't block the user
-          }
+          // For Firebase, we'll save progress in localStorage for now
+          // In a production app, you might want to implement a draft saving mechanism
+          localStorage.setItem('workshopBookingDraft', JSON.stringify(partialData));
+          console.log('Step 1 progress saved locally');
+          toast.success("Progress saved locally! You can continue or come back later.");
         } catch (error) {
           console.error('Error saving step 1 progress:', error);
           // Continue anyway, don't block the user
@@ -243,7 +238,7 @@ export function WorkshopBookingModal({ isOpen, onClose, selectedCourse }: Worksh
         language: language
       };
 
-      // Submit booking using Supabase API
+      // Submit booking using Firebase API
       let response;
       
       if (currentBookingId) {

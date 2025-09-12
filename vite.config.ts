@@ -38,11 +38,78 @@ export default defineConfig({
     target: 'es2022',
     outDir: 'build',
     sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
+      },
+    },
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       external: [],
       output: {
-        // Disable manual chunking temporarily to fix React loading issues
-        // manualChunks: undefined,
+        manualChunks: (id) => {
+          // Core React libraries - keep small for LCP
+          if (id.includes('react') || id.includes('react-dom')) {
+            return 'react-vendor';
+          }
+          // UI libraries - defer loading
+          if (id.includes('lucide-react') || id.includes('sonner') || id.includes('vaul')) {
+            return 'ui-vendor';
+          }
+          // Form libraries - defer loading
+          if (id.includes('react-hook-form') || id.includes('react-day-picker')) {
+            return 'form-vendor';
+          }
+          // Chart libraries - defer loading
+          if (id.includes('recharts')) {
+            return 'chart-vendor';
+          }
+          // Utility libraries - defer loading
+          if (id.includes('tailwind-merge') || id.includes('clsx')) {
+            return 'utils-vendor';
+          }
+          // Analytics and performance - defer loading
+          if (id.includes('analytics') || id.includes('performance') || id.includes('web-vitals')) {
+            return 'analytics-vendor';
+          }
+          // SEO and optimization - defer loading
+          if (id.includes('seo') || id.includes('optimizer')) {
+            return 'seo-vendor';
+          }
+          // Large components - defer loading
+          if (id.includes('admin') || id.includes('CoursePage') || id.includes('SEOLandingPage')) {
+            return 'large-components';
+          }
+          // Language provider - separate chunk
+          if (id.includes('LanguageProvider')) {
+            return 'language-vendor';
+          }
+          // Theme provider - separate chunk
+          if (id.includes('ThemeProvider')) {
+            return 'theme-vendor';
+          }
+          // Firebase auth - separate chunk
+          if (id.includes('FirebaseAuthProvider') || id.includes('firebase')) {
+            return 'auth-vendor';
+          }
+          // Router components - separate chunk
+          if (id.includes('router') || id.includes('PageRouter')) {
+            return 'router-vendor';
+          }
+        },
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId
+            ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
+            : 'chunk';
+          return `assets/${facadeModuleId}-[hash].js`;
+        },
       },
     },
   },

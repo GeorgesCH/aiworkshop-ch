@@ -184,7 +184,7 @@ export function DiscoveryCallPage({ onBackToHome }: DiscoveryCallPageProps) {
     trackConversion('discovery_call');
     
     try {
-      const { submitDiscoveryCall } = await import('../utils/supabaseApi');
+      const { submitDiscoveryCall } = await import('../utils/firebaseApi');
       
       const result = await submitDiscoveryCall({
         firstName: formData.firstName,

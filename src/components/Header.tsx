@@ -12,7 +12,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Separator } from "./ui/separator";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "./FirebaseAuthProvider";
 import { useLearningProgress } from "../hooks/useLearningProgress";
 import { learnCourseModules, learnHubCourseKey } from "./learn/courseMap";
 import { AuthModal } from "./auth/AuthModal";
@@ -88,6 +88,8 @@ export function Header({ currentPage, onPageChange = () => {} }: HeaderProps) {
                 src={getCurrentLogo()} 
                 alt="AI Workshop Switzerland" 
                 className="w-[35px] h-auto object-contain"
+                width="35"
+                height="35"
               />
               <span className="font-aiworkshop text-[15px] md:text-base font-semibold text-foreground hidden sm:block">
                 AI-Workshop

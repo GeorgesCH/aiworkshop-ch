@@ -185,7 +185,7 @@ export function initPerformanceMonitoring() {
 function preloadCriticalResources() {
   const criticalResources = [
     '/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp',
-    '/hero-dots.png'
+    '/@optimized/hero-dots-optimized.webp'
   ];
 
   criticalResources.forEach(resource => {

@@ -1,125 +1,173 @@
 # VPS Deployment Configuration
 
+## Key Deployment Notes
+
+### Build Order (CRITICAL)
+Always follow this exact sequence for proper deployment:
+```bash
+npm run build      # Build the application
+npm run prerender  # Generate static HTML for all language routes
+npm run sitemap    # Generate sitemap with hreflang alternates
+```
+
+### Prerendered Pages
+- **Location**: `public/{lang}/.../index.html` files are ready for crawlers
+- **SEO Features**: Each page includes correct title, meta description, canonical per language, full hreflang cluster, and OG/Twitter tags
+- **Languages**: All language variants are prerendered with proper meta tags
+
+### Redirects
+- **Canonical 301 redirects**: Configure at Nginx/Apache level (e.g., www → non-www)
+- **Client-side redirects**: Removed from JavaScript for better SEO
+- **Implementation**: Use server-level redirects for canonical URLs
+
+### Sitemap & Robots
+- **Sitemap**: `public/sitemap.xml` lists every language URL with hreflang alternates
+- **Robots**: `public/robots.txt` allows all languages and points to sitemap
+
+### VPS Deployment Structure
+The deployment creates a single web root containing:
+- **Built assets**: All optimized JS, CSS, images from `build/` directory
+- **Prerendered pages**: Language-specific HTML files in `{lang}/{route}/index.html`
+- **SEO files**: `sitemap.xml` and `robots.txt` at web root
+- **Result**: Single `/var/www/aiworkshop` directory with everything needed
+
 ## Nginx Configuration
 
 Create `/etc/nginx/sites-available/aiworkshop-ch`:
 
 ```nginx
+# HTTP to HTTPS redirect with canonical www → non-www
 server {
     listen 80;
-    server_name your-domain.com www.your-domain.com;
+    server_name aiworkshop.ch www.aiworkshop.ch;
     
-    # Redirect HTTP to HTTPS
-    return 301 https://$server_name$request_uri;
+    # 301 redirect www → non-www
+    if ($host = www.aiworkshop.ch) {
+        return 301 https://aiworkshop.ch$request_uri;
+    }
+    
+    # Enforce HTTPS (if certbot/SSL runs on a separate server block, skip this)
+    return 301 https://aiworkshop.ch$request_uri;
 }
 
+# Main site (non-WWW canonical)
 server {
     listen 443 ssl http2;
-    server_name your-domain.com www.your-domain.com;
+    server_name aiworkshop.ch;
     
-    # SSL Configuration (update paths to your certificates)
-    ssl_certificate /path/to/your/certificate.crt;
-    ssl_certificate_key /path/to/your/private.key;
+    # SSL config here (certs, protocols, ciphers)
+    ssl_certificate /etc/letsencrypt/live/aiworkshop.ch/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/aiworkshop.ch/privkey.pem;
     
-    # SSL Security Settings
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384;
-    ssl_prefer_server_ciphers off;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m;
-    
-    # Document root (update path to your deployment directory)
-    root /var/www/aiworkshop-ch;
+    root /var/www/aiworkshop;
     index index.html;
     
-    # Gzip compression
+    # Gzip/brotli can be enabled as needed
     gzip on;
-    gzip_vary on;
-    gzip_min_length 1024;
-    gzip_proxied expired no-cache no-store private must-revalidate auth;
-    gzip_types
-        text/plain
-        text/css
-        text/xml
-        text/javascript
-        application/javascript
-        application/xml+rss
-        application/json
-        font/woff
-        font/woff2
-        font/ttf
-        font/otf
-        image/svg+xml;
     
-    # Security headers
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-XSS-Protection "1; mode=block" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header Referrer-Policy "no-referrer-when-downgrade" always;
-    add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
-    add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    # Cache static assets aggressively
+    location ~* ^/(assets|@optimized|fonts|favicon|sw.js|manifest.json) {
+        access_log off;
+        expires 30d;
+        add_header Cache-Control "public, max-age=2592000, immutable";
+        try_files $uri =404;
+    }
     
-    # Main location block
+    # Serve prerendered localized pages if they exist
+    # e.g., /en/generative-ai/ -> /var/www/aiworkshop/en/generative-ai/index.html
+    location ~* ^/(en|fr|de|it)(/.*)?$ {
+        try_files $uri $uri/ $uri/index.html /index.html;
+    }
+    
+    # Sitemap and robots
+    location = /sitemap.xml { try_files /sitemap.xml =404; }
+    location = /robots.txt { try_files /robots.txt =404; }
+    
+    # Fallback SPA route (English)
     location / {
         try_files $uri $uri/ /index.html;
-        
-        # Cache control for HTML
-        location ~* \.html$ {
-            expires 1h;
-            add_header Cache-Control "public, must-revalidate";
-        }
     }
     
-    # Static assets with long-term caching
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|webp|avif)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-        access_log off;
-    }
-    
-    # Fonts
-    location ~* \.(woff|woff2|ttf|eot|otf)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-        add_header Access-Control-Allow-Origin "*";
-        access_log off;
-    }
-    
-    # Service Worker
-    location /sw.js {
-        expires 1h;
-        add_header Cache-Control "public, must-revalidate";
-    }
-    
-    # Manifest and robots
-    location ~* \.(json|xml|txt)$ {
-        expires 1d;
-        add_header Cache-Control "public";
-    }
-    
-    # Deny access to hidden files
-    location ~ /\. {
-        deny all;
-        access_log off;
-        log_not_found off;
-    }
+    # Security headers (optional but recommended)
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+    add_header Referrer-Policy "strict-origin-when-cross-origin";
+    add_header Permissions-Policy "interest-cohort=()";
 }
 ```
 
 ## Apache Configuration
 
-If using Apache, create `.htaccess` in your deployment directory:
+### VirtualHost Configuration
+
+Create a VirtualHost configuration in `/etc/apache2/sites-available/aiworkshop-ch.conf`:
+
+```apache
+# HTTP to HTTPS redirect
+<VirtualHost *:80>
+    ServerName your-domain.com
+    ServerAlias www.your-domain.com
+    Redirect permanent / https://your-domain.com/
+</VirtualHost>
+
+# WWW to non-WWW redirect (canonical)
+<VirtualHost *:443>
+    ServerName www.your-domain.com
+    DocumentRoot /var/www/aiworkshop
+    
+    # SSL Configuration
+    SSLEngine on
+    SSLCertificateFile /path/to/your/certificate.crt
+    SSLCertificateKeyFile /path/to/your/private.key
+    
+    # Canonical redirect: www to non-www
+    Redirect permanent / https://your-domain.com/
+</VirtualHost>
+
+# Main site (non-WWW canonical)
+<VirtualHost *:443>
+    ServerName your-domain.com
+    DocumentRoot /var/www/aiworkshop
+    
+    # SSL Configuration
+    SSLEngine on
+    SSLCertificateFile /path/to/your/certificate.crt
+    SSLCertificateKeyFile /path/to/your/private.key
+    
+    # Include .htaccess rules
+    AllowOverride All
+    
+    # Security headers
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</VirtualHost>
+```
+
+### .htaccess Configuration
+
+Create `.htaccess` in your deployment directory:
 
 ```apache
 RewriteEngine On
 
-# Handle Angular and React Router
+# Canonical redirects (if not handled by VirtualHost)
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Handle SPA routing
 RewriteBase /
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
+
+# Handle language-specific routes (prerendered pages)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(en|de|fr|it)/(.*)$ /$1/index.html [L]
 
 # Compression
 <IfModule mod_deflate.c>
@@ -169,22 +217,40 @@ RewriteRule . /index.html [L]
 
 ## Deployment Steps
 
-1. **Run the deployment script:**
+### Automated Deployment (Recommended)
+
+1. **Run the complete release pipeline:**
+   ```bash
+   npm run release  # Builds, prerenders, generates sitemap, and deploys
+   ```
+
+### Manual Deployment
+
+1. **Follow the critical build order:**
+   ```bash
+   npm run build      # Build the application
+   npm run prerender  # Generate static HTML for all language routes  
+   npm run sitemap    # Generate sitemap with hreflang alternates
+   ```
+
+2. **Deploy to VPS:**
    ```bash
    ./deploy-vps.sh
    ```
 
-2. **Upload to your VPS:**
+### Manual Upload (Alternative)
+
+1. **Upload to your VPS:**
    ```bash
    scp aiworkshop-ch-deploy.tar.gz user@your-vps-ip:/tmp/
    ```
 
-3. **On your VPS, extract and set up:**
+2. **On your VPS, extract and set up:**
    ```bash
    cd /var/www
-   sudo mkdir -p aiworkshop-ch
-   sudo chown -R www-data:www-data aiworkshop-ch
-   cd aiworkshop-ch
+   sudo mkdir -p aiworkshop
+   sudo chown -R www-data:www-data aiworkshop
+   cd aiworkshop
    sudo tar -xzf /tmp/aiworkshop-ch-deploy.tar.gz
    ```
 
@@ -215,6 +281,32 @@ RewriteRule . /index.html [L]
 - Configure log rotation
 - Set up automated backups
 
+## Optional Enhancements
+
+### Build Pipeline Automation
+Add a single npm script that runs the complete sequence:
+```bash
+npm run release  # build → prerender → sitemap → deploy
+```
+
+### Rsync-based Deploy Script
+For faster, incremental deployments:
+```bash
+npm run deploy:rsync  # Uses rsync for efficient file synchronization
+```
+
+### Full Localization
+Extend prerender meta to pull from existing language meta maps:
+- Localized titles and descriptions in static HTML
+- Currently uses English as authoritative fallback
+- Can be enhanced to use language-specific meta data
+
+### Apache Configuration
+If using Apache instead of Nginx:
+- VirtualHost configuration provided above
+- .htaccess rules for SPA routing and language handling
+- Equivalent security headers and compression settings
+
 ## Monitoring
 
 Consider setting up:
@@ -222,3 +314,4 @@ Consider setting up:
 - Uptime monitoring
 - Performance monitoring
 - Error logging
+- SEO monitoring for prerendered pages

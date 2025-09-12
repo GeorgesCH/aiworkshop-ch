@@ -8,7 +8,7 @@ import { useAnalytics } from "../hooks/useAnalytics";
 // Use optimized public images
 import { CircuitBackground, DiagonalPill } from "./BrandMotif";
 // Hero image path - using optimized WebP version
-const heroImagePath = "/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp";
+const heroImagePath = "/@optimized/AI-Workshop-training-for-employees-switzerland-640-optimized.webp";
 
 interface HeroSectionProps {
   onPageChange?: (page: string) => void;
@@ -50,19 +50,21 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:max-w-none lg:mx-0 font-light">
+              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:max-w-none lg:mx-0 font-normal">
                 {t("hero.description")}
               </p>
             </div>
 
             {/* Hero Image - Mobile Optimized - Shows after text on mobile */}
-            <div className="relative lg:hidden mt-8">
+            <div className="relative hidden mt-8">
               <div className="relative max-w-sm mx-auto">
                 <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/20 to-secondary/40 shadow-xl">
                   <img
                     src={heroImagePath}
                     alt={t("hero.image_alt")}
                     className="w-full h-auto object-center"
+                    width="400"
+                    height="300"
                     loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-2xl"></div>
@@ -123,13 +125,15 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
             </div>
 
           {/* Hero Image - Enhanced */}
-          <div className="relative hidden lg:block">
+          <div className="relative block">
             <div className="relative max-w-none group h-[600px]">
               <div className="relative h-full rounded-3xl overflow-hidden bg-gradient-to-br from-secondary/20 to-secondary/40 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
                 <img
                   src={heroImagePath}
                   alt={t("hero.image_alt")}
                   className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700"
+                  width="600"
+                  height="600"
                   loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl"></div>

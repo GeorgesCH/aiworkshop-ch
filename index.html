@@ -39,61 +39,92 @@
       <link rel="manifest" href="/manifest.json" />
       <meta name="theme-color" content="#000000" />
       
+      <!-- Preload critical images to prevent CLS -->
+      <link rel="preload" as="image" href="/@optimized/AI-Workshop_Logo_light-optimized.webp" fetchpriority="high">
+      <link rel="preload" as="image" href="/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp" fetchpriority="high">
+      
       <!-- Preload critical resources for LCP optimization -->
       <link rel="preload" href="/fonts/sigum/Sigum.woff2" as="font" type="font/woff2" crossorigin>
       
+      <!-- Preload critical JavaScript chunks for LCP -->
+      <link rel="modulepreload" href="/src/main.tsx">
+      <link rel="modulepreload" href="/src/App.tsx">
+      <link rel="modulepreload" href="/src/components/HeroSection.tsx">
+      <link rel="modulepreload" href="/src/components/Header.tsx">
+      
       <!-- Preload critical CSS chunks -->
+      <link rel="preload" href="/src/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="/src/index.css"></noscript>
+      
+      <!-- Preload main JavaScript bundle -->
+      <link rel="modulepreload" href="/src/main.tsx" crossorigin>
       
       <!-- DNS prefetch for external resources -->
       <link rel="dns-prefetch" href="//fonts.googleapis.com">
       <link rel="dns-prefetch" href="//fonts.gstatic.com">
       <link rel="dns-prefetch" href="//www.googletagmanager.com">
+      
+      <!-- Preconnect to same origin for faster asset loading -->
+      <link rel="preconnect" href="/" crossorigin>
+      
+      <!-- Prefetch critical assets -->
+      <link rel="prefetch" href="/src/components/Footer.tsx">
+      <link rel="prefetch" href="/src/components/StatsSection.tsx">
+      <link rel="prefetch" href="/src/components/FeatureGrid.tsx">
 
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDY4DP6BME"></script>
+      <!-- Google tag (gtag.js) - Ultra-deferred loading for LCP optimization -->
       <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        // Ultra-defer Google Analytics loading to improve LCP
+        let gaLoaded = false;
+        let gaQueue = [];
         
-        // Enhanced Google Analytics configuration
-        gtag('config', 'G-NDY4DP6BME', {
-          // Enhanced measurement settings
-          enhanced_measurements: {
-            scrolls: true,
-            outbound_clicks: true,
-            site_search: true,
-            video_engagement: true,
-          },
+        // Queue GA calls until script loads
+        function gtag() {
+          if (gaLoaded) {
+            window.gtag.apply(window, arguments);
+          } else {
+            gaQueue.push(arguments);
+          }
+        }
+        
+        // Load GA only after user interaction or 5 seconds
+        function loadGA() {
+          if (gaLoaded) return;
+          gaLoaded = true;
           
-          // Custom parameters
-          custom_map: {
-            'custom_parameter_1': 'page_type',
-            'custom_parameter_2': 'language',
-            'custom_parameter_3': 'user_type',
-          },
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-NDY4DP6BME';
+          document.head.appendChild(script);
           
-          // Privacy and performance settings
-          anonymize_ip: true,
-          allow_google_signals: true,
-          allow_ad_personalization_signals: false,
-          
-          // Enhanced ecommerce (for workshop bookings)
-          send_page_view: false, // We'll handle this manually for better control
-          
-          // Debug mode in development
-          debug_mode: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
+          script.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            
+            // Minimal GA configuration for LCP optimization
+            window.gtag('config', 'G-NDY4DP6BME', {
+              send_page_view: false,
+              anonymize_ip: true,
+              allow_google_signals: false,
+              allow_ad_personalization_signals: false,
+            });
+            
+            // Process queued calls
+            gaQueue.forEach(function(args) {
+              window.gtag.apply(window, args);
+            });
+            gaQueue = [];
+          };
+        }
+        
+        // Load GA on first user interaction
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(function(event) {
+          document.addEventListener(event, loadGA, { once: true, passive: true });
         });
         
-        // Track initial page load
-        gtag('event', 'page_view', {
-          page_title: document.title,
-          page_location: window.location.href,
-          page_path: window.location.pathname,
-          language: navigator.language,
-          screen_resolution: screen.width + 'x' + screen.height,
-          viewport_size: window.innerWidth + 'x' + window.innerHeight,
-        });
+        // Fallback: load after 5 seconds
+        setTimeout(loadGA, 5000);
       </script>
       
       <!-- Critical CSS inlined for LCP optimization -->
@@ -191,6 +222,18 @@
         /* Prevent layout shift for images */
         img { max-width: 100%; height: auto; }
         
+        /* Critical image dimensions to prevent CLS */
+        img[src*="AI-Workshop_Logo_light-optimized.webp"] {
+          width: 35px;
+          height: 35px;
+        }
+        
+        img[src*="AI-Workshop-training-for-employees-switzerland-optimized.webp"] {
+          aspect-ratio: 4/3;
+          width: 100%;
+          height: auto;
+        }
+        
         /* Critical accessibility styles */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
         *:focus-visible { outline: 2px solid #dc143c; outline-offset: 2px; }
@@ -222,6 +265,40 @@
           .hero-section { min-height: 80vh; padding: 20px; }
           .btn-primary { padding: 10px 20px; font-size: 14px; }
         }
+        
+        /* Critical layout styles to prevent FOUC */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .grid { display: grid; }
+        .flex { display: flex; }
+        .hidden { display: none; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .sticky { position: sticky; }
+        .top-4 { top: 1rem; }
+        .z-50 { z-index: 50; }
+        .w-full { width: 100%; }
+        .h-screen { height: 100vh; }
+        .min-h-screen { min-height: 100vh; }
+        .bg-white { background-color: white; }
+        .text-foreground { color: #1d1d1f; }
+        .text-muted-foreground { color: #6b7280; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .text-center { text-align: center; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 1rem; }
+        .p-4 { padding: 1rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mt-4 { margin-top: 1rem; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .shadow-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+        .border { border-width: 1px; }
+        .border-gray-200 { border-color: #e5e7eb; }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
       </style>
       
       <!-- Vite will inject the built CSS automatically; no manual CSS loader -->
@@ -295,7 +372,8 @@
         })();
       </script>
       
-      <script type="module" src="/src/main.tsx"></script>
+      <!-- Load main script with optimized loading strategy -->
+      <script type="module" src="/src/main.tsx" async></script>
       
       <!-- Service Worker Registration -->
       <script>

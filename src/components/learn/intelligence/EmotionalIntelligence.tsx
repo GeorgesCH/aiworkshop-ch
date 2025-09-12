@@ -21,6 +21,8 @@ export function EmotionalIntelligence() {
                     src={eqImage} 
                     alt={t("intelligence.emotional.image_alt")} 
                     className="w-full h-auto rounded-2xl shadow-2xl border border-gray-200/60"
+                    width="600"
+                    height="400"
                   />
                   
                   <div className="absolute bottom-4 left-4 right-4">

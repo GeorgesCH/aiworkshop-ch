@@ -9,7 +9,7 @@ import { Target, Calendar, Users, Save, Share2, Lightbulb, BookOpen, CheckCircle
 import { toast } from "sonner";
 import { useLanguage } from "../LanguageProvider";
 import { saveExerciseResponse, autoSaveExercise, calculateCompletionPercentage } from "../../utils/exerciseApi";
-// Removed old API import - using Supabase now
+// Removed old API import - using Firebase now
 
 interface ExerciseComponentProps {
   responses: Record<string, any>;

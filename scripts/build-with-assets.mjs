@@ -12,9 +12,9 @@ if (fs.existsSync('build')) {
   fs.rmSync('build', { recursive: true, force: true });
 }
 
-// Step 2: Run the normal build
-console.log('🔨 Running Vite build...');
-execSync('npx vite build', { stdio: 'inherit' });
+// Step 2: Run the optimized build
+console.log('🔨 Running optimized Vite build...');
+execSync('npx vite build --mode production', { stdio: 'inherit' });
 
 // Step 3: Copy static assets from public to build
 console.log('📋 Copying static assets...');
@@ -96,6 +96,41 @@ if (buildFiles.includes('@optimized')) {
 if (buildFiles.includes('fonts')) {
   const fontFiles = fs.readdirSync(path.join(buildDir, 'fonts'));
   console.log(`- fonts directory contains ${fontFiles.length} files`);
+}
+
+// Step 5: Analyze bundle sizes for LCP optimization
+console.log('\n📊 Bundle size analysis:');
+const assetsDir = path.join(buildDir, 'assets');
+if (fs.existsSync(assetsDir)) {
+  const assets = fs.readdirSync(assetsDir);
+  const jsFiles = assets.filter(file => file.endsWith('.js'));
+  const cssFiles = assets.filter(file => file.endsWith('.css'));
+  
+  console.log(`- JavaScript files: ${jsFiles.length}`);
+  console.log(`- CSS files: ${cssFiles.length}`);
+  
+  // Calculate total JS size
+  let totalJSSize = 0;
+  jsFiles.forEach(file => {
+    const filePath = path.join(assetsDir, file);
+    const stats = fs.statSync(filePath);
+    totalJSSize += stats.size;
+    console.log(`  - ${file}: ${(stats.size / 1024).toFixed(1)}KB`);
+  });
+  
+  console.log(`- Total JavaScript size: ${(totalJSSize / 1024).toFixed(1)}KB`);
+  
+  // Calculate total CSS size
+  let totalCSSSize = 0;
+  cssFiles.forEach(file => {
+    const filePath = path.join(assetsDir, file);
+    const stats = fs.statSync(filePath);
+    totalCSSSize += stats.size;
+    console.log(`  - ${file}: ${(stats.size / 1024).toFixed(1)}KB`);
+  });
+  
+  console.log(`- Total CSS size: ${(totalCSSSize / 1024).toFixed(1)}KB`);
+  console.log(`- Total assets size: ${((totalJSSize + totalCSSSize) / 1024).toFixed(1)}KB`);
 }
 
 console.log('\n🎉 Build completed successfully!');

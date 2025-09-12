@@ -24,7 +24,7 @@ import { useLanguage } from "./LanguageProvider";
 import { useAnalytics, useFormAnalytics } from "../hooks/useAnalytics";
 import { trackAssessment } from "../utils/analytics";
 // Remove WorkshopBookingModal import as we now use routing
-import { submitExerciseResponse, ExerciseSubmissionData, submitContactForm, ContactFormData } from "../utils/supabaseApi";
+import { submitExerciseResponse, ExerciseSubmissionData, submitContactForm, ContactFormData } from "../utils/firebaseApi";
 import { getSessionId } from "../utils/exerciseApi";
 
 interface AssessmentPageProps {

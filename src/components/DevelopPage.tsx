@@ -40,7 +40,7 @@ import {
 } from "lucide-react";
 import { motion } from "../utils/safe-motion";
 import { useLanguage } from "./LanguageProvider";
-import { supabase, TABLES, DevelopmentEstimate, getClientInfo } from "../config/supabase";
+import { db, COLLECTIONS, DevelopmentEstimate, getClientInfo } from "../config/firebase";
 
 interface EstimateData {
   projectName: string;
@@ -136,7 +136,7 @@ export function DevelopPage() {
   ];
 
   const platformFeatures = [
-    { id: "supabase_auth", name: "User Authentication", price: 2400, description: "Secure login system with Supabase" },
+    { id: "firebase_auth", name: "User Authentication", price: 2400, description: "Secure login system with Firebase" },
     { id: "payments", name: "Payment Integration", price: 3200, description: "Stripe, PayPal integration" },
     { id: "file_storage", name: "File Storage", price: 2000, description: "Secure file upload and management" },
     { id: "api_integrations", name: "API Integrations", price: 3200, description: "Third-party service connections" },
@@ -230,7 +230,7 @@ export function DevelopPage() {
         ai_chat_agent: estimateData.aiFeatures.includes('ai_chat_agent'),
         rag_search: estimateData.aiFeatures.includes('rag_search'),
         analytics_dashboard: estimateData.aiFeatures.includes('analytics_dashboard'),
-        supabase_auth: estimateData.platformRequirements.includes('supabase_auth'),
+        firebaseAuth: estimateData.platformRequirements.includes('firebase_auth'),
         payments: estimateData.platformRequirements.includes('payments'),
         file_storage: estimateData.platformRequirements.includes('file_storage'),
         api_integrations: estimateData.platformRequirements.includes('api_integrations') ? ['standard'] : [],
@@ -261,19 +261,16 @@ export function DevelopPage() {
         status: 'new'
       };
 
-      const { data, error } = await supabase
-        .from(TABLES.DEVELOPMENT_ESTIMATES)
-        .insert([estimateRecord])
-        .select()
-        .single();
+      const { submitDevelopmentEstimate } = await import('../utils/firebaseApi');
+      const response = await submitDevelopmentEstimate(estimateRecord);
 
-      if (error) {
-        console.error('Error submitting estimate:', error);
+      if (!response.success) {
+        console.error('Error submitting estimate:', response.error);
         setSubmitError('Failed to submit estimate. Please try again or contact us directly.');
         return;
       }
 
-      console.log('Estimate submitted successfully:', data);
+      console.log('Estimate submitted successfully:', response.data);
       setSubmitSuccess(true);
       
       // Reset form after successful submission

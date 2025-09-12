@@ -6,7 +6,7 @@ import { Progress } from '../ui/progress';
 import { CheckCircle, Play, ArrowRight, LogIn } from 'lucide-react';
 import { useLearningProgress, ModuleDef } from '../../hooks/useLearningProgress';
 import { learnCourseModules, learnHubCourseKey } from './courseMap';
-import { useAuth } from '../AuthProvider';
+import { useAuth } from '../FirebaseAuthProvider';
 import { AuthModal } from '../auth/AuthModal';
 import { useLanguage } from '../LanguageProvider';
 

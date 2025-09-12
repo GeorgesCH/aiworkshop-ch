@@ -11,7 +11,7 @@ interface LazyWrapperProps {
 export function LazyWrapper({
   children,
   fallback = <div className="animate-pulse bg-gray-200 rounded h-32"></div>,
-  rootMargin = '100px',
+  rootMargin = '50px',
   threshold = 0.1,
   className = '',
 }: LazyWrapperProps) {
@@ -20,25 +20,51 @@ export function LazyWrapper({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasLoaded) {
-          setIsVisible(true);
-          setHasLoaded(true);
-          observer.disconnect();
+    // Use requestIdleCallback to defer intersection observer creation
+    const createObserver = () => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !hasLoaded) {
+            setIsVisible(true);
+            setHasLoaded(true);
+            observer.disconnect();
+          }
+        },
+        {
+          rootMargin,
+          threshold,
         }
-      },
-      {
-        rootMargin,
-        threshold,
+      );
+
+      if (ref.current) {
+        observer.observe(ref.current);
       }
-    );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+      return observer;
+    };
+
+    let observer: IntersectionObserver;
+    
+    if ('requestIdleCallback' in window) {
+      const idleCallback = window.requestIdleCallback(() => {
+        observer = createObserver();
+      }, { timeout: 100 });
+      
+      return () => {
+        window.cancelIdleCallback(idleCallback);
+        observer?.disconnect();
+      };
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      const timer = setTimeout(() => {
+        observer = createObserver();
+      }, 0);
+      
+      return () => {
+        clearTimeout(timer);
+        observer?.disconnect();
+      };
     }
-
-    return () => observer.disconnect();
   }, [hasLoaded, rootMargin, threshold]);
 
   return (

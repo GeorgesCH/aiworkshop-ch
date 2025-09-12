@@ -6,7 +6,7 @@
 # VPS Connection Details
 export VPS_HOST="128.65.199.142"            # Your VPS IP address
 export VPS_USER="ubuntu"                    # SSH username
-export VPS_PATH="/var/www/aiworkshop.ch"    # Web root directory
+export VPS_PATH="/var/www/aiworkshop"    # Web root directory
 
 # SSH Key Path for authentication
 export SSH_KEY_PATH="~/.ssh/gcloud-key2"    # Path to your SSH private key

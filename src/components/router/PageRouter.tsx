@@ -88,16 +88,52 @@ export function PageRouter({ currentPage, setCurrentPage }: PageRouterProps) {
           </LazyWrapper>
         </Suspense>
 
-        {/* Below the fold - temporarily loaded directly to debug React hooks issue */}
-        <ProgramsSection onPageChange={setCurrentPage} />
-        <VideoShowcaseSection />
-        <WorkshopsSection onPageChange={setCurrentPage} />
-        <WhyChooseUsSection onPageChange={setCurrentPage} />
-        <TestimonialsSection />
-        <FacilitatorSection />
-        <ContactSection />
-        <WorkshopMethodologySection />
-        <ActionDock />
+        {/* Below the fold - lazy loaded to reduce initial DOM size */}
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <ProgramsSection onPageChange={setCurrentPage} />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <VideoShowcaseSection />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <WorkshopsSection onPageChange={setCurrentPage} />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <WhyChooseUsSection onPageChange={setCurrentPage} />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <TestimonialsSection />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <FacilitatorSection />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <ContactSection />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-32"></div>}>
+          <LazyWrapper>
+            <WorkshopMethodologySection />
+          </LazyWrapper>
+        </Suspense>
+        <Suspense fallback={<div className="animate-pulse bg-gray-100 h-16"></div>}>
+          <LazyWrapper>
+            <ActionDock />
+          </LazyWrapper>
+        </Suspense>
       </main>
     );
   }

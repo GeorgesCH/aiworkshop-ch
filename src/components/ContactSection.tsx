@@ -7,7 +7,7 @@ import { Badge } from "./ui/badge";
 import { Mail, Phone, MapPin, Calendar, Send, MessageCircle, AlertCircle, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useLanguage } from "./LanguageProvider";
-import { submitContactForm, ContactFormData } from "../utils/supabaseApi";
+import { submitContactForm, ContactFormData } from "../utils/firebaseApi";
 import React from "react";
 
 export function ContactSection() {
@@ -80,7 +80,7 @@ export function ContactSection() {
         form_type: 'contact_section'
       };
 
-      // Submit contact form using Supabase API
+      // Submit contact form using Firebase API
       const response = await submitContactForm(contactData);
       
       if (response.success) {
