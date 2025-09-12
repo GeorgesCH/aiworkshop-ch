@@ -6,7 +6,6 @@ import { usePageRouting } from "./hooks/usePageRouting";
 import { SEOHead } from "./components/SEOHead";
 import type { Page } from "./components/router/types";
 import { initializeGA } from "./utils/analytics";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Lazy load all heavy components to reduce initial bundle size
 const Header = lazy(() => import("./components/Header").then(module => ({ default: module.Header })));
@@ -135,8 +134,6 @@ function AppContent() {
         <Toaster />
       </Suspense>
       
-      {/* Vercel Speed Insights */}
-      <SpeedInsights />
     </div>
   );
 }

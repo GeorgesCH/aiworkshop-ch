@@ -30,15 +30,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Critical header styles */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
+
 
 /* Critical hero section styles */
 .hero-section {

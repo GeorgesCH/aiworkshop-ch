@@ -75,6 +75,16 @@ export function Footer({ onPageChange }: FooterProps = {}) {
                   </a>
                 </Button>
               </div>
+              
+              {/* ChatSwiss.ch Link */}
+              <div className="pt-2">
+                <Button asChild variant="outline" size="sm" className="h-8 px-3 text-xs hover:bg-gradient-to-r hover:from-primary/10 hover:to-secondary/10 hover:scale-105 transition-all duration-300 rounded-lg border-primary/20 hover:border-primary/40">
+                  <a href="http://chatswiss.ch/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                    <span>ChatSwiss.ch</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
 

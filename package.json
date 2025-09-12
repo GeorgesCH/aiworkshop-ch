@@ -31,7 +31,6 @@
             "@radix-ui/react-toggle-group": "^1.1.11",
             "@radix-ui/react-tooltip": "^1.2.8",
             "@supabase/supabase-js": "^2.57.4",
-            "@vercel/speed-insights": "^1.2.0",
             "class-variance-authority": "^0.7.1",
             "clsx": "^2.1.1",
             "cmdk": "^1.1.1",
@@ -72,12 +71,6 @@
             "preview": "vite preview",
             "sitemap": "node ./scripts/generate-sitemap.mjs",
             "analyze": "vite build --mode analyze",
-            "deploy": "npm run build && ./deploy-simple.sh",
-            "deploy:full": "npm run build && ./deploy.sh",
-            "deploy:optimized": "./deploy-optimized.sh",
-            "deploy:fixed": "./deploy-fixed.sh",
-            "deploy:vps": "./deploy-vps.sh",
-            "deploy:vps:simple": "./deploy-simple.sh",
-            "vercel-build": "npm run build"
+            "deploy": "./deploy-vps.sh"
       }
 }

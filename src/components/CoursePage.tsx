@@ -9,7 +9,7 @@ import { CourseAssessmentCTA } from "./CourseAssessmentCTA";
 // Use optimized images from public folder
 const fundamentalsCourseImage = "/@optimized/AI-Workshop-training-for-employees-switzerland-optimized.webp";
 const participantsLearningImage = "/@optimized/aiworkshop-participants-learning-optimized.webp";
-const generativeAiTrainingImage = "/@optimized/aiworkshop-generative-ai-training-optimized.webp";
+import generativeAiTrainingImage from "@/assets/optimized/aiworkshop-generative-ai-training-optimized.webp";
 const businessIntelligenceImage = "/@optimized/aiworkshop-business-intelligence-training-optimized.webp";
 const teamCollaborationImage = "/@optimized/aiworkshop-team-collaboration-optimized.webp";
 import { 
@@ -357,7 +357,7 @@ export function CoursePage({ courseId, onBackToHome, onPageChange }: CoursePageP
               <Card className="relative overflow-hidden border border-gray-200/60 shadow-2xl bg-white/95 backdrop-blur-sm">
                 {/* Hero dotted background pattern */}
                 <div className="absolute inset-0 opacity-30" style={{
-                  backgroundImage: "url('/hero-dots.png')",
+                  backgroundImage: "url('/@optimized/hero-dots-optimized.webp')",
                   backgroundRepeat: 'repeat',
                   backgroundPosition: '0 0',
                   backgroundAttachment: 'fixed'
@@ -462,13 +462,13 @@ export function CoursePage({ courseId, onBackToHome, onPageChange }: CoursePageP
         <section className="py-20 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <ImageWithFallback
                     src={getCourseImage(courseId)}
                     alt={`${course.title} - Interactive Learning Experience`}
-                    className="relative w-full h-auto object-cover rounded-3xl shadow-2xl transition-transform duration-300 group-hover:scale-105"
+                    className="relative w-full h-[350px] lg:h-[450px] object-cover rounded-3xl shadow-2xl transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div className="space-y-6">

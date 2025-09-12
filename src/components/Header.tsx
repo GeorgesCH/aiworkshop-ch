@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Separator } from "./ui/separator";
 import { useAuth } from "./AuthProvider";
 import { useLearningProgress } from "../hooks/useLearningProgress";
@@ -75,8 +76,8 @@ export function Header({ currentPage, onPageChange = () => {} }: HeaderProps) {
 
   return (
     <>
-      <header>
-        <div className={`sticky top-0 z-50 w-full py-2 sm:py-3 ${isScrolled ? 'shadow-md' : 'shadow-sm'} flex h-14 md:h-16 items-center justify-between rounded-2xl border border-gray-200 bg-white transition-[box-shadow,border-color] duration-200 container mx-auto px-4 sm:px-6 lg:px-8`}>
+      <header className="sticky top-4 z-50 w-full">
+        <div className={`py-2 sm:py-3 ${isScrolled ? 'shadow-lg backdrop-blur-md bg-white/80 border-white/20' : 'shadow-sm backdrop-blur-sm bg-white/60 border-white/10'} flex h-14 md:h-16 items-center justify-between rounded-2xl border transition-all duration-300 container mx-auto px-4 sm:px-6 lg:px-8`}>
           <div className="flex items-center space-x-4 relative z-20">
             <button
               onClick={() => navigateToPage("home")}
@@ -101,7 +102,7 @@ export function Header({ currentPage, onPageChange = () => {} }: HeaderProps) {
                 {t("header.courses")}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-80 p-3 border border-gray-200 shadow-lg bg-white rounded-xl">
+              <DropdownMenuContent align="start" className="w-80 p-3 border border-white/20 shadow-lg backdrop-blur-md bg-white/90 rounded-xl">
                 <div className="space-y-1">
                   {courses.map((course) => (
                     <DropdownMenuItem
@@ -144,7 +145,7 @@ export function Header({ currentPage, onPageChange = () => {} }: HeaderProps) {
                 {t("header.learn")}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-72 p-3 border border-gray-200 shadow-lg bg-white rounded-xl">
+              <DropdownMenuContent align="start" className="w-72 p-3 border border-white/20 shadow-lg backdrop-blur-md bg-white/90 rounded-xl">
                 <div className="space-y-1">
                   <DropdownMenuItem
                     onClick={() => navigateToPage("learn")}
@@ -242,7 +243,7 @@ export function Header({ currentPage, onPageChange = () => {} }: HeaderProps) {
                 {user ? (user.email || 'Account') : t('header.sign_in', 'Sign in')}
                 <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-72 p-3 border border-gray-200 shadow-lg bg-white rounded-xl">
+              <DropdownMenuContent align="end" className="w-72 p-3 border border-white/20 shadow-lg backdrop-blur-md bg-white/90 rounded-xl">
                 {user ? (
                   <div className="px-2 py-1.5 text-xs text-muted-foreground">{user.email}</div>
                 ) : (
@@ -316,207 +317,202 @@ export function Header({ currentPage, onPageChange = () => {} }: HeaderProps) {
           {/* Mobile controls */}
           <div className="flex md:hidden items-center gap-2 relative z-20">
             <LanguageSwitcher />
-            <button
-              className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-nav"
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-              <span className="text-sm font-medium">Menu</span>
-            </button>
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors"
+                  aria-label="Toggle menu"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="text-sm font-medium">Menu</span>
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0 backdrop-blur-md bg-white/95 border-l border-white/20">
+                <SheetHeader className="p-6 pb-4">
+                  <SheetTitle className="text-left">Navigation</SheetTitle>
+                </SheetHeader>
+                <div className="px-6 pb-6 space-y-6 overflow-y-auto h-full">
+                  {/* Courses Section */}
+                  <div className="space-y-3">
+                    <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t("header.courses")}
+                    </div>
+                    <div className="space-y-2">
+                      {courses.map((course) => (
+                        <button
+                          key={course.id}
+                          onClick={() => {
+                            navigateToPage(course.id);
+                            setIsMenuOpen(false);
+                          }}
+                          className="flex flex-col items-start w-full p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 min-h-[48px]"
+                        >
+                          <div className="flex items-center gap-2 w-full">
+                            <span className="text-sm font-medium">{course.name}</span>
+                            {course.badge && (
+                              <Badge variant="apple" size="sm">
+                                {course.badge}
+                              </Badge>
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Develop Section */}
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => {
+                        navigateToPage("develop");
+                        setIsMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-[15px] font-medium transition-colors hover:bg-gray-50 ${
+                        currentPage === "develop" ? "text-primary/90" : "text-foreground"
+                      }`}
+                    >
+                      {t("nav.develop", "Develop")}
+                    </button>
+                  </div>
+
+                  {/* Coaching Section */}
+                  <div className="space-y-3">
+                    <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t("header.coaching")}
+                    </div>
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => {
+                          navigateToPage("coaching");
+                          setIsMenuOpen(false);
+                        }}
+                        className="block w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium"
+                      >
+                        {t("header.coaching")}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Learn Section */}
+                  <div className="space-y-3">
+                    <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t("header.learn")}
+                    </div>
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => {
+                          navigateToPage("learn");
+                          setIsMenuOpen(false);
+                        }}
+                        className="block w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium"
+                      >
+                        {t("header.learning_hub")}
+                      </button>
+                      {[
+                        { id: "learn-ai-overview", name: t("header.ai_overview") },
+                        { id: "learn-intelligence", name: t("header.intelligence_iq_eq_ai") },
+                        { id: "learn-machine-learning", name: t("header.machine_learning") },
+                        { id: "learn-deep-learning", name: t("header.deep_learning") },
+                        { id: "learn-neural-networks", name: t("header.neural_networks") },
+                        { id: "learn-foundation-models", name: t("header.foundation_models") },
+                        { id: "learn-generative-ai", name: t("header.generative_ai") },
+                        { id: "learn-llm-players", name: t("header.llm_players") },
+                        { id: "learn-ai-tools", name: t("header.ai_tools_protocols") },
+                        { id: "learn-ai-tools-directory", name: t("header.ai_tools_directory") },
+                        { id: "learn-interactive-exercises", name: t("header.interactive_exercises") }
+                      ].map((item) => (
+                        <button 
+                          key={item.id}
+                          onClick={() => {
+                            navigateToPage(item.id);
+                            setIsMenuOpen(false);
+                          }}
+                          className="block w-full text-left p-3 rounded-xl transition-colors hover:bg-gray-50 text-[15px]"
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Navigation Links */}
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => {
+                        navigateToPage("contact");
+                        setIsMenuOpen(false);
+                      }}
+                      className="block w-full text-left p-3 rounded-xl transition-colors hover:bg-gray-50 text-[15px] font-medium"
+                    >
+                      {t("nav.contact")}
+                    </button>
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="pt-4 border-t border-gray-200">
+                    {/* Account controls (mobile) */}
+                    <div className="mb-3 space-y-2">
+                      <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">{t('header.account', 'Your account')}</div>
+                      {user ? (
+                        <>
+                          <button
+                            onClick={() => {
+                              if (nextModule) navigateToPage(nextModule.routeId); else navigateToPage('learn');
+                              setIsMenuOpen(false);
+                            }}
+                            className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
+                          >
+                            <Play className="h-4 w-4" /> {nextModule ? t('header.continue_learning', 'Continue learning') : t('header.browse_learn', 'Browse Learn Hub')}
+                          </button>
+                          <button
+                            onClick={() => { navigateToPage('learn'); setIsMenuOpen(false); }}
+                            className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
+                          >
+                            <BookOpen className="h-4 w-4" /> {t('header.my_learning', 'My learning')}
+                          </button>
+                          <button
+                            onClick={async () => { await signOut(); setIsMenuOpen(false); }}
+                            className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2 text-red-600"
+                          >
+                            <LogOut className="h-4 w-4" /> {t('header.sign_out', 'Sign out')}
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => { setAuthMode('signin'); setAuthOpen(true); setIsMenuOpen(false); }}
+                            className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
+                          >
+                            <LogIn className="h-4 w-4" /> {t('header.sign_in', 'Sign in')}
+                          </button>
+                          <button
+                            onClick={() => { setAuthMode('signup'); setAuthOpen(true); setIsMenuOpen(false); }}
+                            className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
+                          >
+                            <UserIcon className="h-4 w-4" /> {t('header.create_account', 'Create account')}
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    <Button 
+                      variant="apple"
+                      size="lg"
+                      className="w-full rounded-xl"
+                      onClick={() => {
+                        navigateToPage("discovery-call");
+                        setIsMenuOpen(false);
+                      }}
+                      leftIcon={<Phone className="h-4 w-4" />}
+                    >
+                      {t("nav.book_consultation")}
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
 
-        {/* Mobile navigation panel (contained) */}
-        {isMenuOpen && (
-          <div className="md:hidden fixed inset-0 z-40 bg-black/20" onClick={() => setIsMenuOpen(false)}>
-            <nav id="mobile-nav" aria-label="Mobile" className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 h-full overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-4 space-y-6 max-h-[calc(100vh-2rem)] overflow-y-auto">
-                {/* Courses Section */}
-                <div className="space-y-3">
-                  <div className="caption">
-                    {t("header.courses")}
-                  </div>
-                  <div className="space-y-2">
-                    {courses.map((course) => (
-                      <button
-                        key={course.id}
-                        onClick={() => {
-                          navigateToPage(course.id);
-                          setIsMenuOpen(false);
-                        }}
-                        className="flex flex-col items-start w-full p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 min-h-[48px]"
-                      >
-                        <div className="flex items-center gap-2 w-full">
-                          <span className="text-sm font-medium">{course.name}</span>
-                          {course.badge && (
-                            <Badge variant="apple" size="sm">
-                              {course.badge}
-                            </Badge>
-                          )}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Develop Section */}
-                <div className="space-y-3">
-                  <button
-                    onClick={() => {
-                      navigateToPage("develop");
-                      setIsMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-[15px] font-medium transition-colors hover:bg-gray-50 ${
-                      currentPage === "develop" ? "text-primary/90" : "text-foreground"
-                    }`}
-                  >
-                    {t("nav.develop", "Develop")}
-                  </button>
-                </div>
-
-                {/* Coaching Section */}
-                <div className="space-y-3">
-                  <div className="caption">
-                    {t("header.coaching")}
-                  </div>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => {
-                        navigateToPage("coaching");
-                        setIsMenuOpen(false);
-                      }}
-                      className="block w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium"
-                    >
-                      {t("header.coaching")}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Learn Section */}
-                <div className="space-y-3">
-                  <div className="caption">
-                    {t("header.learn")}
-                  </div>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => {
-                        navigateToPage("learn");
-                        setIsMenuOpen(false);
-                      }}
-                      className="block w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium"
-                    >
-                      {t("header.learning_hub")}
-                    </button>
-                    {[
-                      { id: "learn-ai-overview", name: t("header.ai_overview") },
-                      { id: "learn-intelligence", name: t("header.intelligence_iq_eq_ai") },
-                      { id: "learn-machine-learning", name: t("header.machine_learning") },
-                      { id: "learn-deep-learning", name: t("header.deep_learning") },
-                      { id: "learn-neural-networks", name: t("header.neural_networks") },
-                      { id: "learn-foundation-models", name: t("header.foundation_models") },
-                      { id: "learn-generative-ai", name: t("header.generative_ai") },
-                      { id: "learn-llm-players", name: t("header.llm_players") },
-                      { id: "learn-ai-tools", name: t("header.ai_tools_protocols") },
-                      { id: "learn-ai-tools-directory", name: t("header.ai_tools_directory") },
-                      { id: "learn-interactive-exercises", name: t("header.interactive_exercises") }
-                    ].map((item) => (
-                      <button 
-                        key={item.id}
-                        onClick={() => {
-                          navigateToPage(item.id);
-                          setIsMenuOpen(false);
-                        }}
-                          className="block w-full text-left p-3 rounded-xl transition-colors hover:bg-gray-50 text-[15px]"
-                      >
-                        {item.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Navigation Links */}
-                <div className="space-y-2">
-                  <button
-                    onClick={() => {
-                      navigateToPage("contact");
-                      setIsMenuOpen(false);
-                    }}
-                    className="block w-full text-left p-3 rounded-xl transition-colors hover:bg-gray-50 text-[15px] font-medium"
-                  >
-                    {t("nav.contact")}
-                  </button>
-                </div>
-
-                {/* CTA Button */}
-                <div className="pt-4 border-t border-gray-200">
-                  {/* Account controls (mobile) */}
-                  <div className="mb-3 space-y-2">
-                    <div className="caption">{t('header.account', 'Your account')}</div>
-                    {user ? (
-                      <>
-                        <button
-                          onClick={() => {
-                            if (nextModule) navigateToPage(nextModule.routeId); else navigateToPage('learn');
-                            setIsMenuOpen(false);
-                          }}
-                          className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
-                        >
-                          <Play className="h-4 w-4" /> {nextModule ? t('header.continue_learning', 'Continue learning') : t('header.browse_learn', 'Browse Learn Hub')}
-                        </button>
-                        <button
-                          onClick={() => { navigateToPage('learn'); setIsMenuOpen(false); }}
-                          className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
-                        >
-                          <BookOpen className="h-4 w-4" /> {t('header.my_learning', 'My learning')}
-                        </button>
-                        <button
-                          onClick={async () => { await signOut(); setIsMenuOpen(false); }}
-                          className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2 text-red-600"
-                        >
-                          <LogOut className="h-4 w-4" /> {t('header.sign_out', 'Sign out')}
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => { setAuthMode('signin'); setAuthOpen(true); setIsMenuOpen(false); }}
-                          className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
-                        >
-                          <LogIn className="h-4 w-4" /> {t('header.sign_in', 'Sign in')}
-                        </button>
-                        <button
-                          onClick={() => { setAuthMode('signup'); setAuthOpen(true); setIsMenuOpen(false); }}
-                          className="w-full text-left p-3 rounded-xl border border-gray-200 transition-colors hover:bg-gray-50 text-[15px] font-medium flex items-center gap-2"
-                        >
-                          <UserIcon className="h-4 w-4" /> {t('header.create_account', 'Create account')}
-                        </button>
-                      </>
-                    )}
-                  </div>
-                  <Button 
-                    variant="apple"
-                    size="lg"
-                    className="w-full rounded-xl"
-                    onClick={() => {
-                      navigateToPage("discovery-call");
-                      setIsMenuOpen(false);
-                    }}
-                    leftIcon={<Phone className="h-4 w-4" />}
-                  >
-                    {t("nav.book_consultation")}
-                  </Button>
-                </div>
-              </div>
-            </nav>
-          </div>
-        )}
       </header>
       <AuthModal open={authOpen} mode={authMode} onOpenChange={setAuthOpen} />
     </>

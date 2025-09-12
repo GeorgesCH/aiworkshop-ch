@@ -4,7 +4,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 // Use optimized images from public folder
-const generativeAiTrainingImage = "/@optimized/aiworkshop-generative-ai-training-optimized.webp";
+import generativeAiTrainingImage from "@/assets/optimized/aiworkshop-generative-ai-training-optimized.webp";
 const designThinkingImage = "/@optimized/aiworkshop-design-thinking-lausanne-optimized.webp";
 import { 
   MapPin, 
@@ -118,7 +118,7 @@ export function SEOLandingPage({
       <section className="relative py-20 lg:py-32 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10"></div>
-        <div className="absolute inset-0 bg-[url('/hero-dots.png')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/@optimized/hero-dots-optimized.webp')] opacity-10"></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="max-w-6xl mx-auto">
@@ -227,7 +227,7 @@ export function SEOLandingPage({
                   <ImageWithFallback
                     src={generativeAiTrainingImage}
                     alt={`AI training session in ${city} - professional team learning artificial intelligence`}
-                    className="w-full h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-2xl"
+                    className="w-full h-[400px] lg:h-[500px] object-cover rounded-3xl shadow-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-3xl"></div>
                   
@@ -876,7 +876,7 @@ export function SEOLandingPage({
 
       {/* Enhanced Final CTA */}
       <section className="py-20 lg:py-32 bg-gradient-to-br from-primary to-primary/80 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/hero-dots.png')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/@optimized/hero-dots-optimized.webp')] opacity-10"></div>
         <div className="container mx-auto px-4 relative">
           <div className="max-w-5xl mx-auto text-center text-primary-foreground">
             <Badge variant="secondary" className="mb-6 gap-2 text-primary">

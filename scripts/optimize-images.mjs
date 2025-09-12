@@ -44,6 +44,12 @@ const IMAGES_TO_OPTIMIZE = [
     type: 'icon',
     originalSize: '18.5 KiB',
     displaySize: '29x28'
+  },
+  {
+    name: 'aiworkshop-generative-ai-training.jpg',
+    type: 'section',
+    originalSize: 'Unknown',
+    displaySize: '600x800'
   }
 ];
 
