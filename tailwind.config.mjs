@@ -85,7 +85,7 @@ export default {
 
       // Typography - Optimized font stack
       fontFamily: {
-        // Primary sans-serif stack with optimized fallbacks
+        // Primary sans-serif stack for body text (NO Sigum)
         sans: [
           'Inter', 
           '-apple-system', 
@@ -95,7 +95,7 @@ export default {
           'Roboto', 
           'sans-serif'
         ],
-        // Custom Sigum font for branding and headers
+        // Custom Sigum font ONLY for branding elements
         sigum: [
           'Sigum', 
           'Inter', 
@@ -104,7 +104,7 @@ export default {
           'SF Pro Display', 
           'sans-serif'
         ],
-        // Display font (same as sigum for consistency)
+        // Display font for headings and titles
         display: [
           'Sigum', 
           'Inter', 
@@ -113,7 +113,7 @@ export default {
           'SF Pro Display', 
           'sans-serif'
         ],
-        // Legacy alias for backward compatibility
+        // Legacy alias for backward compatibility (branding only)
         aiworkshop: [
           'Sigum', 
           'Inter', 

@@ -5,16 +5,27 @@ This document outlines the optimized font configuration for the AI Workshop webs
 
 ## Font Stack
 
-### Primary Font: Sigum
+### Primary Body Font: Inter (Default)
+- **Family**: `Inter`
+- **Usage**: Body text, paragraphs, general content
+- **Stack**: `'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'`
+
+### Branding Font: Sigum (Selective Use)
 - **Family**: `Sigum`
 - **Weights**: 400 (normal), 600 (semibold), 700 (bold)
 - **Formats**: WOFF2, WOFF, TTF
-- **Usage**: Headers, branding, logo text
+- **Usage**: Logo, headings, titles, branding elements only
+- **Stack**: `'Sigum', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'`
 
-### Fallback Stack
-```css
-font-family: 'Sigum', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', sans-serif;
-```
+### When to Use Sigum:
+- ✅ Logo text
+- ✅ Main headings (h1, h2)
+- ✅ Section titles
+- ✅ Branding elements
+- ✅ Call-to-action buttons
+- ❌ Body text
+- ❌ Paragraphs
+- ❌ General content
 
 ## Configuration Files
 
@@ -52,14 +63,19 @@ fontFamily: {
 
 ### Tailwind Classes
 ```html
-<!-- Primary usage -->
+<!-- Logo text (branding) -->
 <span class="font-sigum">AI-Workshop</span>
 
-<!-- Legacy compatibility -->
-<span class="font-aiworkshop">AI-Workshop</span>
-
-<!-- Display text -->
+<!-- Main headings (branding) -->
 <h1 class="font-display">Main Heading</h1>
+<h2 class="heading-2">Section Title</h2>
+
+<!-- Legacy compatibility (branding only) -->
+<span class="font-aiworkshop">Brand Element</span>
+
+<!-- Body text (default Inter font) -->
+<p class="font-sans">Regular paragraph text</p>
+<div>Default body text uses Inter</div>
 ```
 
 ### CSS Classes

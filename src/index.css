@@ -57,14 +57,318 @@
    ========================================================================== */
 
 /* 
- * Ensure smooth font loading experience
- * Add fonts-loaded class when custom fonts are ready
+ * Font loading states - only apply Sigum to specific elements
+ * Body text should use clean sans-serif stack
  */
 .fonts-loading {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
 .fonts-loaded {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+/* Sigum font should only be applied to specific branding elements */
+.fonts-loaded .font-sigum,
+.fonts-loaded .font-aiworkshop,
+.fonts-loaded .font-display,
+.fonts-loaded .heading-2 {
   font-family: 'Sigum', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+/* ==========================================================================
+   Apple Design System Theme Variables
+   ========================================================================== */
+
+@theme {
+  /* Spacing system aligned with your Apple spacing */
+  --spacing-apple-1: 4px;
+  --spacing-apple-2: 8px;
+  --spacing-apple-3: 12px;
+  --spacing-apple-4: 16px;
+  --spacing-apple-5: 20px;
+  --spacing-apple-6: 24px;
+  --spacing-apple-8: 32px;
+  --spacing-apple-10: 40px;
+  --spacing-apple-12: 48px;
+  --spacing-apple-16: 64px;
+  --spacing-apple-20: 80px;
+  --spacing-apple-24: 96px;
+  --spacing-apple-32: 128px;
+  
+  /* Color system using your CSS variables */
+  --color-background: white;
+  --color-foreground: #1d1d1f;
+  --color-primary: #dc143c;
+  --color-primary-foreground: white;
+  --color-secondary: #f2f2f7;
+  --color-secondary-foreground: #1d1d1f;
+  --color-muted: #f2f2f7;
+  --color-muted-foreground: #8e8e93;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-card: white;
+  --color-card-foreground: #1d1d1f;
+  --color-accent: #f2f2f7;
+  --color-accent-foreground: #1d1d1f;
+  --color-destructive: #ff3b30;
+  --color-destructive-foreground: white;
+  --color-ring: #dc143c;
+  --color-popover: white;
+  --color-popover-foreground: #1d1d1f;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  
+  /* Apple shadows */
+  --shadow-apple-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-apple-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-apple-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-apple-xl: 0 16px 64px rgba(0, 0, 0, 0.15);
+  
+  /* Animation timing */
+  --animate-apple-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --animate-apple-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ==========================================================================
+   Apple Design System Utilities
+   ========================================================================== */
+
+@layer utilities {
+  /* Unified headings for consistent typography across sections */
+  .heading-2 {
+    font-family: 'Sigum', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    font-size: var(--text-3xl);
+  }
+  @media (min-width: 1024px) {
+    .heading-2 { font-size: var(--text-4xl); }
+  }
+
+  .heading-3 {
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.25;
+    font-size: var(--text-2xl);
+  }
+  @media (min-width: 1024px) {
+    .heading-3 { font-size: var(--text-3xl); }
+  }
+  
+  /* Container utilities */
+  .container-apple {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  @media (min-width: 480px) {
+    .container-apple {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container-apple {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  
+  /* Section utilities */
+  .section-apple {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  @media (min-width: 480px) {
+    .section-apple {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .section-apple {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+  
+  /* Apple transitions */
+  .apple-transition {
+    transition: var(--animate-apple-transition);
+  }
+  
+  .apple-transition-fast {
+    transition: var(--animate-apple-fast);
+  }
+  
+  /* Apple hover effects */
+  .apple-hover {
+    transition: var(--animate-apple-fast);
+  }
+  
+  .apple-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-apple-lg);
+  }
+  
+  /* Card styles */
+  .card-apple {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: var(--animate-apple-transition);
+  }
+  
+  .card-apple:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-apple-lg);
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  }
+  
+  /* Button styles */
+  .btn-apple {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: var(--animate-apple-fast);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-apple:hover {
+    background: color-mix(in srgb, var(--color-primary) 90%, black);
+    transform: scale(1.02);
+  }
+  
+  .btn-apple:active {
+    transform: scale(0.98);
+  }
+  
+  .btn-apple-secondary {
+    background: var(--color-secondary);
+    color: var(--color-secondary-foreground);
+    border: 1px solid var(--color-border);
+  }
+  
+  .btn-apple-secondary:hover {
+    background: color-mix(in srgb, var(--color-secondary) 80%, black);
+    border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+  
+  /* Apple shadows */
+  .shadow-apple-sm {
+    box-shadow: var(--shadow-apple-sm);
+  }
+  
+  .shadow-apple-md {
+    box-shadow: var(--shadow-apple-md);
+  }
+  
+  .shadow-apple-lg {
+    box-shadow: var(--shadow-apple-lg);
+  }
+  
+  .shadow-apple-xl {
+    box-shadow: var(--shadow-apple-xl);
+  }
+  
+  /* Fade in animations */
+  .fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Stagger animations */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+  .stagger-7 { animation-delay: 0.7s; }
+  
+  /* Custom button styles */
+  .consultation-button {
+    background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 90%, black) 100%);
+    color: var(--color-primary-foreground);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--animate-apple-fast);
+    box-shadow: var(--shadow-apple-md);
+  }
+  
+  .consultation-button:hover {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 95%, black) 0%, color-mix(in srgb, var(--color-primary) 85%, black) 100%);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-apple-lg);
+  }
+  
+  .consultation-button:active {
+    transform: translateY(0);
+  }
+  
+  .secondary-button {
+    background: var(--color-secondary);
+    color: var(--color-secondary-foreground);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--animate-apple-fast);
+  }
+  
+  .secondary-button:hover {
+    background: color-mix(in srgb, var(--color-secondary) 80%, black);
+    border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    transform: translateY(-1px);
+  }
+  
+  .secondary-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Gap utilities for Apple spacing */
+  .gap-apple-1 { gap: var(--spacing-apple-1); }
+  .gap-apple-2 { gap: var(--spacing-apple-2); }
+  .gap-apple-3 { gap: var(--spacing-apple-3); }
+  .gap-apple-4 { gap: var(--spacing-apple-4); }
+  .gap-apple-5 { gap: var(--spacing-apple-5); }
+  .gap-apple-6 { gap: var(--spacing-apple-6); }
+  .gap-apple-8 { gap: var(--spacing-apple-8); }
+  .gap-apple-10 { gap: var(--spacing-apple-10); }
+  .gap-apple-12 { gap: var(--spacing-apple-12); }
+  .gap-apple-16 { gap: var(--spacing-apple-16); }
+  .gap-apple-20 { gap: var(--spacing-apple-20); }
+  .gap-apple-24 { gap: var(--spacing-apple-24); }
 }
 
