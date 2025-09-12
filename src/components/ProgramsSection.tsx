@@ -35,8 +35,8 @@ export function ProgramsSection({ onPageChange }: ProgramsSectionProps) {
   const { t } = useLanguage();
   const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
   return (
-    <section id="programs" className="section-apple">
-      <div className="container-apple">
+    <section id="programs" className="py-apple-20 lg:py-apple-24">
+      <div className="container mx-auto px-apple-4">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-apple-3 mb-6">
@@ -58,7 +58,7 @@ export function ProgramsSection({ onPageChange }: ProgramsSectionProps) {
           {programs.map((program, index) => {
             const IconComponent = program.icon;
             return (
-              <Card key={index} className="group hover:border-primary/50 transition-all duration-apple border bg-background/80 backdrop-blur-sm">
+              <Card key={index} className="group hover:border-primary/50 transition-all duration-300 border border-border/60 bg-background/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-[2px]">
                 <CardContent className="p-8 lg:p-10">
                   {/* Icon Container */}
                   <div className="mb-8">
@@ -97,7 +97,7 @@ export function ProgramsSection({ onPageChange }: ProgramsSectionProps) {
 
         {/* Cities Section */}
         <div className="max-w-5xl mx-auto">
-          <Card className="bg-white/80 backdrop-blur-sm border-0">
+                  <Card className="bg-white/80 backdrop-blur-sm border border-border/60">
             <CardContent className="p-12 lg:p-16 text-center">
               <div className="space-y-8">
                 <div>

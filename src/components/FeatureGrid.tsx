@@ -11,15 +11,15 @@ export function FeatureGrid() {
   ]
 
   return (
-    <section className="section-apple">
-      <div className="container-apple">
+    <section className="py-apple-20 lg:py-apple-24">
+      <div className="container mx-auto px-apple-4">
         <div className="grid gap-apple-6 md:grid-cols-3">
           {features.map((f, i) => {
             const Icon = f.icon
             return (
               <div
                 key={i}
-                className={`relative rounded-2xl border border-border/60 bg-background/90 backdrop-blur p-6 transition-apple hover:-translate-y-[2px] hover:shadow-apple-lg fade-in-up ${i===0 ? 'stagger-1' : i===1 ? 'stagger-2' : 'stagger-3'}`}
+                className={`relative rounded-2xl border border-border/60 bg-background/80 backdrop-blur-sm p-6 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-2xl hover:border-primary/50 fade-in-up ${i===0 ? 'stagger-1' : i===1 ? 'stagger-2' : 'stagger-3'}`}
               >
                 <div className="relative z-10 space-y-4">
                   <div className="brand-chip">

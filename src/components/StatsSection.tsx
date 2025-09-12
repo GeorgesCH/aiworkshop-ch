@@ -55,10 +55,10 @@ export function StatsSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 lg:py-24">
-      <div className="container mx-auto px-4">
+    <section className="py-apple-20 lg:py-apple-24">
+      <div className="container mx-auto px-apple-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-apple-8 lg:gap-apple-16 items-center">
             {/* Visual Content */}
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-apple"></div>
@@ -76,7 +76,7 @@ export function StatsSection() {
                     <Badge variant="secondary" className="mb-2 bg-white/20 backdrop-blur-sm border-white/30 text-white text-xs">
                       {t("stats.proven_results")}
                     </Badge>
-                    <h3 className="text-white text-lg font-semibold leading-tight drop-shadow-lg">
+                    <h3 className="text-white text-lg font-display font-semibold leading-tight drop-shadow-lg">
                       {t("stats.measurable_impact")}
                     </h3>
                   </div>
@@ -104,7 +104,7 @@ export function StatsSection() {
                 <Badge variant="outline" className="w-fit border-primary/20 text-primary bg-transparent">
                   {t("stats.our_impact")}
                 </Badge>
-                <h2 className="text-3xl lg:text-4xl font-bold leading-tight tracking-tight">
+                <h2 className="text-3xl lg:text-4xl font-display font-bold leading-tight tracking-tight">
                   <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                     {t("stats.trusted_by_professionals")}
                   </span>
@@ -115,7 +115,7 @@ export function StatsSection() {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-2 gap-apple-4">
                 {stats.map((stat, index) => {
                   const IconComponent = stat.icon;
                   return (
@@ -141,9 +141,9 @@ export function StatsSection() {
               {/* Bottom CTA */}
               <div className="relative group p-6 rounded-2xl border border-border/60 bg-background/80 backdrop-blur-sm shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-apple"></div>
-                <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-apple-4">
                   <div>
-                    <h3 className="font-semibold mb-1 text-foreground">{t("stats.ready_to_join")}</h3>
+                    <h3 className="font-display font-semibold mb-1 text-foreground">{t("stats.ready_to_join")}</h3>
                     <p className="text-sm text-muted-foreground">
                       {t("stats.start_journey")}
                     </p>

@@ -28,8 +28,8 @@ interface WhyChooseUsSectionProps {
 export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {}) {
   const { t } = useLanguage();
   return (
-    <section className="section-apple">
-      <div className="container-apple">
+    <section className="py-apple-20 lg:py-apple-24">
+      <div className="container mx-auto px-apple-4">
         {/* Header */}
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4">
@@ -50,7 +50,7 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
               {benefits.map((benefit, index) => {
                 const IconComponent = benefit.icon;
                 return (
-                  <Card key={index} className={`group hover:shadow-apple-lg transition-apple border border-border/60 bg-background/80 backdrop-blur fade-in-up ${index===0?'stagger-1':index===1?'stagger-2':index===2?'stagger-3':index===3?'stagger-4':index===4?'stagger-5':'stagger-6'}`}>
+                  <Card key={index} className={`group hover:shadow-2xl transition-all duration-300 border border-border/60 bg-background/80 backdrop-blur-sm hover:-translate-y-[2px] hover:border-primary/50 fade-in-up ${index===0?'stagger-1':index===1?'stagger-2':index===2?'stagger-3':index===3?'stagger-4':index===4?'stagger-5':'stagger-6'}`}>
                     <CardContent className="p-6">
                       <div className="flex flex-col gap-apple-4">
                         <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/15 transition-colors">
@@ -70,7 +70,7 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
             </div>
 
             {/* Call to Action Card */}
-            <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-0">
+            <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border border-primary/20">
               <CardContent className="p-8 text-center">
                 <h3 className="text-xl font-bold mb-2">{t('why.cta_title')}</h3>
                 <p className="text-primary-foreground/90 mb-4">
@@ -103,7 +103,7 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
                 
                 {/* Overlay Content */}
                 <div className="absolute bottom-6 left-6 right-6">
-                  <Card className="bg-white/95 backdrop-blur border-0">
+                  <Card className="bg-white/95 backdrop-blur-sm border border-border/60">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-apple-4">
                         <div className="flex-1">
@@ -126,7 +126,7 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
 
               {/* Floating testimonial */}
               <div className="absolute -top-6 -right-6 hidden lg:block max-w-xs">
-                <Card className="shadow-xl bg-white border-0">
+                <Card className="shadow-xl bg-white border border-border/60">
                   <CardContent className="p-6">
                     <div className="flex mb-3">
                       {[...Array(testimonialHighlight.rating)].map((_, i) => (
@@ -147,7 +147,7 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
 
             {/* Secondary Visual Elements */}
             <div className="grid grid-cols-2 gap-apple-4">
-              <Card className="bg-gray-100/20 border-0">
+              <Card className="bg-gray-100/20 border border-border/60">
                 <CardContent className="p-6 text-center">
                   <Users className="w-8 h-8 text-blue-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-900">500+</div>
@@ -155,7 +155,7 @@ export function WhyChooseUsSection({ onPageChange }: WhyChooseUsSectionProps = {
                 </CardContent>
               </Card>
               
-              <Card className="bg-gray-100/20 border-0">
+              <Card className="bg-gray-100/20 border border-border/60">
                 <CardContent className="p-6 text-center">
                   <Trophy className="w-8 h-8 text-green-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-green-900">8+</div>
