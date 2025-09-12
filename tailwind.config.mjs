@@ -86,8 +86,8 @@ export default {
       // Typography
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Segmun', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
-        aiworkshop: ['Segmun', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
+        display: ['Sigum', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
+        aiworkshop: ['Sigum', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
         mono: ['SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Courier New', 'monospace'],
       },
       
@@ -305,8 +305,8 @@ export default {
         '.transition-apple': { transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
         
         // Font family utilities
-        '.font-aiworkshop': { fontFamily: 'Segmun, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
-        '.font-display': { fontFamily: 'Segmun, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
+        '.font-aiworkshop': { fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
+        '.font-display': { fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
 
         '.dark .glass-effect': {
           backgroundColor: 'rgba(28, 28, 30, 0.8)',

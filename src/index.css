@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-/* Custom AI Workshop Font - Segmun */
+/* Custom AI Workshop Font - Sigum */
 @font-face {
-  font-family: 'Segmun';
+  font-family: 'Sigum';
   src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
        url('/fonts/sigum/Sigum.woff') format('woff'),
        url('/fonts/sigum/Sigum.ttf') format('truetype');
@@ -12,7 +12,7 @@
 }
 
 @font-face {
-  font-family: 'Segmun';
+  font-family: 'Sigum';
   src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
        url('/fonts/sigum/Sigum.woff') format('woff'),
        url('/fonts/sigum/Sigum.ttf') format('truetype');
@@ -22,7 +22,7 @@
 }
 
 @font-face {
-  font-family: 'Segmun';
+  font-family: 'Sigum';
   src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
        url('/fonts/sigum/Sigum.woff') format('woff'),
        url('/fonts/sigum/Sigum.ttf') format('truetype');
