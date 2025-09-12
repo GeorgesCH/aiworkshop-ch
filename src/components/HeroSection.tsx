@@ -75,7 +75,8 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
                 <Button 
                   variant="gradient"
                   size="lg"
-                  className="text-lg px-apple-8 py-apple-4 rounded-apple-xl"
+                  radius="xl"
+                  className="text-lg px-apple-8 py-apple-4"
                   onClick={() => {
                     trackClick('book-consultation', 'hero-section');
                     trackConversion('discovery_call');
@@ -88,7 +89,8 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
                 <Button 
                   variant="glass"
                   size="lg"
-                  className="text-lg px-apple-8 py-apple-4 rounded-apple-xl"
+                  radius="xl"
+                  className="text-lg px-apple-8 py-apple-4"
                   onClick={() => {
                     trackClick('download-brochure', 'hero-section');
                     setIsBrochureModalOpen(true);
