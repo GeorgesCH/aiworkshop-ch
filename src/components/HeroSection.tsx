@@ -37,7 +37,7 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
           {/* Text Content - Enhanced */}
           <div className="space-y-apple-10 text-center lg:text-left">
             <div className="space-y-apple-8">
-              <div className="inline-flex items-center gap-apple-3 bg-white/80 backdrop-blur-xl border border-white/20 text-foreground shadow-apple-sm rounded-full px-4 py-2 mx-auto lg:mx-0">
+              <div className="inline-flex items-center gap-apple-3 bg-white/80 backdrop-blur-xl border border-white/20 text-foreground shadow-apple-sm rounded-apple-xl px-4 py-2 mx-auto lg:mx-0">
                 <div className="w-2.5 h-2.5 bg-success rounded-full animate-pulse" />
                 <span className="text-sm font-medium">
                   {t("hero.badge")}
@@ -75,7 +75,7 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
                 <Button 
                   variant="gradient"
                   size="lg"
-                  className="text-lg px-apple-8 py-apple-4"
+                  className="text-lg px-apple-8 py-apple-4 rounded-apple-xl"
                   onClick={() => {
                     trackClick('book-consultation', 'hero-section');
                     trackConversion('discovery_call');
@@ -88,7 +88,7 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
                 <Button 
                   variant="glass"
                   size="lg"
-                  className="text-lg px-apple-8 py-apple-4"
+                  className="text-lg px-apple-8 py-apple-4 rounded-apple-xl"
                   onClick={() => {
                     trackClick('download-brochure', 'hero-section');
                     setIsBrochureModalOpen(true);
@@ -105,7 +105,7 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
                 {trustIndicators.map((indicator, index) => {
                   const IconComponent = indicator.icon;
                   return (
-                    <Card key={index} variant="apple" className="group p-apple-4">
+                    <Card key={index} variant="apple" className="group p-apple-4 rounded-apple-xl">
                       <div className="w-10 h-10 rounded-apple-lg bg-gradient-to-br from-primary/10 to-primary/20 group-hover:from-primary/20 group-hover:to-primary/30 flex items-center justify-center transition-apple">
                         <IconComponent className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-apple" />
                       </div>
@@ -117,7 +117,7 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
               
               {/* Swiss Feature - Enhanced */}
               <div className="flex justify-center lg:justify-start items-center gap-apple-4 text-base text-muted-foreground pt-apple-6">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-500/20 to-white/60 flex items-center justify-center text-lg shadow-apple-sm">
+                <div className="w-8 h-8 rounded-apple-xl bg-gradient-to-br from-red-500/20 to-white/60 flex items-center justify-center text-lg shadow-apple-sm">
                   🇨🇭
                 </div>
                 <span className="font-semibold">{t("hero.feature_1")}</span>

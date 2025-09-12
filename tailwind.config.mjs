@@ -338,8 +338,12 @@ export default {
         '.gap-apple-3': { gap: '12px' },
         
         // Apple border radius utilities
+        '.rounded-apple-sm': { borderRadius: '8px' },
         '.rounded-apple': { borderRadius: '12px' },
+        '.rounded-apple-lg': { borderRadius: '16px' },
+        '.rounded-apple-xl': { borderRadius: '20px' },
         '.rounded-apple-2xl': { borderRadius: '24px' },
+        '.rounded-apple-3xl': { borderRadius: '32px' },
         
         // Apple shadow utilities
         '.shadow-apple-lg': { boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)' },
