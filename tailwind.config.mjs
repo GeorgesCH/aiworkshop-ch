@@ -83,12 +83,55 @@ export default {
         },
       },
 
-      // Typography
+      // Typography - Optimized font stack
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Sigum', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
-        aiworkshop: ['Sigum', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
-        mono: ['SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Courier New', 'monospace'],
+        // Primary sans-serif stack with optimized fallbacks
+        sans: [
+          'Inter', 
+          '-apple-system', 
+          'BlinkMacSystemFont', 
+          'SF Pro Display', 
+          'Segoe UI', 
+          'Roboto', 
+          'sans-serif'
+        ],
+        // Custom Sigum font for branding and headers
+        sigum: [
+          'Sigum', 
+          'Inter', 
+          '-apple-system', 
+          'BlinkMacSystemFont', 
+          'SF Pro Display', 
+          'sans-serif'
+        ],
+        // Display font (same as sigum for consistency)
+        display: [
+          'Sigum', 
+          'Inter', 
+          '-apple-system', 
+          'BlinkMacSystemFont', 
+          'SF Pro Display', 
+          'sans-serif'
+        ],
+        // Legacy alias for backward compatibility
+        aiworkshop: [
+          'Sigum', 
+          'Inter', 
+          '-apple-system', 
+          'BlinkMacSystemFont', 
+          'SF Pro Display', 
+          'sans-serif'
+        ],
+        // Monospace stack for code
+        mono: [
+          'SF Mono', 
+          'Monaco', 
+          'Cascadia Code', 
+          'Roboto Mono', 
+          'Consolas', 
+          'Courier New', 
+          'monospace'
+        ],
       },
       
       fontWeight: {
@@ -304,9 +347,28 @@ export default {
         // Apple transition utilities
         '.transition-apple': { transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
         
-        // Font family utilities
-        '.font-aiworkshop': { fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
-        '.font-display': { fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif' },
+        // Font family utilities - Optimized and consistent
+        '.font-sigum': { 
+          fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif',
+          fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale'
+        },
+        '.font-aiworkshop': { 
+          fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif',
+          fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale'
+        },
+        '.font-display': { 
+          fontFamily: 'Sigum, Inter, -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif',
+          fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale'
+        },
 
         '.dark .glass-effect': {
           backgroundColor: 'rgba(28, 28, 30, 0.8)',

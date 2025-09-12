@@ -1,12 +1,16 @@
 
-  import React from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index-clean.css"; // Load Tailwind CSS with @theme directive and custom utilities
+import "./index.css"; // Load Tailwind CSS with optimized font configuration
+import { initializeFontLoading } from "./utils/font-loader";
 
-  ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
+// Initialize font loading for optimal performance
+initializeFontLoading();
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
   

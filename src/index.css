@@ -1,6 +1,17 @@
 @import "tailwindcss";
 
-/* Custom AI Workshop Font - Sigum */
+/* ==========================================================================
+   AI Workshop Custom Font - Sigum
+   ========================================================================== */
+
+/* 
+ * Font Loading Strategy:
+ * 1. Use font-display: swap for better performance
+ * 2. Load woff2 first (best compression), then woff, then ttf as fallback
+ * 3. Use consistent font-family name across all declarations
+ * 4. Optimize for critical text rendering
+ */
+
 @font-face {
   font-family: 'Sigum';
   src: url('/fonts/sigum/Sigum.woff2') format('woff2'),
@@ -9,6 +20,10 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+  /* Optimize for text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @font-face {
@@ -19,6 +34,9 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @font-face {
@@ -29,5 +47,24 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Font Loading Optimization
+   ========================================================================== */
+
+/* 
+ * Ensure smooth font loading experience
+ * Add fonts-loaded class when custom fonts are ready
+ */
+.fonts-loading {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.fonts-loaded {
+  font-family: 'Sigum', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
