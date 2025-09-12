@@ -32,12 +32,12 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-100/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
       
-      <div className="container mx-auto px-apple-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-apple-12 lg:gap-apple-20 items-center min-h-[80vh]">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[80vh]">
           {/* Text Content - Enhanced */}
-          <div className="space-y-apple-10 text-center lg:text-left">
-            <div className="space-y-apple-8">
-              <div className="inline-flex items-center gap-apple-3 bg-white/80 backdrop-blur-xl border border-white/20 text-foreground shadow-apple-sm rounded-apple-xl px-4 py-2 mx-auto lg:mx-0">
+          <div className="space-y-10 text-center lg:text-left">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-xl border border-white/20 text-foreground shadow-sm rounded-2xl px-4 py-2 mx-auto lg:mx-0">
                 <div className="w-2.5 h-2.5 bg-success rounded-full animate-pulse" />
                 <span className="text-sm font-medium">
                   {t("hero.badge")}
@@ -71,55 +71,50 @@ export function HeroSection({ onPageChange }: HeroSectionProps = {}) {
             </div>
 
             {/* CTA Buttons - Enhanced */}
-            <div className="flex flex-col sm:flex-row gap-apple-4 w-full max-w-lg mx-auto lg:max-w-none lg:mx-0">
-                <Button 
-                  variant="gradient"
-                  size="lg"
-                  radius="xl"
-                  className="text-lg px-apple-8 py-apple-4"
+            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg mx-auto lg:max-w-none lg:mx-0">
+                <button 
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-lg font-medium px-8 py-4 rounded-3xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 relative overflow-hidden group"
                   onClick={() => {
                     trackClick('book-consultation', 'hero-section');
                     trackConversion('discovery_call');
                     window.open('https://calendly.com/georgeraymond/30min', '_blank');
                   }}
-                  leftIcon={<Phone className="h-5 w-5" />}
                 >
-                  {t("hero.cta_primary")}
-                </Button>
-                <Button 
-                  variant="glass"
-                  size="lg"
-                  radius="xl"
-                  className="text-lg px-apple-8 py-apple-4"
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <Phone className="h-5 w-5 relative z-10" />
+                  <span className="relative z-10">{t("hero.cta_primary")}</span>
+                </button>
+                <button 
+                  className="inline-flex items-center justify-center gap-2 bg-background/80 backdrop-blur-xl border border-white/20 text-foreground text-lg font-medium px-8 py-4 rounded-3xl shadow-lg hover:bg-background/90 hover:scale-105 active:scale-95 transition-all duration-300"
                   onClick={() => {
                     trackClick('download-brochure', 'hero-section');
                     setIsBrochureModalOpen(true);
                   }}
-                  leftIcon={<Download className="h-5 w-5" />}
                 >
-                  {t("hero.download_brochure")}
-                </Button>
+                  <Download className="h-5 w-5" />
+                  <span>{t("hero.download_brochure")}</span>
+                </button>
             </div>
 
             {/* Trust Indicators - Enhanced */}
-            <div className="pt-apple-8">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-apple-4">
+            <div className="pt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {trustIndicators.map((indicator, index) => {
                   const IconComponent = indicator.icon;
                   return (
-                    <Card key={index} variant="apple" className="group p-apple-4 rounded-apple-xl">
-                      <div className="w-10 h-10 rounded-apple-lg bg-gradient-to-br from-primary/10 to-primary/20 group-hover:from-primary/20 group-hover:to-primary/30 flex items-center justify-center transition-apple">
-                        <IconComponent className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-apple" />
+                    <div key={index} className="group p-4 rounded-3xl border border-border/60 bg-background/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-[2px] hover:border-primary/50 transition-all duration-300">
+                      <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/20 group-hover:from-primary/20 group-hover:to-primary/30 flex items-center justify-center transition-all duration-300">
+                        <IconComponent className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
                       </div>
-                      <span className="font-semibold text-sm text-center group-hover:text-primary transition-colors duration-apple">{indicator.label}</span>
-                    </Card>
+                      <span className="font-semibold text-sm text-center group-hover:text-primary transition-colors duration-300">{indicator.label}</span>
+                    </div>
                   );
                 })}
               </div>
               
               {/* Swiss Feature - Enhanced */}
-              <div className="flex justify-center lg:justify-start items-center gap-apple-4 text-base text-muted-foreground pt-apple-6">
-                <div className="w-8 h-8 rounded-apple-xl bg-gradient-to-br from-red-500/20 to-white/60 flex items-center justify-center text-lg shadow-apple-sm">
+              <div className="flex justify-center lg:justify-start items-center gap-4 text-base text-muted-foreground pt-6">
+                <div className="w-8 h-8 rounded-2xl bg-gradient-to-br from-red-500/20 to-white/60 flex items-center justify-center text-lg shadow-sm">
                   🇨🇭
                 </div>
                 <span className="font-semibold">{t("hero.feature_1")}</span>
